@@ -20,5 +20,7 @@ import Cyber_News_App
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('Cyber_News_App', include(Cyber_News_App.urls)),
+    path('home', Cyber_News_App.views.homepage),
+    path('login', Cyber_News_App.views.login),
+
 ]
