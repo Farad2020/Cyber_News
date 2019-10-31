@@ -6,7 +6,7 @@ from django.db import models
 class Article(models.Model):
     article_id = models.CharField(max_length=9999)
     article_text = models.TextField()
-    article_date = models.DateTimeField("date published")
+    article_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.article_text + self.article_date
@@ -15,7 +15,7 @@ class Article(models.Model):
 class Blog(models.Model):
     blog_id = models.CharField(max_length=9999)
     blog_text = models.TextField()
-    blog_date = models.DateTimeField("date published")
+    blog_date = models.DateTimeField(auto_now_add=True)
     blog_author = models.CharField(max_length=9999)
 
     def __str__(self):
@@ -25,7 +25,7 @@ class Blog(models.Model):
 class Thread(models.Model):
     thread_id = models.CharField(max_length=9999)
     thread_text = models.TextField()
-    thread_date = models.DateTimeField("date published")
+    thread_date = models.DateTimeField(auto_now_add=True)
     thread_author = models.CharField(max_length=9999)
 
     def __str__(self):
@@ -35,7 +35,7 @@ class Thread(models.Model):
 class Comment(models.Model):
     comment_id = models.CharField(max_length=9999)
     comment_text = models.TextField()
-    comment_date = models.DateTimeField("date published")
+    comment_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.comment_text + self.comment_date
