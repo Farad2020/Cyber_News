@@ -1,27 +1,30 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import *
 from django.shortcuts import render, get_object_or_404
+from .models import *
 
 
 # Create your views here.
 def index(request):
     return HttpResponse("emptyness")
 
-def login(request):
-    return HttpResponse("user login page")
-
 
 def homepage(request):
-    return HttpResponse("homepage")
+    # return HttpResponse("homepage")
+    return render(request, 'Cyber_News_App/homepage.html')
 
-    '''
+
+def login(request):
+    # return HttpResponse("user login page")
+    return render(request, 'Cyber_News_App/logregpage.html')
+
+
+'''
     return render(request, "Cyber_News_App/index.html", {'latest_articles': latest_articles})
     '''
-    '''return HttpResponse(
+'''return HttpResponse(
         "I hope this will work"
     )'''
-
 '''
 def article(request, article_id):
     """Using get_object_or_404() shortcut to return PNF 404"""
