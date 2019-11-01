@@ -11,7 +11,7 @@ def index(request):
 
 def homepage(request):
     # return HttpResponse("homepage")
-    return render(request, 'Cyber_News_App/homepage.html')
+    return render(request, 'Cyber_News_App/homepage_test.html')
 
 
 def login(request):
