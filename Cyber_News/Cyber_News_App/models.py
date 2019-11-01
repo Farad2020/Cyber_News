@@ -4,13 +4,12 @@ from django.db import models
 
 #First model
 class Article(models.Model):
-    article_id = models.CharField(max_length=9999)
     article_name = models.CharField(max_length=9999)
     article_text = models.TextField()
     article_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.article_id + self.article_name + self.article_text
+        return self.article_name + self.article_text
 
 
 class Blog(models.Model):
