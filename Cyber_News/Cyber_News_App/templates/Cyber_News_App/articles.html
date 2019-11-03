@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+    <div>
+        <h1>Title for something</h1>
+            <div class = "articles">
+                {% for article in articles %}
+                    <div class = "article">
+                        <h2><a href="#">{{article.article_name }}</a> </h2>
+                        <p>{{article.article_text }}</p>
+                        <p>{{article.article_date }}</p>
+                    </div>
+                {% endfor %}
+
+            </div>
+    </div>
+</body>
+</html>

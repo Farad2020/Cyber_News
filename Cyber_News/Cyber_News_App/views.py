@@ -15,10 +15,10 @@ def homepage(request):
     return render(request, 'Cyber_News_App/homepage_test.html')
 
 
-def homepage_test(request):
+def articles_page(request):
     # return HttpResponse("homepage")
     articles = Article.objects.all().order_by('article_date')
-    return render(request, 'Cyber_News_App/homepage.html', {'articles': articles})
+    return render(request, 'Cyber_News_App/articles.html', {'articles': articles})
 
 
 def login(request):
