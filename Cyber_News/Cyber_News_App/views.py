@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
+# from .models import Article, Blog, Thread, Comment, User, Editor
 from .models import *
 
 
@@ -12,6 +13,12 @@ def index(request):
 def homepage(request):
     # return HttpResponse("homepage")
     return render(request, 'Cyber_News_App/homepage_test.html')
+
+
+def homepage_test(request):
+    # return HttpResponse("homepage")
+    articles = Article.objects.all().order_by('article_date')
+    return render(request, 'Cyber_News_App/homepage.html', {'articles': articles})
 
 
 def login(request):

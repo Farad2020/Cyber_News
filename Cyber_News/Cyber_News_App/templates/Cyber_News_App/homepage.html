@@ -4,7 +4,18 @@
     <meta charset="UTF-8">
     <title>Home page</title>
 </head>
-<body>
-<h1>Title for something</h1>
+    <div>
+        <h1>Title for something</h1>
+            <div class = "articles">
+                {% for article in articles %}
+                    <div class = "article">
+                        <h2><a href="#">{{article.article_name }}</a> </h2>
+                        <p>{{article.article_text }}</p>
+                        <p>{{article.article_date }}</p>
+                    </div>
+                {% endfor %}
+                
+            </div>
+    </div>
 </body>
 </html>
