@@ -7,9 +7,14 @@ class Article(models.Model):
     article_name = models.CharField(max_length=9999)
     article_text = models.TextField()
     article_date = models.DateTimeField(auto_now_add=True)
+    article_slug = models.SlugField()
+    # for url tutorial: https://www.youtube.com/watch?v=c2hbT0uIcOQ&list=PL4cUxeGkcC9ib4HsrXEYpQnTOTZE1x0uc&index=14
 
     def __str__(self):
-        return self.article_name + self.article_text
+        return self.article_name
+
+    def snippet(self):  # returns sneak-peek for article content
+        return self.article_text[:50] + "..."
 
 
 class Blog(models.Model):

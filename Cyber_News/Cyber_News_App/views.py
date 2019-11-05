@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-# from .models import Article, Blog, Thread, Comment, User, Editor
 from .models import *
 
 
@@ -19,6 +18,10 @@ def articles_page(request):
     # return HttpResponse("homepage")
     articles = Article.objects.all().order_by('article_date')
     return render(request, 'Cyber_News_App/articles.html', {'articles': articles})
+
+
+def articles_details(request, slug):
+    return HttpResponse(slug)
 
 
 def login(request):
