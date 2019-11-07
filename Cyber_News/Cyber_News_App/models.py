@@ -98,7 +98,7 @@ class Game(models.Model):
     game_rd = models.DateField('date published') # released date
     game_rating = models.FloatField(default=0.0)
     # link to articles, blogs, threads
-    # image
+    # image(ImageField), platforms(list of strings)
 
     def __str__(self):
         return self.game_name
