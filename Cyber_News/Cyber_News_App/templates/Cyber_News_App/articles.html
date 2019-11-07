@@ -1,24 +1,16 @@
-{% load static from staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home page</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
+{% extends "Cyber_News_App/base_layout.html" %}
+
+{% block content %}
     <div>
-        <h1><a href="{% url 'cyber_news:list' %}">articles</a> </h1>   <!-- Link to go to list -->
+        <h1><a href="{% url 'cyber_news:index' %}">articles</a> </h1>   <!-- Link to go to list -->
             <div class = "articles">
                 {% for article in articles %}
                     <div class = "article">
-                        <h2><a href="{% url 'cyber_news:article' article.id %}">{{article.article_name }}</a> </h2> <!-- Link to go to specific article, from part15 -->
-                        <p>{{article.article_text }}</p>
+                        <h2><a href="{% url 'cyber_news:article' article.id %}">{{article.article_name}}</a> </h2> <!-- Link to go to specific article, from part15 -->
                         <p>{{article.article_date }}</p>
                     </div>
                 {% endfor %}
 
             </div>
     </div>
-</body>
-</html>
+{% endblock %}

@@ -14,16 +14,18 @@ def homepage(request):
     return render(request, 'Cyber_News_App/homepage_test.html')
 
 
-def articles_page(request):
+def index(request):
     # return HttpResponse("homepage")
     articles = Article.objects.all().order_by('article_date')
     return render(request, 'Cyber_News_App/articles.html', {'articles': articles})
 
 
-def article_details(request, art_id):
-    # return HttpResponse(slug)
-    article = Article.objects.get(id = art_id)
-    return render(request, 'Cyber_News_App/article_detail.html', {'article': article})
+def article_details(request, article_id):
+    '''article = get_object_or_404(Article, pk=art_id)
+    article.numberOfClicks += 1
+    article.save()
+    return render(request, 'Cyber_News_App/article_detail.html', {'article': article})'''
+    return HttpResponse(article_id)
 
 
 def login(request):
