@@ -90,7 +90,7 @@ class User(models.Model):
         return self.login
 
 
-class GamePage(models.Model):
+class Game(models.Model):
     game_name = models.CharField(max_length=1000)
     game_developer = models.CharField(max_length=1000)
     game_text = models.TextField(default="")
@@ -116,7 +116,7 @@ class Article(models.Model):
     article_text = models.TextField(default="")
     article_date = models.DateTimeField(auto_now_add=True)  # earlier was written this: 'date published'
     author_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    game_id = models.ForeignKey(GamePage, on_delete=models.CASCADE)
+    game_id = models.ForeignKey(Game, on_delete=models.CASCADE)
     rating = models.FloatField(default=0.0)
     numberOfClicks = models.IntegerField(default=0)
     isBlog = models.BooleanField(True)
@@ -142,7 +142,7 @@ class Thread(models.Model): #later need to add comments to threads
     thread_text = models.TextField()
     thread_date = models.DateTimeField(auto_now_add=True)
     thread_author = models.ForeignKey(User, on_delete=models.CASCADE)
-    game_id = models.ForeignKey(GamePage, on_delete=models.CASCADE)
+    game_id = models.ForeignKey(Game, on_delete=models.CASCADE)
     #link to the game
 
     def __str__(self):
