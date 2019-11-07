@@ -141,6 +141,7 @@ class Thread(models.Model): #later need to add comments to threads
     thread_text = models.TextField()
     thread_date = models.DateTimeField(auto_now_add=True)
     thread_author = models.ForeignKey(User, on_delete=models.CASCADE)
+    game_id = models.ForeignKey(GamePage, on_delete=models.CASCADE)
     #link to the game
 
     def __str__(self):
@@ -150,6 +151,7 @@ class Thread(models.Model): #later need to add comments to threads
 class Comments(models.Model):
     comments_text = models.TextField()
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    author_id = models.ForeignKey(User, on_delete=models.CASCADE)
     # comment_author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
