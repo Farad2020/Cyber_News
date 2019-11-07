@@ -1,7 +1,17 @@
 from django.db import models
 
 # Create your models here.
+"""
+'''''''''''''''BIG PLAN''''''''''''''
+Everyone gets their own model, and do html for that page to be fully functional
+later connect them with each other
+'''''''''''''''''''''REMEMBER: WHEN YOU CHANGE MODEL, MAKE MIGRATION!!''''''''''''''''''''
 
+Alua - User, Editor, 
+Madina - Article, Blog
+Faraby - Game
+
+"""
 #First model
 class Article(models.Model):
     article_name = models.CharField(max_length=9999)

@@ -9,7 +9,4 @@ urlpatterns = [
     url('', views.articles_page, name="list"),
     # created from tutorial, link in models, to use img watch part15
     url(r'^(?P<slug>[-\w]+)/$', views.articles_details, name="detail"),
-
-
-
 ]
