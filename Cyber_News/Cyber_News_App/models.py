@@ -110,6 +110,12 @@ class Game(models.Model):
         else:
             return (self.rating + new_rate) / 2
 
+    @classmethod
+    def create(self, game_name, game_developer, game_text, game_publisher, game_rd, game_rating):
+        game = self(game_name=game_name, game_developer=game_developer, game_text=game_text,
+                    game_publisher=game_publisher, game_rd=game_rd, game_rating=game_rating)
+        return game
+
 
 class Article(models.Model):
     article_name = models.CharField(max_length=1000)

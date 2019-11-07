@@ -2,6 +2,7 @@
 
 {% block content %}
     <h1><a href="{% url 'cyber_news:index' %}">Home</a> </h1>
+    <h1><a href="{% url 'cyber_news:games' %}">games</a> </h1>
     <div class="game-details"> <!-- Link to go to list -->
         <h1>{{ game.game_name }}</h1>
         <p>Publisher: {{ game.game_publisher }}</p>
