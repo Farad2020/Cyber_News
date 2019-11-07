@@ -80,8 +80,8 @@ from django.forms import ModelForm
 
 class User(models.Model):
     login = models.CharField(max_length=100)
-    isEditor = models.BooleanField(False)  # rang of the user
-    isActive = models.BooleanField(True)  # check if use is banned, deleted or not
+    isEditor = models.BooleanField(False, True)  # rang of the user
+    isActive = models.BooleanField(False, True)  # check if use is banned, deleted or not
 
     # password = models.PasswordField()
 
@@ -116,7 +116,7 @@ class Article(models.Model):
     author_id = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.FloatField(default=0.0)
     numberOfClicks = models.IntegerField(default=0)
-    isBlog = models.BooleanField(False)
+    isBlog = models.BooleanField(False, True)
     # game_link
     # article
     # image optional
