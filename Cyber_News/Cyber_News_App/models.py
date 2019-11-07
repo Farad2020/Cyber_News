@@ -93,8 +93,9 @@ class User(models.Model):
 class GamePage(models.Model):
     game_name = models.CharField(max_length=1000)
     game_developer = models.CharField(max_length=1000)
+    game_text = models.TextField(default="")
     game_publisher = models.CharField(max_length=1000)
-    game_rd = models.DateTimeField('date published') # released date
+    game_rd = models.DateField('date published') # released date
     game_rating = models.FloatField(default=0.0)
     # link to articles, blogs, threads
     # image

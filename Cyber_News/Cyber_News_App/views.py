@@ -18,7 +18,10 @@ def article_details(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
     article.numberOfClicks += 1
     article.save()
-    return render(request, 'Cyber_News_App/article_detail.html', {'article': article})
+
+    author = User.objects.get(pk = article.author_id_id)    # why id_id works!&?
+    return render(request, 'Cyber_News_App/article_detail.html', {'article': article,
+                                                                  'author': author})
 
 
 def login(request):
