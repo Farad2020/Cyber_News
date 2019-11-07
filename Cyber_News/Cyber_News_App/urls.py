@@ -5,11 +5,10 @@ from . import views
 app_name = "cyber_news"
 
 urlpatterns = [
-    # path('', views.index, name='index'),
-    url('', views.index, name="index"),
-    # created from tutorial, link in models, to use img watch part15
-
+    # GIANT QUESTION!!! why replacing urls with positions fixed the program?
     path('article/<article_id>/', views.article_details, name='article'),
+
+    url('', views.index, name="index"),
     path('home/', views.homepage),
     path('login/', views.login),
 
