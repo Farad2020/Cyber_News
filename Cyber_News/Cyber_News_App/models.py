@@ -12,7 +12,8 @@ Madina - Article, Blog
 Faraby - Game
 
 """
-#First model
+
+"""
 class Article(models.Model):
     article_name = models.CharField(max_length=9999)
     article_text = models.TextField()
@@ -68,3 +69,74 @@ class User(models.Model):
 
     def __str__(self):
         return self.user_name + self.user_surname
+
+"""
+
+from django.db import models
+from django.forms import ModelForm
+
+
+# Create your models here.
+
+class User(models.Model):
+    login = models.CharField(max_length=100)
+    isEditor = models.BooleanField(False)  # rang of the user
+    isActive = models.BooleanField(True)  # check if use is banned, deleted or not
+
+    # password = models.PasswordField()
+
+    def __str__(self):
+        return self.login
+
+
+class GamePage(models.Model):
+    game_name = models.CharField(max_length=1000)
+    game_developer = models.CharField(max_length=1000)
+    game_publisher = models.CharField(max_length=1000)
+    game_rd = models.DateTimeField('date published') # released date
+    game_rating = models.FloatField(default=0.0)
+    # link to articles, blogs, threads
+    # image
+
+    def __str__(self):
+        return self.game_name
+
+    def rate_game(self, new_rate):
+        if self.rating == 0.0:
+            self.rating = new_rate
+            return self.rating
+        else:
+            return (self.rating + new_rate) / 2
+
+
+class Article(models.Model):
+    article_name = models.CharField(max_length=1000)
+    article_text = models.TextField(default="")
+    article_date = models.DateTimeField(auto_now_add=True)  # earlier was written this: 'date published'
+    author_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.FloatField(default=0.0)
+    numberOfClicks = models.IntegerField(default=0)
+    isBlog = models.BooleanField(False)
+    # game_link
+    # article
+    # image optional
+
+    def __str__(self):
+        return self.article_name
+
+    def rate_article(self, new_rate):
+        if self.rating == 0.0:
+            self.rating = new_rate
+            return self.rating
+        else:
+            return (self.rating + new_rate) / 2
+
+
+
+class Comments(models.Model):
+    comments_text = models.TextField()
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    # comment_author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.comments_text
