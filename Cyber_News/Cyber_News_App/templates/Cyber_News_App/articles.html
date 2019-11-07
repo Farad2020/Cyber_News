@@ -12,7 +12,7 @@
             <div class = "articles">
                 {% for article in articles %}
                     <div class = "article">
-                        <h2><a href="{% url 'cyber_news:detail' slug=article.article_slug %}">{{article.article_name }}</a> </h2> <!-- Link to go to specific article, from part15 -->
+                        <h2><a href="{% url 'cyber_news:article' article.id %}">{{article.article_name }}</a> </h2> <!-- Link to go to specific article, from part15 -->
                         <p>{{article.article_text }}</p>
                         <p>{{article.article_date }}</p>
                     </div>

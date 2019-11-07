@@ -131,6 +131,18 @@ class Article(models.Model):
         else:
             return (self.rating + new_rate) / 2
 
+    def snippet(self):  # returns sneak-peek for article content
+        return self.article_text[:50] + "..."
+
+
+class Thread(models.Model): #later need to add comments to threads
+    thread_text = models.TextField()
+    thread_date = models.DateTimeField(auto_now_add=True)
+    thread_author = models.ForeignKey(User, on_delete=models.CASCADE)
+    #link to the game
+
+    def __str__(self):
+        return self.thread_author + self.thread_text
 
 
 class Comments(models.Model):

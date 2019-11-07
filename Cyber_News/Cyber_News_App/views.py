@@ -20,9 +20,9 @@ def articles_page(request):
     return render(request, 'Cyber_News_App/articles.html', {'articles': articles})
 
 
-def articles_details(request, slug):
+def article_details(request, art_id):
     # return HttpResponse(slug)
-    article = Article.objects.get(slug=slug)
+    article = Article.objects.get(id = art_id)
     return render(request, 'Cyber_News_App/article_detail.html', {'article': article})
 
 

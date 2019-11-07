@@ -8,5 +8,8 @@ urlpatterns = [
     # path('', views.index, name='index'),
     url('', views.articles_page, name="list"),
     # created from tutorial, link in models, to use img watch part15
-    url(r'^(?P<slug>[-\w]+)/$', views.articles_details, name="detail"),
+
+    path('article/<int:article_id>/', views.article_details, name='article'),
+    path('home/', views.homepage),
+    path('login/', views.login),
 ]
