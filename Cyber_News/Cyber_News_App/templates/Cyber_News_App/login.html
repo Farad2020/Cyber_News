@@ -1,0 +1,13 @@
+{% extends "Cyber_News_App/base_layout.html" %}
+
+{% block content %}
+    <div class="sign-up">
+        <form action="{% url 'cyber_news:login' %}" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <div class = "form-group">
+                <button class="btn btn-outline-info" type="submit">Log in</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
