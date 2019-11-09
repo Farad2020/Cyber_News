@@ -60,7 +60,19 @@ def games_page(request):
 
 
 def create_game_page(request):
+<<<<<<< HEAD
     return render(request, )
+=======
+    if request.method == 'POST':
+        try:
+            game = Game(game_name=request.POST.get("game_name"), game_developer=request.POST.get("game_dev"),
+                        game_publisher=request.POST.get("game_pub"), game_text=request.POST.get("game_desc"),
+                        game_rd=request.POST.get("game_date"), game_rating=request.POST.get("game_rate"))
+            game.save()
+        except:
+            print('the comments cannot be added')
+    return render(request, "Cyber_News_App/game_creation_page.html", {})
+>>>>>>> 9aeec1010df77f6ed0da6b1a12c316c85645b97b
 
 
 def game_details(request, game_id):
