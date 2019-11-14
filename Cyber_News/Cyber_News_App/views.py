@@ -54,6 +54,7 @@ def user_page(request, user_id):
     user.save()
     return render(request, 'Cyber_News_App/login.html', {'user':user})
 
+'''
 def games_page(request):
     games = Game.objects.all().order_by('game_name')
     return render(request, "Cyber_News_App/games_page.html", {'games': games})
@@ -74,3 +75,4 @@ def create_game_page(request):
 def game_details(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
     return render(request, "Cyber_News_App/game_details_page.html", {'game': game})
+'''
