@@ -5,7 +5,7 @@
     <h1><a href="{% url 'cyber_news:games' %}">games</a> </h1>
     <div class="games-list"> <!-- Link to go to list -->
          <div class = "create-game">
-             <form class="" action="" method="post">
+             <form class="" action="" method="POST">
              {% csrf_token %}
                 <textarea name="game_name" rows="1" cols="30" placeholder="Game Name"></textarea><br>
                  <textarea name="game_dev" rows="1" cols="30" placeholder="Game Developer"></textarea><br>

@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
 from .models import *
-from User_Account.models import *
+from Cyber_News.Cyber_News.User_Account.models import SimpleUser
 
 
 def homepage(request):
@@ -21,7 +21,7 @@ def article_details(request, article_id):
     article.numberOfClicks += 1
     article.save()
 
-    author = User.objects.get(pk=article.author_id_id)  # why id_id works!&?
+    author = SimpleUser.objects.get(pk=article.author_id_id)  # why id_id works!&?
     return render(request, 'Cyber_News_App/article_detail.html', {'article': article,
                                                                   'author': author})
 
@@ -39,12 +39,12 @@ def sign_up(request):
     return render(request, 'Cyber_News_App/signup_page.html', {'form': form})
 """
 
-def user_page(request, user_id):
-    user = get_object_or_404(User, pk = user_id)
+'''def user_page(request, user_id):
+    user = get_object_or_404(SimpleUser, pk = user_id)
     user.save()
-    return render(request, 'Cyber_News_App/login.html', {'user':user})
+    return render(request, 'Cyber_News_App/login.html', {'user':user})'''
 
-def games_page(request):
+'''def games_page(request):
     games = Game.objects.all().order_by('game_name')
     return render(request, "Cyber_News_App/games_page.html", {'games': games})
 
@@ -63,4 +63,4 @@ def create_game_page(request):
 
 def game_details(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
-    return render(request, "Cyber_News_App/game_details_page.html", {'game': game})
+    return render(request, "Cyber_News_App/game_details_page.html", {'game': game})'''

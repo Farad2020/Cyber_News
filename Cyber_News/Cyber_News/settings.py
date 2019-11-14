@@ -34,6 +34,7 @@ LOGOUT_REDIRECT_URL = "cyber_news:index"
 # Application definition
 
 INSTALLED_APPS = [
+    'game_pages',
     'Cyber_News_App',
     'User_Account',
     'django.contrib.admin',
