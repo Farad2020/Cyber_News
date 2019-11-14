@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
 from .models import *
+from User_Account.models import *
 
 
 def homepage(request):
@@ -37,18 +38,6 @@ def sign_up(request):
         form = UserCreationForm()
     return render(request, 'Cyber_News_App/signup_page.html', {'form': form})
 """
-
-
-def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)   
-            redirect('cyber_news:index')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'Cyber_News_App/login.html', {'form': form})
 
 def user_page(request, user_id):
     user = get_object_or_404(User, pk = user_id)

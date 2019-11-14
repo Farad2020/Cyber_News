@@ -5,8 +5,35 @@
     <meta charset="UTF-8">
     <title>Cyber_News</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
 </head>
 <body>
+        <div class="container">
+                {%block login%}
+                {% if user.is_authenticated%}
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{% url 'logout' %}"> Logout </a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                       <a href="{% url 'user_accounts:profile' %}">{{user.username}}</a>
+                    </li>
+                </ul>
+    
+                {%else%}
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{% url 'login'%}">Login</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'user_accounts:registration'%}"> Registration </a> 
+                    </li>
+                    </ul>
+                {%endif%}
+                {%endblock%}
+            </div>
     <div class="wrapper">
         {% block content %}
         {% endblock %}

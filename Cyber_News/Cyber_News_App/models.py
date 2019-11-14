@@ -78,17 +78,6 @@ from django.forms import ModelForm
 
 # Create your models here.
 
-class User(models.Model):
-    login = models.CharField(max_length=100)
-    isEditor = models.BooleanField(True)  # rang of the user
-    isActive = models.BooleanField(True)  # check if use is banned, deleted or not
-
-
-    # password = models.PasswordField()
-
-    def __str__(self):
-        return self.login
-
 
 class Game(models.Model):
     game_name = models.CharField(max_length=1000)
