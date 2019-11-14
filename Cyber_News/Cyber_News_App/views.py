@@ -24,7 +24,7 @@ def article_details(request, article_id):
     return render(request, 'Cyber_News_App/article_detail.html', {'article': article,
                                                                   'author': author})
 
-
+"""
 def sign_up(request):
     # return HttpResponse("user login page")
     if request.method == 'POST':
@@ -36,6 +36,7 @@ def sign_up(request):
     else:
         form = UserCreationForm()
     return render(request, 'Cyber_News_App/signup_page.html', {'form': form})
+"""
 
 
 def login_view(request):
@@ -60,9 +61,6 @@ def games_page(request):
 
 
 def create_game_page(request):
-<<<<<<< HEAD
-    return render(request, )
-=======
     if request.method == 'POST':
         try:
             game = Game(game_name=request.POST.get("game_name"), game_developer=request.POST.get("game_dev"),
@@ -72,7 +70,6 @@ def create_game_page(request):
         except:
             print('the comments cannot be added')
     return render(request, "Cyber_News_App/game_creation_page.html", {})
->>>>>>> 9aeec1010df77f6ed0da6b1a12c316c85645b97b
 
 
 def game_details(request, game_id):
