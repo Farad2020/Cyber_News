@@ -27,12 +27,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'User_Account.SimpleUser'
+LOGIN_REDIRECT_URL = "cyber_news:index"
+LOGOUT_REDIRECT_URL = "cyber_news:index"
 
 # Application definition
 
 INSTALLED_APPS = [
     'game_pages',
     'Cyber_News_App',
+    'User_Account',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

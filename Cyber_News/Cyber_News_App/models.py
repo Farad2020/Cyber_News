@@ -5,20 +5,16 @@ from django.db import models
 from django.db import models
 from django.forms import ModelForm
 from game_pages.models import Game
+from User_Account.models import SimpleUser
 
 # Create your models here.
 
-class User(models.Model):
-    login = models.CharField(max_length=100)
-    isEditor = models.BooleanField(True)  # rang of the user
-    isActive = models.BooleanField(True)  # check if use is banned, deleted or not
-
-
-    # password = models.PasswordField()
+class Editor(models.Model):
+    editors_name = models.CharField(max_length=100)
+    editors_surname = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.login
-
+        return self.editors_name + self.editors_surname
 
 
 
@@ -27,7 +23,7 @@ class Article(models.Model):
     article_name = models.CharField(max_length=1000)
     article_text = models.TextField(default="")
     article_date = models.DateTimeField(auto_now_add=True)  # earlier was written this: 'date published'
-    author_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    author_id = models.ForeignKey(SimpleUser, on_delete=models.CASCADE)
     game_id = models.ForeignKey(Game, on_delete=models.CASCADE)
     rating = models.FloatField(default=0.0)
     numberOfClicks = models.IntegerField(default=0)
@@ -53,7 +49,7 @@ class Article(models.Model):
 class Thread(models.Model): #later need to add comments to threads
     thread_text = models.TextField()
     thread_date = models.DateTimeField(auto_now_add=True)
-    thread_author = models.ForeignKey(User, on_delete=models.CASCADE)
+    thread_author = models.ForeignKey(SimpleUser, on_delete=models.CASCADE)
     game_id = models.ForeignKey(Game, on_delete=models.CASCADE)
     #link to the game
 
@@ -64,8 +60,8 @@ class Thread(models.Model): #later need to add comments to threads
 class Comments(models.Model):
     comments_text = models.TextField()
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
-    author_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    # comment_author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author_id = models.ForeignKey(SimpleUser, on_delete=models.CASCADE)
+    #comment_author = models.ForeignKey(SimpleUser, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.comments_text

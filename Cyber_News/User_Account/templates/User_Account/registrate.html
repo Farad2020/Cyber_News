@@ -1,0 +1,31 @@
+{% extends "Cyber_News_App/base_layout.html" %}
+
+{%block content%}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/forge/0.8.2/forge.all.min.js"></script>
+
+   <script type="text/Javascript">
+       function generateHash()
+ {
+           var pass = document.getElementById('id_pass').value;
+           var rep_pass = document.getElementById('id_rep_pass').value;
+           var md = forge.md.sha256.create();
+           md.start();
+           md.update(pass);
+           var hashPass = md.digest().toHex();
+           md.start();
+           md.update(rep_pass)
+           var hashRepPass = md.digest().toHex();
+           document.getElementById("id_pass").value = hashPass;
+           document.getElementById("id_rep_pass").value = hashRepPass;
+       }
+   </script>
+
+   <h2>Sign up</h2>
+   <form method="post" enctype="multipart/form-data">
+     {% csrf_token %}
+     {{ form.as_p }}
+     <button type="submit">Sign up</button>
+   </form>
+{% endblock %}
