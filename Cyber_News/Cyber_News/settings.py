@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'User_Account.User'
+AUTH_USER_MODEL = 'User_Account.SimpleUser'
 LOGIN_REDIRECT_URL = "cyber_news:index"
 LOGOUT_REDIRECT_URL = "cyber_news:index"
 
