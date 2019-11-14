@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'game_pages',
     'Cyber_News_App',
     'django.contrib.admin',
     'django.contrib.auth',

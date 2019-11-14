@@ -7,6 +7,7 @@ from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('games/', include('game_pages.urls')),
     path('', include('Cyber_News_App.urls')),
 
 ]
