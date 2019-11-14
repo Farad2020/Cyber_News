@@ -8,7 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('User_Account.urls')),
     path('games/', include('game_pages.urls')),
+    path('dj/', include('django.contrib.auth.urls')),
     path('', include('Cyber_News_App.urls')),
-    path('', include('django.contrib.auth.urls')),
 ]
 #urlpatterns += staticfiles_urlpatterns()

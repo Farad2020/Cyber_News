@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
 from .models import *
-from Cyber_News.Cyber_News.User_Account.models import SimpleUser
+from User_Account.models import SimpleUser
 
 
 def homepage(request):

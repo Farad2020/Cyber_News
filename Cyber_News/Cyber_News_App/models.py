@@ -4,8 +4,8 @@ from django.db import models
 
 from django.db import models
 from django.forms import ModelForm
-from Cyber_News.Cyber_News.game_pages.models import Game
-from Cyber_News.Cyber_News.User_Account.models import SimpleUser
+from game_pages.models import Game
+from User_Account.models import SimpleUser
 
 # Create your models here.
 
