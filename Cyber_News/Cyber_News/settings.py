@@ -35,15 +35,15 @@ LOGIN_REDIRECT_URL = 'cyber_news: index'
 LOGIN_URL = 'login'
 
 INSTALLED_APPS = [
+    'users',
+    'game_pages',
+    'Cyber_News_App',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'game_pages',
-    'Cyber_News_App',
-    'users',
 ]
 
 MIDDLEWARE = [

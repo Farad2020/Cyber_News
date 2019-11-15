@@ -10,14 +10,6 @@ class SimpleUserForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
 
-    def clean_username(self):
-        username = self.cleaned_data["username"]
-        try:
-            User.objects.get(username = username)
-        except User.DoesNotExist:
-            return username
-        raise forms.ValidationError(self.error_messages['dublicate_username'])
-
 
 class SimpleUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
