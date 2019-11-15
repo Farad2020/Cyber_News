@@ -29,10 +29,15 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+
+AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = 'cyber_news: index'
+LOGIN_URL = 'login'
+
 INSTALLED_APPS = [
     'game_pages',
     'Cyber_News_App',
-    'users.apps.UsersConfig',
+    'users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,6 +129,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "assets"),
 )
-AUTH_USER_MODEL = 'users.User'
-LOGIN_REDIRECT_URL = 'cyber_news: index'
-LOGIN_URL = 'login'

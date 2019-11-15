@@ -4,8 +4,8 @@ from django.db import models
 
 from django.db import models
 from django.forms import ModelForm
-from game_pages import Game
-from users import User
+#from game_pages.models
+from users.models import User
 
 
 # Create your models here.
@@ -25,7 +25,7 @@ class Article(models.Model):
     article_text = models.TextField(default="")
     article_date = models.DateTimeField(auto_now_add=True)  # earlier was written this: 'date published'
     author_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    game_id = models.ForeignKey(Game, on_delete=models.CASCADE)
+    #game_id = models.ForeignKey(Game, on_delete=models.CASCADE)
     rating = models.FloatField(default=0.0)
     numberOfClicks = models.IntegerField(default=0)
     isBlog = models.BooleanField(True)
@@ -51,7 +51,7 @@ class Thread(models.Model): #later need to add comments to threads
     thread_text = models.TextField()
     thread_date = models.DateTimeField(auto_now_add=True)
     thread_author = models.ForeignKey(User, on_delete=models.CASCADE)
-    game_id = models.ForeignKey(Game, on_delete=models.CASCADE)
+    #game_id = models.ForeignKey(Game, on_delete=models.CASCADE)
     #link to the game
 
     def __str__(self):
