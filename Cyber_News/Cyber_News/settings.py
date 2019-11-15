@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 
 
 AUTH_USER_MODEL = 'users.User'
-LOGIN_REDIRECT_URL = 'cyber_news: index'
+LOGIN_REDIRECT_URL = "cyber_news:index"
 LOGIN_URL = 'login'
 
 INSTALLED_APPS = [
@@ -106,6 +106,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+APPEND_SLASH = True
+#url(r'^accounts/login/', 'django.contrib.auth.views.login')
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
