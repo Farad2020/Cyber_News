@@ -3,7 +3,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
 from .models import *
-from User_Account.models import SimpleUser
 
 
 def homepage(request):
@@ -21,7 +20,7 @@ def article_details(request, article_id):
     article.numberOfClicks += 1
     article.save()
 
-    author = SimpleUser.objects.get(pk=article.author_id_id)  # why id_id works!&?
+    author = Editor.objects.get(pk=article.author_id_id)  # why id_id works!&?
     return render(request, 'Cyber_News_App/article_detail.html', {'article': article,
                                                                   'author': author})
 
