@@ -1,8 +1,9 @@
-'''from django import forms
+from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
-User = get_user_model()
+#User = get_user_model()
+from .models import User
 
 
 class SimpleUserForm(UserCreationForm):
@@ -20,4 +21,3 @@ class CustomizedAdmin(UserAdmin):
     add_form = SimpleUserForm
     form = SimpleUserChangeForm
     model = User
-'''

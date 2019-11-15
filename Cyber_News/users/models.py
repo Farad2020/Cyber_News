@@ -1,12 +1,18 @@
-'''from django.db import models
+from django.db import models
 from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser
-)
+    BaseUserManager, AbstractBaseUser,
+    AbstractUser)
 
 
 # Create your models here.
 
-class MyUserManager(BaseUserManager):
+class User(AbstractUser):
+
+    def __str__(self):
+        return self.username
+
+
+'''class MyUserManager(BaseUserManager):
     def create_user(self, password=None):
         user = self.model()
         user.set_password(password)
@@ -30,7 +36,6 @@ class User(AbstractBaseUser):
 
     def __str__(self):
         return self.get_username()'''
-
 
 '''
     def has_perm(self, perm, obj=None):
