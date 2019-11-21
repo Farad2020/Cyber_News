@@ -3,7 +3,7 @@ from django.urls import path, include
 from users import views as user_views
 from django.contrib.auth import views as auth_views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.conf.urls import url
+from django.conf.urls import url, static
 from django.conf import settings
 
 urlpatterns = [

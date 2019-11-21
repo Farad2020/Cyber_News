@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 
 class Game(models.Model):
     game_name = models.CharField(max_length=1000)
@@ -9,7 +8,7 @@ class Game(models.Model):
     game_publisher = models.CharField(max_length=1000)
     game_rd = models.DateField('date published') # released date
     game_rating = models.FloatField(default=0.0)
-    game_img = models.ImageField(upload_to='photos', verbose_name='My Photo')
+    game_img = models.ImageField(upload_to='game_img/', default='NULL')
     # link to articles, blogs, threads
     # image(ImageField), platforms(list of strings)
 
@@ -28,4 +27,6 @@ class Game(models.Model):
         game = self(game_name=game_name, game_developer=game_developer, game_text=game_text,
                     game_publisher=game_publisher, game_rd=game_rd, game_rating=game_rating)
         return game
+
+
 
