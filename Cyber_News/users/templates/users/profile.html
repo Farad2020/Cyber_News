@@ -1,5 +1,6 @@
 {% extends "Cyber_News_App/base_layout.html" %}
 
 {% block content %}
-    <h1> {{ user.username }}</h1>
+    <p> {{ user.username }}</p>
+    <p>User Image: <img src="{{user.userImg.url}}" alt="" width="200" height="200"></p>
 {% endblock content %}

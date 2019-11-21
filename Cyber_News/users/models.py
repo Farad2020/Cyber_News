@@ -5,8 +5,7 @@ from django.contrib.auth.models import (AbstractUser)
 # Create your models here.
 
 class User(AbstractUser):
-
-    isBanned = models.BooleanField
+    userImg = models.ImageField(upload_to='user_avas/', default='NULL')
 
     def __str__(self):
         return self.username
