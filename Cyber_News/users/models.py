@@ -1,12 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser,
-    AbstractUser)
+from django.contrib.auth.models import (AbstractUser)
 
 
 # Create your models here.
 
 class User(AbstractUser):
+
+    isBanned = models.BooleanField
 
     def __str__(self):
         return self.username

@@ -16,8 +16,3 @@ class SimpleUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = User
 
-
-class CustomizedAdmin(UserAdmin):
-    add_form = SimpleUserForm
-    form = SimpleUserChangeForm
-    model = User
