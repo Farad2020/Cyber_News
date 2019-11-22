@@ -9,5 +9,6 @@ urlpatterns = [
     path('article/<article_id>/', v1.article_details, name='article'),
     path('home/', v1.homepage),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('contacts/', v1.contacts, name="contacts"),
     url('', v1.index, name="index"),
 ]

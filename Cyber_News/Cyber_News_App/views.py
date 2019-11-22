@@ -24,6 +24,11 @@ def article_details(request, article_id):
     return render(request, 'Cyber_News_App/article_detail.html', {'article': article,
                                                                   'author': author})
 
+
+def contacts(request):
+    return render(request, 'Cyber_News_App/contacts.html')
+
+
 """
 def sign_up(request):
     # return HttpResponse("user login page")
