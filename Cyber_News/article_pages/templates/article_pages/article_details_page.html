@@ -3,10 +3,34 @@
 {% block content %}
     <div class="article-detail"> <!-- Link to go to list -->
         <h1>{{ article.article_name }}</h1>
-        <p>{{ author.login }}</p>
-        <p>{{ article.numberOfClicks }}</p>
-
-        <p>{{ article.article_date }}</p>
+        <h1><a href="{% url 'article_pages:article_edit' article.id %}">edit</a> </h1>
+        <h2><a href="{% url 'game_pages:game_det' article.game_id.id %}">Source</a> </h2>
+        <img src="{{article.article_img.url}}" alt="{{article.article_img}}" class="img-responsive" />
         <p>{{ article.article_text }}</p>
+        <p>Release date: {{ article.article_date }}</p>
+        <p>Rating: {{ article.rating }}</p>
+        <p>NUMBER OF CLICKS:{{ article.numberOfClicks}}</p>
     </div>
-{% endblock %}
+        <!--
+  {%if user.is_authenticated%}
+  <h3>Comments: </h3>
+  {% if comments %}
+  {% for comment in comments %}
+  <p><b>*{{comment.user.username}}* left this comment: </b></p>
+    <p> {{comment.comments_text}}</p>
+
+  {% endfor %}
+  {% else %}
+    <p>No comments on this article yet</p>
+  {% endif %}
+
+  <form class="" action="" method="post">
+    {% csrf_token %}
+    <textarea name="comments_text" rows="8" cols="80" placeholder="Leave your thoughts"></textarea>
+    <input type="hidden" name="username" value="{{user.username}}">
+    <br><input type="submit" name="" value="Submit">
+  </form>
+  {%endif%}
+  -->
+  {% endblock content%}
+

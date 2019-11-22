@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'users',
     'game_pages',
     'Cyber_News_App',
+    'article_pages',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

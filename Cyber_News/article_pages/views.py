@@ -1,35 +1,86 @@
 from django.shortcuts import render
-
+from django.contrib import messages
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import *
+from .forms import  *
 # Create your views here.
-def det_all_articles(request):
-    return render(request,"article_pages/articles_page.html")
 
 
-"""
-def games_page(request):
-    games = Article.objects.all().order_by('article_name')
-    return render(request, "Cyber_News_App/articles_page.html", {'articles': articles})
+def get_all_articles(request):
+    articles = Article.objects.all
+    return render(request,"article_pages/articles_page.html", {'articles':articles})
 
 
 def create_article_page(request):
-    if request.method == 'POST':
-        try:
-            article = Article(article_name=request.POST.get("article_name"), article_text=request.POST.get("article_text"),
-                        article_date=request.POST.get("article_data"), author_id=request.POST.get("author_id"),
-                        game_id=request.POST.get("game_id"), rating=request.POST.get("article_rate"),
-                        numberOfClicks=request.POST.get("numberOfClicks"),isBlog=request.POST.get("isBlog"))
-            article.save()
-        except:
-            print('the comments cannot be added')
-    return render(request, "Cyber_News_App/article_creation_page.html", {})
+    form = EditArticleForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        form = EditArticleForm()
+
+    return render(request, "Cyber_News_App/article_creation_page.html", {'form': form})
 
 
 def article_details(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
     article.numberOfClicks += 1
     article.save()
+    comments = showComments(request, article_id)
 
-    author = User.objects.get(pk=article.author_id_id)  # why id_id works!&?
-    return render(request, 'Cyber_News_App/article_detail.html', {'article': article,
-                                                                  'author': author})
-"""
+    if request.method == 'POST':
+        try:
+            txt = request.POST.get("comments_text")
+            print(request.POST)
+            comment = Comments(comments_text=txt,
+                               article=Article.objects.get(pk=article_id))
+            comment.save()
+        except:
+            print('the comments cannot be added')
+
+    #author = User.objects.get(pk=article.author_id_id)  # why id_id works!&? 'author': author 'comment' : comments,
+    return render(request, 'article_pages/article_details_page.html', {'article': article, })
+                       
+def articles_delete(request, id=None):
+
+    article= get_object_or_404(Article, id=id)
+
+    creator= article.user.username
+
+    if request.method == "POST" and request.user.is_authenticated and request.user.username == creator:
+        article.delete()
+        messages.success(request, "Post successfully deleted!")
+        return HttpResponseRedirect("/article_pages/article_details_page.html/")
+    
+    context= {'article': article,
+              'creator': creator,
+              }
+    
+    return render(request, 'article_pages/articles_delete.html', context)
+
+def edit_article(request, article_id):
+    article = get_object_or_404(Article, pk=article_id)
+    form = EditArticleForm(request.POST or None, instance=article)
+    if form.is_valid():
+        form.save()
+        form = EditArticleForm()
+        return redirect('../')
+    return render(request, "article_pages/edit_article.html", {'form': form})
+
+def addComment(request, article_id):
+    try:
+        txt = request.POST.get("comments_text")
+        comment = Comments(comments_text=txt,
+                            article=Article.objects.get(pk=article_id))
+        comment.save()
+        return render(request, "article_pages/article_details_page.html",
+                                {"article":Article.objects.get(pk=article_id)})
+    except:
+        return HttpResponse("No such articles")
+
+def showComments(request, article_id):
+    try:
+        comments = Comments.objects.filter(article=Article.objects.get(pk=article_id))
+        return comments
+    except:
+        return "No comments yet"
+                                                                  
+
