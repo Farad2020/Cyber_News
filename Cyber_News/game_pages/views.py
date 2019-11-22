@@ -16,10 +16,11 @@ def get_all_games(request):
 
 
 def create_game_page(request):
-    form = EditGameForm(request.POST or None)
+    form = EditGameForm(request.POST or None, request.FILES)
     if form.is_valid():
         form.save()
         form = EditGameForm()
+        return redirect('../')
     return render(request, "game_pages/game_creation_page.html", {'form': form})
 
 
@@ -37,9 +38,11 @@ def game_details(request, game_id):
 #@permission_required()
 def edit_game_info(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
-    form = EditGameForm(request.POST or None, instance=game)
-    if form.is_valid():
-        form.save()
-        form = EditGameForm()
-        return redirect('../')
+    # request.POST, request.FILES or None
+    form = EditGameForm(  request.POST or None, request.FILES or None, instance=game)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            form = EditGameForm()
+            return redirect('../')
     return render(request, "game_pages/edit_game_info.html", {'form': form})

@@ -6,6 +6,7 @@ class Game(models.Model):
     game_developer = models.CharField(max_length=1000)
     game_text = models.TextField(default="")
     game_publisher = models.CharField(max_length=1000)
+    game_platforms = models.CharField(max_length=1000)
     game_rd = models.DateField('date published') # released date
     game_rating = models.FloatField(default=0.0)
     game_img = models.ImageField(upload_to='game_img/', default='NULL')
