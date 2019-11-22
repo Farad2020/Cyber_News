@@ -3,7 +3,6 @@ from django.urls import path
 from django.conf.urls import url, static
 from django.conf import settings
 from . import views
-from Cyber_News_App import urls
 
 app_name = "game_pages"
 

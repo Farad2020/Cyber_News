@@ -10,7 +10,7 @@ class CustomizedAdmin(UserAdmin):
     form = SimpleUserChangeForm
     model = User
 
-    list_display = ['username', 'userImg']
+    list_display = ['username', 'userImg', 'is_moderator']
 
     fieldsets = UserAdmin.fieldsets + (
         (None, {'fields': ('userImg',)}),

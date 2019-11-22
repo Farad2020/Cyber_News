@@ -1,8 +1,6 @@
 {% extends "Cyber_News_App/base_layout.html" %}
 
 {% block content %}
-    <h1><a href="{% url 'cyber_news:index' %}">Home</a> </h1>
-    <h1><a href="{% url 'game_pages:games_page' %}">games</a> </h1>
     <h1><a href="{% url 'game_pages:game_edit' game.id %}">edit</a> </h1>
     <div class="game-details"> <!-- Link to go to list -->
         <h1>{{ game.game_name }}</h1>

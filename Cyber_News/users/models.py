@@ -6,6 +6,7 @@ from django.contrib.auth.models import (AbstractUser)
 
 class User(AbstractUser):
     userImg = models.ImageField(upload_to='user_avas/', default='NULL')
+    is_moderator = models.BooleanField(default=False, verbose_name='Moderator')
 
     def __str__(self):
         return self.username
