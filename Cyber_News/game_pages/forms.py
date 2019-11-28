@@ -18,4 +18,5 @@ class EditGameForm(forms.ModelForm):
             'game_rd',
             'game_rating',
             'game_img',
+            'game_trailer',
         ]

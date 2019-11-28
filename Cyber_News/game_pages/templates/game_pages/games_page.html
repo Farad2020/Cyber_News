@@ -5,7 +5,7 @@
         <h2><a href="{% url 'game_pages:create_game'%}">Create Game</a> </h2><br>
         {% for game in games %}
          <div class = "game">
-                <h2><a href="{% url 'game_pages:game_det' game.id %}">{{game.game_name}}</a> </h2> <!-- Link to go to specific article, from part15 -->
+                <h2><a href="{% url 'game_pages:game_det' game.id %}">{{game.game_name}}</a> </h2>
                 <p>Rating: {{game.game_rating }}</p>
                 <p>Publisher: {{ game.game_publisher }}</p>
          </div>

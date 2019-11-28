@@ -10,6 +10,7 @@ class Game(models.Model):
     game_rd = models.DateField('date published') # released date
     game_rating = models.FloatField(default=0.0)
     game_img = models.ImageField(upload_to='game_img/', default='NULL')
+    game_trailer = models.URLField(max_length=200, default='NULL')
     # link to articles, blogs, threads
     # image(ImageField), platforms(list of strings)
 
