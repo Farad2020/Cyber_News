@@ -1,6 +1,17 @@
 {% extends "Cyber_News_App/base_layout.html" %}
-
 {% block content %}
-    <p> {{ user.username }}</p>
-    <p>User Image: <img src="{{user.userImg.url}}" alt="" width="200" height="200"></p>
+    <div class="container">
+        <div class="card-title mb-4" style="padding-top: 50px; padding-bottom: 50px;">
+            <div class="d-flex justify-content-start">
+                <div class="image-container">
+                    <img src="{{user.userImg.url}}" id="imgProfile" style="width: 180px; height: 180px" class="img-thumbnail" />
+                </div>
+                <div class="userData ml-3">
+                    <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold; font-family: sans-serif;">{{ user.username }}</h2>
+                    <h6 class="d-block"><a href="javascript:void(0)">300</a> Blog Posts</h6>
+                    <h6 class="d-block"><a href="javascript:void(0)">Change</a></h6>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
