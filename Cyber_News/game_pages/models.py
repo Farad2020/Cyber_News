@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import User
 
 
 class Game(models.Model):
@@ -9,8 +10,8 @@ class Game(models.Model):
     game_platforms = models.CharField(max_length=1000)
     game_rd = models.DateField('date published') # released date
     game_rating = models.FloatField(default=0.0)
-    game_img = models.ImageField(upload_to='game_img/', default='NULL')
-    game_trailer = models.URLField(max_length=200, default='NULL')
+    game_img = models.ImageField(upload_to='game_img/', default=None, null=True)
+    game_trailer = models.URLField(max_length=200, default=None, blank=True, null=True)
     # link to articles, blogs, threads
     # image(ImageField), platforms(list of strings)
 
@@ -31,4 +32,6 @@ class Game(models.Model):
         return game
 
 
-
+class Followers(models.Model):
+    followers = models.ManyToManyField(User)
+    followed_games = models.ManyToManyField(Game)

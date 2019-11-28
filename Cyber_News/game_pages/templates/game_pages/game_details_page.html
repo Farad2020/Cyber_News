@@ -4,7 +4,7 @@
     <h1><a href="{% url 'game_pages:game_edit' game.id %}">edit</a> </h1>
     <div class="game-details"> <!-- Link to go to list -->
         <h1>{{ game.game_name }}</h1>
-        <p><img src="{{ game.game_img.url }}" alt="" width=400" height="400"></p>
+        <p><img src="{{ game.game_img.url }}" alt="{{ game.game_img }}" width=400" height="400"></p>
         <p>Publisher: {{ game.game_publisher }}</p>
         <p>Developer: {{ game.game_developer }}</p>
         <p>Platforms: {{ game.game_platforms }}</p>
