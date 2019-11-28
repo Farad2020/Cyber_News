@@ -457,7 +457,7 @@ ol {
 }
 
 .news-ticker-contant .nt-item span.new {
-	background: #ff205f;
+	 background: #ff205f;
 }
 
 .news-ticker-contant .nt-item span.strategy {
@@ -466,6 +466,7 @@ ol {
 
 .news-ticker-contant .nt-item span.racing {
 	background: #694eae;
+
 }
 
 /*------------------
