@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import permission_required
 
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from .models import *
 from .forms import *
 from django.urls import reverse
@@ -28,8 +28,13 @@ def game_details(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
     game.save()
     if request.method == 'POST':
-        game.delete()
-        return redirect('../')
+        if 'delete' in request.POST:
+            game.delete()
+            return redirect('../')
+        elif 'follow' in request.POST:
+            game.followers.add(request.user)
+        elif 'unfollow' in request.POST:
+            game.followers.remove(request.user)
     return render(request, "game_pages/game_details_page.html", {'game': game})
 
 
