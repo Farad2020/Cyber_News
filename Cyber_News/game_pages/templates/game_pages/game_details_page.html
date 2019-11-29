@@ -26,12 +26,14 @@
         <p>Rating: {{ game.game_rating }}</p>
         <p>Release date: {{ game.game_rd }}</p>
         <p>Description: <br>{{ game.game_text }}</p>
-        {% for article in related_articles %}
-            <div class = "article">
-                <h2><a href="{% url 'cyber_news:article' article.id %}">{{article.article_name}}</a> </h2>
-                <p>{{article.article_date }}</p>
-            </div>
-        {% endfor %}
+          {% for article in related_articles %}
+                    <div class = "article">
+                        <h2><a href="{% url 'article_pages:article_det' article.id %}">{{article.article_name}}</a> </h2> <!-- Link to go to specific article, from part15 -->
+                        <p>{{article.article_date }}</p>
+                        <p>{{article.snippet}}</p>
+                        <p>Rating: {{article.rating }}</p>
+                    </div>
+                {% endfor %}
         <iframe width="560" height="315" src="{{ game.game_trailer }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
