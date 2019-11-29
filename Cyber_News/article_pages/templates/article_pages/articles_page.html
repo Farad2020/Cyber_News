@@ -3,15 +3,29 @@
 {% block content %}
     <div>
             <div class = "articles">
+             <section class="page-section recent-game-page spad">
+                 <div class="row">
                 {% for article in articles %}
                     <div class = "article">
-                        <h2><a href="{% url 'article_pages:article_det' article.id %}">{{article.article_name}}</a> </h2> <!-- Link to go to specific article, from part15 -->
-                        <p>{{article.article_date }}</p>
-                        <p>{{article.snippet}}</p>
-                        <p>Rating: {{article.rating }}</p>
+                     <div class="col-sm-6">
+                        <div class="recent-game-item">
+                            <div class="rgi-thumb set-bg" data-setbg="{{ article.game_id.game_img.url }}">
+                                <div class="cata new">{{ article.author_id.username }}</div>       <!-- Game genres -->
+                            </div>
+                         <div class="rgi-content">
+                            <div class = "game">
+                                <h2><a href="{% url 'article_pages:article_det' article.id %}">{{article.article_name}}</a> </h2>
+                                <p>{{article.article_date }}</p>
+                                <p>{{article.snippet}}</p>
+                                <p>Rating: {{article.rating }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                     </div>
                 {% endfor %}
-
+                </div>
+             </section>
             </div>
     </div>
 {% endblock %}

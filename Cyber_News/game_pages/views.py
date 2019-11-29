@@ -21,7 +21,7 @@ def create_game_page(request):
     if form.is_valid():
         form.save()
         form = EditGameForm()
-        return redirect('../')
+        return redirect('game_pages:games_page')
     return render(request, "game_pages/game_creation_page.html", {'form': form})
 
 
@@ -32,7 +32,7 @@ def game_details(request, game_id):
     if request.method == 'POST':
         if 'delete' in request.POST:
             game.delete()
-            return redirect('../')
+            return redirect('game_pages:games_page')
         elif 'follow' in request.POST:
             game.followers.add(request.user)
         elif 'unfollow' in request.POST:
@@ -46,10 +46,10 @@ def game_details(request, game_id):
 def edit_game_info(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
     # request.POST, request.FILES or None
-    form = EditGameForm(  request.POST or None, request.FILES or None, instance=game)
+    form = EditGameForm(request.POST or None, request.FILES or None, instance=game)
     if request.method == 'POST':
         if form.is_valid():
             form.save()
             form = EditGameForm()
-            return redirect('../')
+            return redirect('game_pages:games_page')
     return render(request, "game_pages/edit_game_info.html", {'form': form})

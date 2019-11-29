@@ -13,5 +13,3 @@ urlpatterns = [
     path('contacts/', v1.contacts, name="contacts"),
     url('index/', v1.index, name="index"),
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += staticfiles_urlpatterns()
