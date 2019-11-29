@@ -10,6 +10,7 @@ urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('register/', user_views.register, name='register'),
                   path('profile/', user_views.profile, name='profile'),
+                  path('profile/edit', user_views.edit_profile, name='edit_profile'),
                   path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
                   path('logout/', user_views.logout_view, name='logout'),
                   path('games/', include('game_pages.urls')),

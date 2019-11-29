@@ -29,3 +29,14 @@ def logout_view(request):
 @login_required
 def profile(request):
     return render(request, 'users/profile.html')
+
+
+def edit_profile(request):
+    if request.method == 'POST':
+        form = SimpleUserChangeForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('/profile')
+    else:
+        form = SimpleUserChangeForm(instance=request.user)
+    return render(request, 'users/edit_profile.html', {'form': form})
