@@ -1,9 +1,24 @@
 {% extends "Cyber_News_App/base_layout.html" %}
 
 {% block content %}
-    <h1><a href="{% url 'game_pages:game_edit' game.id %}">edit</a> </h1>
     <div class="game-details"> <!-- Link to go to list -->
         <h1>{{ game.game_name }}</h1>
+        <form method="post">
+            <p>Do you want to delete this game?</p>
+            {% csrf_token %}
+            {%if user.is_superuser %}
+            <input type="submit" name="delete" value="Delete">
+            <!-- can button redirect me? <h1><a href="{% url 'game_pages:game_edit' game.id %}">edit</a> </h1> -->
+            <a href="{% url 'game_pages:game_edit' game.id %}"><input type="submit" name="delete" value="Edit"></a>
+            {% endif %}
+            {%if user.is_authenticated %}
+                {%if user not in game.followers.all%}
+                    <input type="submit" name="follow" value="Follow">
+                {% else %}
+                    <input type="submit" name="unfollow" value="Unfollow">
+                {% endif %}
+            {% endif %}
+        </form>
         <p><img src="{{ game.game_img.url }}" alt="{{ game.game_img }}" width=400" height="400"></p>
         <p>Publisher: {{ game.game_publisher }}</p>
         <p>Developer: {{ game.game_developer }}</p>
@@ -11,11 +26,15 @@
         <p>Rating: {{ game.game_rating }}</p>
         <p>Release date: {{ game.game_rd }}</p>
         <p>Description: <br>{{ game.game_text }}</p>
-    <iframe width="560" height="315" src="{{ game.game_trailer }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          {% for article in related_articles %}
+                    <div class = "article">
+                        <h2><a href="{% url 'article_pages:article_det' article.id %}">{{article.article_name}}</a> </h2> <!-- Link to go to specific article, from part15 -->
+                        <p>{{article.article_date }}</p>
+                        <p>{{article.snippet}}</p>
+                        <p>Rating: {{article.rating }}</p>
+                    </div>
+                {% endfor %}
+        <iframe width="560" height="315" src="{{ game.game_trailer }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
-    <form method="post">
-        <p>Do you want to delete this game?</p>
-        {% csrf_token %}
-        <input type="submit" value="Delete">
-    </form>
+
 {% endblock %}
