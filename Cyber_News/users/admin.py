@@ -13,10 +13,10 @@ class CustomizedAdmin(UserAdmin):
     list_display = ['username', 'userImg', 'is_moderator']
 
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('userImg',)}),
+        (None, {'fields': ('userImg', 'is_moderator')}),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
-        (None, {'fields': ('userImg',)}),
+        (None, {'fields': ('userImg', 'is_moderator')}),
     )
 
 
