@@ -41,8 +41,6 @@ def game_details(request, game_id):
                                                                  'related_articles': related_articles,
                                                                  })
 
-
-
 #maybe delete from edit?
 #@permission_required()
 def edit_game_info(request, game_id):
