@@ -20,7 +20,7 @@ def article_details(request, article_id):
     article.numberOfClicks += 1
     article.save()
 
-    author = Editor.objects.get(pk=article.author_id_id)  # why id_id works!&?
+   # author = Editor.objects.get(pk=article.author_id_id)  # why id_id works!&?
     return render(request, 'Cyber_News_App/article_detail.html', {'article': article,
                                                                   'author': author})
 

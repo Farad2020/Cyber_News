@@ -11,26 +11,26 @@
         <p>Rating: {{ article.rating }}</p>
         <p>NUMBER OF CLICKS:{{ article.numberOfClicks}}</p>
     </div>
-        <!--
-  {%if user.is_authenticated%}
+
+
   <h3>Comments: </h3>
   {% if comments %}
   {% for comment in comments %}
-  <p><b>*{{comment.user.username}}* left this comment: </b></p>
+  <p><b>*{{comment.author.username}}* left this comment: </b></p>
     <p> {{comment.comments_text}}</p>
 
   {% endfor %}
   {% else %}
     <p>No comments on this article yet</p>
   {% endif %}
-
+{%if user.is_authenticated%}
   <form class="" action="" method="post">
     {% csrf_token %}
     <textarea name="comments_text" rows="8" cols="80" placeholder="Leave your thoughts"></textarea>
-    <input type="hidden" name="username" value="{{user.username}}">
+    <!-- <input type="hidden" name="username" value="{{author.username}}"> -->
     <br><input type="submit" name="" value="Submit">
   </form>
   {%endif%}
-  -->
+
   {% endblock content%}
 

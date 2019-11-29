@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.contrib import messages
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
+from users.models import User
 from .models import *
 from .forms import  *
 # Create your views here.
@@ -29,15 +31,17 @@ def article_details(request, article_id):
     if request.method == 'POST':
         try:
             txt = request.POST.get("comments_text")
-            print(request.POST)
+            # print(request.POST)
             comment = Comments(comments_text=txt,
-                               article=Article.objects.get(pk=article_id))
+                               article=Article.objects.get(pk=article_id),
+                               author= request.user)
             comment.save()
         except:
             print('the comments cannot be added')
 
     #author = User.objects.get(pk=article.author_id_id)  # why id_id works!&? 'author': author 'comment' : comments,
-    return render(request, 'article_pages/article_details_page.html', {'article': article, })
+    return render(request, 'article_pages/article_details_page.html', {'article': article,
+                                                                       'comments':comments,})
                        
 def articles_delete(request, id=None):
 
@@ -69,7 +73,8 @@ def addComment(request, article_id):
     try:
         txt = request.POST.get("comments_text")
         comment = Comments(comments_text=txt,
-                            article=Article.objects.get(pk=article_id))
+                            article=Article.objects.get(pk=article_id),
+                            )
         comment.save()
         return render(request, "article_pages/article_details_page.html",
                                 {"article":Article.objects.get(pk=article_id)})
