@@ -8,10 +8,34 @@
                 </div>
                 <div class="userData ml-3">
                     <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold; font-family: sans-serif;">{{ user.username }}</h2>
-                    <h6 class="d-block"><a href="javascript:void(0)">300</a> Blog Posts</h6>
+                    <h6 class="d-block">300 Blog Posts</h6>
                     <h6 class="d-block"><a href="{% url 'edit_profile' %}">Edit profile</a></h6>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="container">
+        {% if user.is_moderator %}
+        <fieldset class="form-group">
+            <legend class = "border-bottom mb-4">
+                Users
+            </legend>
+            {% for user in users %}
+            <div class = "user">
+                <h5><a href="{% url 'profile'%}">{{user.username}}</a></h5>
+            </div>
+            {% endfor %}
+        </fieldset>
+        <fieldset class="form-group">
+            <legend class = "border-bottom mb-4">
+                Games
+            </legend>
+            {% for game in games %}
+            <div class = "game">
+                <h5><a href="{% url 'game_pages:game_det' game.id %}">{{game.game_name}}</a></h5>
+            </div>
+            {% endfor %}
+        </fieldset>
+        {% endif %}
     </div>
 {% endblock content %}

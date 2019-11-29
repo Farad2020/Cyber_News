@@ -4,6 +4,7 @@ from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 # Create your views here.
 from .forms import *
+from game_pages.models import Game
 
 from django.contrib.auth import get_user_model
 
@@ -29,7 +30,9 @@ def logout_view(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    games = Game.objects.all()
+    users = User.objects.all()
+    return render(request, 'users/profile.html', {'games': games, 'users': users})
 
 
 def edit_profile(request):

@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="games-list"> <!-- Link to go to list -->
-    {%if user.is_superuser %}
+    {%if user.is_moderator %}
         <h2><a href="{% url 'game_pages:create_game'%}">Create Game</a> </h2><br>
     {% endif %}
         {% for game in games %}
