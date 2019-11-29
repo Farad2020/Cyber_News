@@ -26,7 +26,13 @@
         <p>Rating: {{ game.game_rating }}</p>
         <p>Release date: {{ game.game_rd }}</p>
         <p>Description: <br>{{ game.game_text }}</p>
-    <iframe width="560" height="315" src="{{ game.game_trailer }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        {% for article in related_articles %}
+            <div class = "article">
+                <h2><a href="{% url 'cyber_news:article' article.id %}">{{article.article_name}}</a> </h2>
+                <p>{{article.article_date }}</p>
+            </div>
+        {% endfor %}
+        <iframe width="560" height="315" src="{{ game.game_trailer }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
 {% endblock %}

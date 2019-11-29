@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from .models import *
 from .forms import *
+from article_pages.models import *
 from django.urls import reverse
 import datetime
 
@@ -27,6 +28,7 @@ def create_game_page(request):
 def game_details(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
     game.save()
+    related_articles = Article.objects.filter(game_id=game)
     if request.method == 'POST':
         if 'delete' in request.POST:
             game.delete()
@@ -35,7 +37,9 @@ def game_details(request, game_id):
             game.followers.add(request.user)
         elif 'unfollow' in request.POST:
             game.followers.remove(request.user)
-    return render(request, "game_pages/game_details_page.html", {'game': game})
+    return render(request, "game_pages/game_details_page.html", {'game': game,
+                                                                 'related_articles': related_articles,
+                                                                 })
 
 
 
