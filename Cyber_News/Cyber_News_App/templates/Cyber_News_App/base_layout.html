@@ -63,6 +63,15 @@
 			</nav>
 		</div>
 	</header>
+
+    <div class="search-bar">
+        <form class="" name="search_stuff" action="{%url 'cyber_news:search'%}" method="post" >
+            {% csrf_token %}
+            <input type="text" name="search_field" value="" method='POST' placeholder="Search here" >
+            <input type="submit" name="Search" value="Search">
+        </form>
+    </div>
+
 </head>
 <body>
     <div class="latest-news-section">
@@ -73,7 +82,7 @@
 				<div class="nt-item"><span class="strategy">new</span>Faraby is proud with the job. </div>
 				<div class="nt-item"><span class="racing">golden</span>We've done the project. </div>
 			</div>
-		</div>
+         </div>
 	</div>
     <div class="wrapper">
         {% block content %}

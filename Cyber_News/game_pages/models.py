@@ -34,24 +34,3 @@ class Game(models.Model):
         game = self(game_name=game_name, game_developer=game_developer, game_text=game_text,
                     game_publisher=game_publisher, game_rd=game_rd, game_rating=game_rating)
         return game
-
-'''
-class Followers(models.Model):
-    followers = models.ManyToManyField(User)
-    followed_games = models.ManyToManyField(Game)
-    current_user = models.ForeignKey(User, related_name='owner')
-    game_feed = models.ForeignKey(User, null=True, related_name='feed')
-
-    # default related name followers_set
-
-    @classmethod
-    def make_follower(cls, current_user, game):
-        follower, created = cls.objects.get_or_create(
-            current_user=current_user,
-            game_feed=game
-        )
-        follower.followers.add(follower)
-        follower.followed_games.add(game)
-
-        #maybe I'ts not so efficient
-'''

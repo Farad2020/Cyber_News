@@ -1,20 +1,18 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login
-from .models import *
+from django.template import RequestContext
+
 from article_pages.models import Article
-
-def homepage(request):
-    # return HttpResponse("homepage")
-    return render(request, 'Cyber_News_App/homepage_test.html')
+from game_pages.models import Game
 
 
+# Here will be placed latest games/news/blogs/threads etc
 def index(request):
     articles = Article.objects.all().order_by('article_date')
     return render(request, 'Cyber_News_App/articles.html', {'articles': articles})
 
 
+'''
 def article_details(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
     article.numberOfClicks += 1
@@ -23,28 +21,26 @@ def article_details(request, article_id):
    # author = Editor.objects.get(pk=article.author_id_id)  # why id_id works!&?
     return render(request, 'Cyber_News_App/article_detail.html', {'article': article,
                                                                   'author': author})
+'''
+
+
+def search(request):
+    if request.method == "POST":
+        if 'Search' in request.POST:
+            search_text = request.POST.get("search_field")
+            if len(search_text)>0:
+                search_games = Game.objects.filter(game_name__contains=search_text)
+                search_arts = Article.objects.filter(article_text__contains=search_text)
+                return render(request, "Cyber_News_App/search.html",
+                        {"search_arts": search_arts,
+                         "search_games": search_games,
+                         "empty_res":"There is no fitting results.",})
+            else:
+                return render(request, "Cyber_News_App/search.html",{"empty_res":"There is no fitting results.",})
+    else:
+        return render(request, "Cyber_News_App/search.html",
+                      {"empty_res": "There is no fitting results.", })
 
 
 def contacts(request):
     return render(request, 'Cyber_News_App/contacts.html')
-
-
-"""
-def sign_up(request):
-    # return HttpResponse("user login page")
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            redirect('cyber_news:index')
-    else:
-        form = UserCreationForm()
-    return render(request, 'Cyber_News_App/signup_page.html', {'form': form})
-"""
-
-'''def user_page(request, user_id):
-    user = get_object_or_404(SimpleUser, pk = user_id)
-    user.save()
-    return render(request, 'Cyber_News_App/login.html', {'user':user})'''
-
