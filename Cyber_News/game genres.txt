@@ -1,0 +1,66 @@
+Action
+Action RPG
+Adventure
+Battle Royale
+Beat 'em up
+Fighting
+FPS
+Interactive movie
+JRPG
+Metroidvania
+MMO
+MMORPG
+MOBA
+Platformer
+Quest
+Racing
+Rhythm games
+Roguelikes
+RPG
+RTS
+Sandbox
+Shooter
+Simulator
+Soulslike
+Sports
+Stealth
+Strategy
+Survival
+Survival horror
+TBS
+Tower defense
+Visual novels
+
+
+"Action"
+"Action RPG"
+"Adventure"
+"Battle Royale"
+"Beat 'em up"
+"Fighting"
+"FPS"
+"Interactive movie"
+"JRPG"
+"Metroidvania"
+"MMO"
+"MMORPG"
+"MOBA"
+"Platformer"
+"Quest"
+"Racing"
+"Rhythm games"
+"Roguelikes"
+"RPG"
+"RTS"
+"Sandbox"
+"Shooter"
+"Simulator"
+"Soulslike"
+"Sports"
+"Stealth"
+"Strategy"
+"Survival"
+"Survival horror"
+"TBS"
+"Tower defense"
+"Visual novels"

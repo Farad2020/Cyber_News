@@ -19,7 +19,7 @@ def get_all_games(request):
                 "Quest", "Racing", "Rhythm games", "Roguelikes", "RPG", "RTS",
                 "Sandbox", "Shooter", "Simulator", "Soulslike", "Sports", "Stealth",
                 "Strategy", "Survival", "Survival horror", "TBS", "Tower defense",
-                "Visual novels"]
+                "Visual novels", "Hack and slash",]
     if request.method == "POST":
         chosen_genres = request.POST.get('box_genres')
         if chosen_genres:
@@ -49,6 +49,8 @@ def game_details(request, game_id):
         if 'delete' in request.POST:
             game.delete()
             return redirect('game_pages:games_page')
+        elif 'edit' in request.POST:
+            return redirect('game_pages:game_edit',game_id)
         elif 'follow' in request.POST:
             game.followers.add(request.user)
         elif 'unfollow' in request.POST:
@@ -64,8 +66,7 @@ def edit_game_info(request, game_id):
     # request.POST, request.FILES or None
     form = EditGameForm(request.POST or None, request.FILES or None, instance=game)
     if request.method == 'POST':
-        if form.is_valid() and 'edit' in request.POST:
+        if 'edit' in request.POST:
             form.save()
-            form = EditGameForm()
             return redirect('game_pages:games_page')
     return render(request, "game_pages/edit_game_info.html", {'form': form})
