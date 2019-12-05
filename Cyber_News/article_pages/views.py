@@ -19,7 +19,7 @@ def create_article_page(request):
         form.save()
         form = EditArticleForm()
 
-    return render(request, "Cyber_News_App/article_creation_page.html", {'form': form})
+    return render(request, "article_pages/article_creation_page.html", {'form': form})
 
 
 def article_details(request, article_id):

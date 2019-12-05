@@ -1276,6 +1276,35 @@ ol {
 		max-width: 1176px;
 	}
 }
+.search_stuff{
+	background-color: #131313;
+	margin-top: 70px;
+	margin-left: 100px;
+}
+
+.search-txt-field{
+	border-color: #131313;
+	border-radius: 8px;
+	margin-left: 200px;
+	width: 400px;
+	height: 40px;
+  	-webkit-transition: width 0.4s ease-in-out;
+  	transition: width 0.4s ease-in-out;
+}
+.search-txt-field:focus {
+  width: 55%;
+}
+.search-txt-field::placeholder{
+	margin-left: 200px;
+}
+
+.search-btn{
+	height: 40px;
+	width: 80px;
+	border-radius: 10px;
+	background-color: whitesmoke;
+	border-color: #131313;
+}
 
 /* Medium screen : 992px. */
 
@@ -1396,6 +1425,7 @@ ol {
 		color: #131313;
 		padding: 13px 26px;
 	}
+
 	.nav-switch {
 		color: #fff;
 		display: block;
@@ -1534,4 +1564,12 @@ ol {
 
 .article{
 	padding: 0px 30px;
+}
+
+.create-game{
+	padding-left: 100px;
+}
+
+.create-game-page{
+	color: grey;
 }
