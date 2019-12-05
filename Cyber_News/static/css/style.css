@@ -2,7 +2,7 @@
 ------------------------------------
   Game Warrior Template
   Version: 1.0
- ------------------------------------ 
+ ------------------------------------
  ====================================*/
 
 /*---------------------------*/
@@ -1581,6 +1581,18 @@ ol {
 	padding-left: 100px;
 }
 
-.create-game-page{
-	color: grey;
+.cont_creation{
+    padding-left: 700px;
+}
+
+.cont_creation a {
+    color:red;
+}
+
+.followed_game {
+    padding-right:10px;
+}
+
+.followed_game a {
+    padding-left: 20%;
 }
