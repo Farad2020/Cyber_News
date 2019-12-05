@@ -3,7 +3,9 @@
 {% block content %}
     <div class="games-list"> <!-- Link to go to list -->
     {%if user.is_moderator %}
-        <h2><a href="{% url 'game_pages:create_game'%}">Create Game</a> </h2><br>
+        <div class = "create-game">
+        <h2><a  class="create-game-page" href="{% url 'game_pages:create_game'%}">Create Game</a> </h2><br>
+        </div>
     {% endif %}
     <section class="page-section recent-game-page spad">
     <div class="row">
