@@ -1535,3 +1535,14 @@ ol {
 .article{
 	padding: 0px 30px;
 }
+
+.img-thumbnail{
+    height: 200px;
+	width: 200px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.userData{
+    padding-top: 25px;
+}
