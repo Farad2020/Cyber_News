@@ -14,9 +14,10 @@ class EditGameForm(forms.ModelForm):
             'game_developer',
             'game_text',
             'game_publisher',
-            'game_platforms',
             'game_rd',
-            'game_rating',
+            'game_age_rating',
+            'game_platforms',
+            'game_genre',
             'game_img',
             'game_trailer',
         ]

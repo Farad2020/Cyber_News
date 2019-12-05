@@ -172,12 +172,25 @@ ol {
 	background: #4eae60;
 }
 
+
 .cata.racing {
 	background: #694eae;
 }
 
 .cata.adventure {
 	background: #40abf5;
+}
+.cata.red {
+	background: #ff205f;
+}
+.cata.new-green {
+	background: #4eae60;
+}
+.cata.new-blue {
+	background: #40abf5;
+}
+.cata.new-violet {
+	background: #694eae;
 }
 
 /* Preloder */

@@ -23,8 +23,10 @@
         <p>Publisher: {{ game.game_publisher }}</p>
         <p>Developer: {{ game.game_developer }}</p>
         <p>Platforms: {{ game.game_platforms }}</p>
-        <p>Rating: {{ game.game_rating }}</p>
         <p>Release date: {{ game.game_rd }}</p>
+        <p>Age Rating: {{ game.game_age_rating }}</p>
+        <p>Genres: {{ game.game_genre }}</p>
+        <p>User Score: {{ game.game_score }}</p>
         <p>Description: <br>{{ game.game_text }}</p>
           {% for article in related_articles %}
                     <div class = "article">
