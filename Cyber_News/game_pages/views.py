@@ -13,7 +13,23 @@ from django.core.files.storage import FileSystemStorage
 # Create your views here.
 def get_all_games(request):
     games = Game.objects.all().order_by('game_name')
-    return render(request, "game_pages/games_page.html", {'games': games})
+    box_genres = ["Action", "Action RPG", "Adventure", "Battle Royale",
+                "Beat 'em up", "Fighting", "FPS", "Interactive movie",
+                "JRPG", "Metroidvania", "MMO", "MMORPG", "MOBA", "Platformer",
+                "Quest", "Racing", "Rhythm games", "Roguelikes", "RPG", "RTS",
+                "Sandbox", "Shooter", "Simulator", "Soulslike", "Sports", "Stealth",
+                "Strategy", "Survival", "Survival horror", "TBS", "Tower defense",
+                "Visual novels"]
+    if request.method == "POST":
+        chosen_genres = request.POST.get('box_genres')
+        if chosen_genres:
+            new_game_list = []
+            for game in games:
+                if str(game.game_genre).__contains__(chosen_genres):
+                    new_game_list.append(game)
+            games = new_game_list
+    return render(request, "game_pages/games_page.html", {'games': games,
+                                                          'box_genres': box_genres})
 
 
 def create_game_page(request):

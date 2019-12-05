@@ -27,12 +27,16 @@
 
     </div>
     <div class="game-checkboxes">
+    <!-- method="post"  -->
         <form method="post" name="genres_box">
             {% csrf_token %}
         <fieldset>
 
-            <input type="submit" value="Filter" /><br>
-
+            <input type="submit" name="filter" value="Filter" /><br>
+            {% for genre in box_genres %}
+                <input type="checkbox" name="box_genres" value="{{genre}}"><label> {{genre}}</label><br>
+            {% endfor %}
+<!--
         <input type="checkbox" name="Action">Action<br>
         <input type="checkbox" name="Action RPG">Action RPG<br>
         <input type="checkbox" name="Adventure">Adventure<br>
@@ -66,7 +70,7 @@
         <input type="checkbox" name="Tower defense">Tower defense<br>
         <input type="checkbox" name="Visual novels">Visual novels<br>
 
-
+-->
 
         </fieldset>
         </form>
