@@ -2,31 +2,61 @@
 
 {% block content %}
     <div class="game-details"> <!-- Link to go to list -->
-        <h1>{{ game.game_name }}</h1>
-        <form method="post">
-            <p>Do you want to delete this game?</p>
-            {% csrf_token %}
-            {%if user.is_moderator %}
-            <input type="submit" name="delete" value="Delete">
-            <!-- can button redirect me? <h1><a href="{% url 'game_pages:game_edit' game.id %}">edit</a> </h1> -->
-            <a href="{% url 'game_pages:game_edit' game.id %}"><input type="submit" name="delete" value="Edit"></a>
-            {% endif %}
-            {%if user.is_authenticated %}
-                {%if user not in game.followers.all%}
-                    <input type="submit" name="follow" value="Follow">
-                {% else %}
-                    <input type="submit" name="unfollow" value="Unfollow">
-                {% endif %}
-            {% endif %}
-        </form>
-        <p><img src="{{ game.game_img.url }}" alt="{{ game.game_img }}" width=50%" height="50%"></p>
-        <p>Publisher: {{ game.game_publisher }}</p>
-        <p>Developer: {{ game.game_developer }}</p>
-        <p>Platforms: {{ game.game_platforms }}</p>
-        <p>Release date: {{ game.game_rd }}</p>
-        <p>Age Rating: {{ game.game_age_rating }}</p>
-        <p>Genres: {{ game.game_genre }}</p>
-        <p>User Score: {{ game.game_score }}</p>
+        <div class="game-details-head">
+            <div class="d-flex justify-content-start">
+                <div class="img_of_game">
+                    <img src="{{ game.game_img.url }}" alt="{{ game.game_img }}">
+                </div>
+                <div class="game_info">
+                    <h1>{{ game.game_name }}</h1>
+                    <form method="post">{% csrf_token %}
+                    {%if user.is_moderator %}
+                        <p>Do you want to delete this game?</p>
+                        <input type="submit" name="delete" value="Delete">
+                        <!-- can button redirect me? <h1><a href="{% url 'game_pages:game_edit' game.id %}">edit</a> </h1> -->
+                        <a href="{% url 'game_pages:game_edit' game.id %}"><input type="submit" name="delete" value="Edit"></a>
+                    {% endif %}
+                    {%if user.is_authenticated %}
+                        {%if user not in game.followers.all%}
+                            <input type="submit" name="follow" value="Follow">
+                        {% else %}
+                            <input type="submit" name="unfollow" value="Unfollow">
+                        {% endif %}
+                    {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+        <table>
+            <tr>
+                <th>Publisher</th>
+                <td>{{ game.game_publisher }}</td>
+            </tr>
+            <tr>
+                <th>Developer</th>
+                <td>{{ game.game_developer }}</td>
+            </tr>
+            <tr>
+                <th>Platforms</th>
+                <td>{{ game.game_platforms }}</td>
+            </tr>
+            <tr>
+                <th>Release date</th>
+                <td>{{ game.game_rd }}</td>
+            </tr>
+            <tr>
+                <th>Age Rating</th>
+                <td>{{ game.game_age_rating }}</td>
+            </tr>
+            <tr>
+                <th>Genres</th>
+                <td>{{ game.game_genre }}</td>
+            </tr>
+            <tr>
+                <th>User Score</th>
+                <td>{{ game.game_score }}</td>
+            </tr>
+        </table>
         <p>Description: <br>{{ game.game_text }}</p>
           {% for article in related_articles %}
                     <div class = "article">
@@ -37,6 +67,35 @@
                     </div>
                 {% endfor %}
         <iframe width="560" height="315" src="{{ game.game_trailer }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+
+        <!-- LINES TO ADD RELATED CONTENT -->
+        <fieldset class="form-group">
+            <legend class = "border-bottom mb-4">
+                Articles
+            </legend>
+
+        </fieldset>
+
+
+
+
+        <fieldset class="form-group">
+            <legend class = "border-bottom mb-4">
+                Blogs
+            </legend>
+        </fieldset>
+
+
+
+
+
+        <fieldset class="form-group">
+            <legend class = "border-bottom mb-4">
+                Threads
+            </legend>
+        </fieldset>
     </div>
 
 {% endblock %}

@@ -1619,3 +1619,22 @@ ol {
     float: right;
 	padding: 20px;
 }
+
+.game-details{
+    padding-left:50px;
+}
+
+.game-details-head{
+    padding-top:20px;
+    margin-bottom: 10px;
+}
+
+.img_of_game {
+    height: 320px;
+	width: 500px;
+	object-fit: cover;
+}
+
+.game_info{
+    margin-bottom: 10px;
+}
