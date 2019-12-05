@@ -14,6 +14,7 @@ genres = (
     ("Simulator", "Simulator"), ("Strategy", "Strategy"), ("MOBA", "MOBA"), ("RTS", "RTS"),
     ("Tower defense", "Tower defense"), ("TBS", "TBS"), ("Sports", "Sports"),
     ("Racing", "Racing"), ("MMO", "MMO"), ("Soulslike", "Soulslike"),
+    ("Sandbox", "Sandbox"), ("Adventure", "Adventure"),
 )
 
 platforms = (
