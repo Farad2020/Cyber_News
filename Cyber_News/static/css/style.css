@@ -535,12 +535,15 @@ ol {
 	background-color: #eef2f6;
 	border-top: 1px solid #d6dee7;
 	border-bottom: 1px solid #d6dee7;
+	padding-left: 50px;
+	padding-right: 50px;
 }
 
 .recent-game-item .rgi-thumb {
 	height: 204px;
-	width: 330px;
+	width: 300px;
 	padding: 10px 0px;
+
 }
 
 .recent-game-item .rgi-content {
@@ -549,8 +552,8 @@ ol {
 	border: 1px solid #d6dee7;
 	border-top: none;
 	position: relative;
-	height: auto;
-	width: 330px;
+	height: 100%;
+	width: 300px;
 }
 
 .recent-game-item .rgi-content h5 {
@@ -1572,4 +1575,23 @@ ol {
 
 .create-game-page{
 	color: grey;
+}
+
+.games-page{
+  display: inline-block;
+    width: 100%;
+}
+
+.games-list{
+    width: 88%;
+    float: left;
+}
+
+.game-checkboxes{
+    width: 12%;
+    float: right;
+	padding: 20px;
+}
+
+.col-sm-3{
 }
