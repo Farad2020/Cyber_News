@@ -11,7 +11,7 @@ class EditArticleForm(forms.ModelForm):
             #'article_date',
             #'author_id',
             'game_id',
-            'rating',
+            #'rating',
             #'numberOfClicks',
             'article_img',
         ]

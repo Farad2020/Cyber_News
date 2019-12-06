@@ -31,6 +31,13 @@
     <br><input type="submit" name="" value="Submit">
   </form>
   {%endif%}
+{%if user.is_authenticated %}
+                {%if user not in comment.likes.all%}
+                    <input type="submit" name="follow" value="Follow">
+                {% else %}
+                    <input type="submit" name="unfollow" value="Unfollow">
+                {% endif %}
+            {% endif %}
 
   {% endblock content%}
 
