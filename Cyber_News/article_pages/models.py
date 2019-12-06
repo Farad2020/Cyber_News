@@ -38,6 +38,10 @@ class Article(models.Model):
     def snippet(self):  # returns sneak-peek for article content
         return self.article_text[:50] + "..."
 
+    @classmethod
+    def create(self, article_name, article_text, game_id, article_img):
+        article = self(article_name=article_name, article_text=article_text, game_id=game_id, article_img=article_img)
+        return article
 
 
 class Comment(models.Model):
