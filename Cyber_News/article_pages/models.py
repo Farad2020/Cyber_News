@@ -19,7 +19,7 @@ class Article(models.Model):
     game_id = models.ForeignKey(Game, on_delete=models.CASCADE)
     rating = models.FloatField(default=0.0)
     numberOfClicks = models.IntegerField(default=0)
-    isBlog = models.BooleanField(default = True)
+    isBlog = models.BooleanField(default=True)
     article_img = models.ImageField(upload_to='article_img/', default='NULL')
 
     # game_link
@@ -40,23 +40,26 @@ class Article(models.Model):
         return self.article_text[:50] + "..."
 
     @classmethod
-    def create(self, article_name, article_text, article_date, author_id, game_id, rating, article_img):
-        article = self(article_name=article_name, article_text =article_text, article_date=article_date,
-                    author_id=author_id, game_id=game_id, rating=rating, article_img=article_img)
+    def create(self, article_name, article_text, game_id, article_img):
+        article = self(article_name=article_name, article_text =article_text, game_id=game_id, article_img=article_img)
         return article
 
 
-class Comments(models.Model):
-	comments_text = models.TextField()
-	article = models.ForeignKey(Article, on_delete = models.CASCADE)
-	author = models.ForeignKey(User, on_delete=models.CASCADE)
+class Comment(models.Model):
+    comments_text = models.TextField()
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.comments_text
+
+
+class LikeSystem(models.Model):
+    comment_id = models.ForeignKey(Comment, on_delete=models.CASCADE)
     likes = models.ManyToManyField(User, default=None, blank=True, null=True)
 
-	def __str__(self):
-		return self.comments_text
 
-
-class Thread(models.Model): #later need to add comments to threads
+class Thread(models.Model): # later need to add comments to threads
     thread_text = models.TextField()
     thread_date = models.DateTimeField(auto_now_add=True)
     thread_author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -65,6 +68,7 @@ class Thread(models.Model): #later need to add comments to threads
 
     def __str__(self):
         return self.thread_author + self.thread_text
+
 
 class Blogs(models.Model):
     blog_name = models.CharField(max_length=1000)

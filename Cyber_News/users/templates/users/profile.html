@@ -17,7 +17,7 @@
                     <h3><a  class="create-blog-page" href="#">Blog</a> </h3>
                     <h3><a  class="create-thread-page" href="#">Thread</a> </h3>
                     {% if user.is_moderator %}
-                    <h3><a  class="create-article-page" href="{% url 'game_pages:create_game'%}">Article</a> </h3>
+                    <h3><a  class="create-article-page" href="{% url 'article_pages:create_article'%}">Article</a> </h3>
                     <h3><a  class="create-game-page" href="{% url 'game_pages:create_game'%}">Game</a> </h3>
                     {% endif %}
                 </div>
