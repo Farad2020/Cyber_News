@@ -15,3 +15,17 @@ class EditArticleForm(forms.ModelForm):
             #'numberOfClicks',
             'article_img',
         ]
+
+class EditBlogForm(forms.ModelForm):
+    class Meta:
+        model = Blogs
+        fields = [
+            'blog_name',
+            'blog_text',
+            #'blog_date',
+            #'author_id',
+            'game_id',
+            #'rating',
+            #'numberOfClicks',
+            'blog_img',
+        ]

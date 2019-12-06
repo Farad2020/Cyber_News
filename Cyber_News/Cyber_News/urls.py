@@ -17,7 +17,6 @@ urlpatterns = [
                   path('logout/', user_views.logout_view, name='logout'),
                   path('games/', include('game_pages.urls')),
                   path('main/', include('Cyber_News_App.urls')),
-                  path('articles/', include('article_pages.urls')),
-                  # django is a peace death, empty '' ruins my life and code
+                  path('data/', include('article_pages.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()

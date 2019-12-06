@@ -1,0 +1,42 @@
+{% extends "Cyber_News_App/base_layout.html" %}
+
+{% block content %}
+    <div class="blog-detail"> <!-- Link to go to list -->
+        <h1>{{ blog.blog_name }}</h1>
+        <!-- <h1><a href="{% url 'article_pages:blog_edit' blog.id %}">edit</a> </h1>
+        <h2><a href="{% url 'game_pages:game_det' blog.game_id.id %}">Source</a> </h2> -->
+        <img src="{{blog.blog_img.url}}" alt="{{blog.blog_img}}" class="img-responsive" />
+        <p>{{blog.blog_date }}</p>
+        <p>{{ blog.blog_text }}</p>
+        <p>Release date: {{ blog.blog_date }}</p>
+        <p>Rating: {{ blog.blog_score }}</p>
+        <p>NUMBER OF CLICKS:{{ blog.numberOfClicks}}</p>
+    </div>
+
+<!--
+  <h3>Comments: </h3>
+  {% if comments %}
+  {% for comment in comments %}
+  <p><b>*{{comment.author.username}}* left this comment: </b></p>
+    <p> {{comment.comments_text}}</p>
+
+  {% endfor %}
+  {% else %}
+    <p>No comments on this article yet</p>
+  {% endif %}
+{%if user.is_authenticated%}
+  <form class="" action="" method="post">
+    {% csrf_token %}
+    <textarea name="comments_text" rows="8" cols="80" placeholder="Leave your thoughts"></textarea>
+    <br><input type="submit" name="" value="Submit">
+  </form>
+  {%endif%}
+{%if user.is_authenticated %}
+                {%if user not in comment.likes.all%}
+                    <input type="submit" name="follow" value="Follow">
+                {% else %}
+                    <input type="submit" name="unfollow" value="Unfollow">
+                {% endif %}
+            {% endif %}
+-->
+  {% endblock content%}

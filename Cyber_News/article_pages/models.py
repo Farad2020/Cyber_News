@@ -15,11 +15,10 @@ class Article(models.Model):
     article_name = models.CharField(max_length=1000)
     article_text = models.TextField(default="")
     article_date = models.DateTimeField(auto_now_add=True)  # earlier was written this: 'date published'
-    author_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    game_id = models.ForeignKey(Game, on_delete=models.CASCADE)
-    rating = models.FloatField(default=0.0)
+    author_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    game_id = models.ForeignKey(Game, on_delete=models.CASCADE, null=True)
+    article_score = models.FloatField(default=0.0)
     numberOfClicks = models.IntegerField(default=0)
-    isBlog = models.BooleanField(default=True)
     article_img = models.ImageField(upload_to='article_img/', default='NULL')
 
     # game_link
@@ -39,10 +38,6 @@ class Article(models.Model):
     def snippet(self):  # returns sneak-peek for article content
         return self.article_text[:50] + "..."
 
-    @classmethod
-    def create(self, article_name, article_text, game_id, article_img):
-        article = self(article_name=article_name, article_text =article_text, game_id=game_id, article_img=article_img)
-        return article
 
 
 class Comment(models.Model):
@@ -74,11 +69,10 @@ class Blogs(models.Model):
     blog_name = models.CharField(max_length=1000)
     blog_text = models.TextField(default="")
     blog_date = models.DateTimeField(auto_now_add=True)  # earlier was written this: 'date published'
-    author_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    game_id = models.ForeignKey(Game, on_delete=models.CASCADE)
-    blog_rating = models.FloatField(default=0.0)
+    author_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    game_id = models.ForeignKey(Game, on_delete=models.CASCADE, null=True)
+    blog_score = models.FloatField(default=0.0)
     numberOfClicks = models.IntegerField(default=0)
-    isBlog = models.BooleanField(default=True)
     blog_img = models.ImageField(upload_to='blog_img/', default='NULL')
 
     def __str__(self):

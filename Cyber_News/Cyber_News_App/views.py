@@ -9,19 +9,7 @@ from game_pages.models import Game
 # Here will be placed latest games/news/blogs/threads etc
 def index(request):
     articles = Article.objects.all().order_by('article_date')
-    return render(request, 'Cyber_News_App/articles.html', {'articles': articles})
-
-
-'''
-def article_details(request, article_id):
-    article = get_object_or_404(Article, pk=article_id)
-    article.numberOfClicks += 1
-    article.save()
-
-   # author = Editor.objects.get(pk=article.author_id_id)  # why id_id works!&?
-    return render(request, 'Cyber_News_App/article_detail.html', {'article': article,
-                                                                  'author': author})
-'''
+    return render(request, 'Cyber_News_App/homepage.html', {'articles': articles})
 
 
 def search(request):

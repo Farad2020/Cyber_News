@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home page</title>
-</head>
+{% extends "Cyber_News_App/base_layout.html" %}
+
+{% block content %}
     <div>
-        <h1>Title for something</h1>
             <div class = "articles">
                 {% for article in articles %}
                     <div class = "article">
-                        <h2><a href="#">{{article.article_name }}</a> </h2>
-                        <p>{{article.article_text }}</p>
+                        <h2><a href="{% url 'article_pages:article_det' article.id %}">{{article.article_name}}</a> </h2> <!-- Link to go to specific article, from part15 -->
                         <p>{{article.article_date }}</p>
+                        <p>{{article.snippet}}</p>
+                        <p>Rating: {{article.rating }}</p>
                     </div>
                 {% endfor %}
-                
             </div>
     </div>
-</body>
-</html>
+
+{% endblock %}

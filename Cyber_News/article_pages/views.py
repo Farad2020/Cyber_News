@@ -16,12 +16,11 @@ def get_all_articles(request):
 
 
 def create_article_page(request):
-    form = EditArticleForm(request.POST or None)
+    form = EditArticleForm(request.POST or None, request.FILES)
     if form.is_valid():
+        form.author_id = request.user
         form.save()
-        form.article = Article(author_id=request.user)
-        form = EditArticleForm()
-        return redirect('/profile')
+        return redirect('article_pages:article_pages')
     return render(request, "article_pages/article_creation_page.html", {'form': form})
 
 
@@ -69,9 +68,53 @@ def edit_article(request, article_id):
     form = EditArticleForm(request.POST or None, instance=article)
     if form.is_valid():
         form.save()
-        form = EditArticleForm()
         return redirect('../')
     return render(request, "article_pages/edit_article.html", {'form': form})
+
+
+def get_all_blogs(request):
+    blogs = Blogs.objects.all()
+    return render(request, "article_pages/blogs_page.html", {'blogs': blogs})
+
+
+def blog_detail(request, blog_id):
+    blog = get_object_or_404(Blogs, pk=blog_id)
+    blog.numberOfClicks += 1
+    blog.save()
+    '''
+    comments = showComments(request, blog_id)
+    if request.method == 'POST':
+        try:
+            txt = request.POST.get("comments_text")
+            # print(request.POST)
+            comment = Comment(comments_text=txt,
+                              article=Article.objects.get(pk=article_id),
+                              author=request.user)
+            comment.save()
+        except:
+            print('the comments cannot be added')
+    '''
+    return render(request, 'article_pages/blog_details_page.html', {'blog': blog,
+                                                                       #'comments': comments,
+                                                                       })
+
+
+def create_blog(request):
+    form = EditBlogForm(request.POST or None, request.FILES)
+    if form.is_valid():
+        form.author_id = request.user
+        form.save()
+        return redirect('article_pages:blog_pages')
+    return render(request, "article_pages/blog_creation_page.html", {'form': form})
+
+
+def edit_blog(request, blog_id):
+    blog = get_object_or_404(Blogs, pk=blog_id)
+    form = EditBlogForm(request.POST or None, instance=blog)
+    if form.is_valid():
+        form.save()
+        return redirect('../')
+    return render(request, "article_pages/edit_blog.html", {'form': form})
 
 
 def addComment(request, article_id):

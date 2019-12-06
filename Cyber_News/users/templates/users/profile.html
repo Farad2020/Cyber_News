@@ -14,7 +14,7 @@
                     <legend class="border-bottom">
                         Create
                     </legend>
-                    <h3><a  class="create-blog-page" href="#">Blog</a> </h3>
+                    <h3><a  class="create-blog-page" href="{% url 'article_pages:create_blog' %}">Blog</a> </h3>
                     <h3><a  class="create-thread-page" href="#">Thread</a> </h3>
                     {% if user.is_moderator %}
                     <h3><a  class="create-article-page" href="{% url 'article_pages:create_article'%}">Article</a> </h3>

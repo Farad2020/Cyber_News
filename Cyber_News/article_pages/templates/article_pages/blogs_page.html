@@ -3,24 +3,19 @@
 {% block content %}
     <div>
             <div class = "blogs">
-                {%if user.is_moderator %}
-        <h2><a href="{% url 'game_pages:create_game'%}">Create Blog</a> </h2><br>
-    {% endif %}
              <section class="page-section recent-blog-page spad">
                  <div class="row">
                 {% for blog in blogs %}
                     <div class = "blog">
                      <div class="col-sm-3">
-                        <div class="recent-blog-item">
+                        <div class="recent-game-item">
                             <div class="rgi-thumb set-bg" data-setbg="{{ blog.game_id.game_img.url }}">
-                                <div class="cata new-blue">{{ blog.author_id.username }}</div>       <!-- Game genres -->
+                                <div class="cata new-blue">{{ blog.game_id.game_name }}</div>       <!-- Game genres -->
                             </div>
                          <div class="rgi-content">
                             <div class = "blog">
-                                <h2><a href="{% url 'article_pages:article_det' article.id %}">{{blog.blog_name}}</a> </h2>
-                                <p>{{blog.blog_date }}</p>
+                                <h2><a href="{% url 'article_pages:blog_det' blog.id %}">{{blog.blog_name}}</a> </h2>
                                 <p>{{blog.snippet}}</p>
-                                <p>Rating: {{blog.rating }}</p>
                             </div>
                         </div>
                         </div>
