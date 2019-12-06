@@ -45,6 +45,7 @@ def game_details(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
     game.save()
     related_articles = Article.objects.filter(game_id=game)
+    game_rating = calculate_rating(request, game_id)
     if request.method == 'POST':
         if 'delete' in request.POST:
             game.delete()
@@ -55,9 +56,31 @@ def game_details(request, game_id):
             game.followers.add(request.user)
         elif 'unfollow' in request.POST:
             game.followers.remove(request.user)
+        elif 'rate' in request.POST:
+            given_score = request.POST.get("rating")
+            try:
+                new_rate = RatingSystem.objects.get(rater_id=request.user,game_id=game)
+                new_rate.score = given_score
+                new_rate.save()
+            except:
+                new_rate = RatingSystem.objects.get_or_create(rater_id=request.user, game_id=game,score=given_score)
+                new_rate.save()
+            game_rating = calculate_rating(request, game_id)
     return render(request, "game_pages/game_details_page.html", {'game': game,
+                                                                 'game_rating':game_rating,
                                                                  'related_articles': related_articles,
                                                                  })
+
+def calculate_rating(request, game_id):
+    game = get_object_or_404(Game, pk=game_id)
+    game_rates = RatingSystem.objects.filter(game_id=game)
+    game_rating = 0.0
+    for rate in game_rates:
+        game_rating += rate.score
+    if len(game_rates) > 0:
+        game_rating = game_rating / len(game_rates)
+    return game_rating
+
 
 #maybe delete from edit?
 #@permission_required()
