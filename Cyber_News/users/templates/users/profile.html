@@ -4,28 +4,51 @@
         <div class="card-title mb-4" style="padding-top: 50px; padding-bottom: 50px;">
             <div class="d-flex justify-content-start">
                 <div class="image-container">
-                    <img src="{{user.userImg.url}}" id="imgProfile" style="width: 180px; height: 180px" class="img-thumbnail" />
+                    <img src="{{user.userImg.url}}" class="img-thumbnail" />
                 </div>
                 <div class="userData ml-3">
                     <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold; font-family: sans-serif;">{{ user.username }}</h2>
-                    <h6 class="d-block">300 Blog Posts</h6>
                     <h6 class="d-block"><a href="{% url 'edit_profile' %}">Edit profile</a></h6>
+                </div>
+                <div class="cont_creation">
+                    <legend class="border-bottom">
+                        Create
+                    </legend>
+                    <h3><a  class="create-blog-page" href="#">Blog</a> </h3>
+                    <h3><a  class="create-thread-page" href="#">Thread</a> </h3>
+                    {% if user.is_moderator %}
+                    <h3><a  class="create-article-page" href="{% url 'game_pages:create_game'%}">Article</a> </h3>
+                    <h3><a  class="create-game-page" href="{% url 'game_pages:create_game'%}">Game</a> </h3>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
+
     <div class="container">
         {% if user.is_moderator %}
         <fieldset class="form-group">
             <legend class = "border-bottom mb-4">
-                Users
+                Active users
             </legend>
-            {% for user in users %}
+            {% for user in active_users %}
+                <div class = "user">
+                    <h5><a href="{% url 'other_user_profile' user.id %}" >{{user.username}} </a></h5>
+                </div>
+            {% endfor %}
+        </fieldset>
+
+        <fieldset class="form-group">
+            <legend class = "border-bottom mb-4">
+                Deactive users
+            </legend>
+            {% for user in deactive_users %}
             <div class = "user">
-                <h5><a href="{% url 'profile'%}">{{user.username}}</a></h5>
+                <h5><a href="{% url 'other_user_profile' user.id %}" >{{user.username}} </a></h5>
             </div>
             {% endfor %}
         </fieldset>
+
         <fieldset class="form-group">
             <legend class = "border-bottom mb-4">
                 Games
@@ -37,5 +60,25 @@
             {% endfor %}
         </fieldset>
         {% endif %}
+    </div>
+
+    <div class="container">
+        <fieldset class="form-group">
+            <legend class = "border-bottom mb-4">
+                Followed games
+            </legend>
+            <div class="d-flex justify-content-start">
+                {% for game in games %}
+                <div class = "followed_game">
+                    {% if user in game.followers.all %}
+                    <div class="image-container">
+                        <img src="{{game.game_img.url}}" class="img-thumbnail" />
+                    </div>
+                    <h5><a href="{% url 'game_pages:game_det' game.id %}">{{game.game_name}}</a></h5>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </fieldset>
     </div>
 {% endblock content %}

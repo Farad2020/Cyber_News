@@ -14,6 +14,7 @@ genres = (
     ("Simulator", "Simulator"), ("Strategy", "Strategy"), ("MOBA", "MOBA"), ("RTS", "RTS"),
     ("Tower defense", "Tower defense"), ("TBS", "TBS"), ("Sports", "Sports"),
     ("Racing", "Racing"), ("MMO", "MMO"), ("Soulslike", "Soulslike"),
+    ("Sandbox", "Sandbox"), ("Adventure", "Adventure"), ("Hack and slash", "Hack and slash"),
 )
 
 platforms = (
@@ -33,7 +34,7 @@ class Game(models.Model):
     game_developer = models.CharField(max_length=1000)
     game_text = models.TextField(default="")
     game_publisher = models.CharField(max_length=1000)
-    game_platforms = MultiSelectField(choices=platforms, max_choices=5, default=None)
+    game_platforms = MultiSelectField(choices=platforms, default=None)
     game_genre = MultiSelectField(choices=genres, max_choices=5, default=None)
     game_rd = models.DateField('date published') # released date
     game_age_rating = MultiSelectField(choices=age_range, max_choices=1, default=None)

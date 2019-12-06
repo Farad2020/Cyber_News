@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
@@ -32,7 +32,9 @@ def logout_view(request):
 def profile(request):
     games = Game.objects.all()
     users = User.objects.all()
-    return render(request, 'users/profile.html', {'games': games, 'users': users})
+    active_users = User.objects.filter(is_active = True)
+    deactive_users = User.objects.exclude(is_active = True)
+    return render(request, 'users/profile.html', {'games': games, 'users': users, 'active_users': active_users, 'deactive_users': deactive_users})
 
 
 def edit_profile(request):
@@ -56,3 +58,15 @@ def change_password(request):
     else:
         form = PasswordChangeForm(user=request.user)
     return render(request, 'users/change_password.html', {'form': form})
+
+
+def other_user_profile(request, id):
+    user = get_object_or_404(User, pk=id)
+    moder_user = request.user
+    if request.method == 'POST':
+        if 'ban' in request.POST:
+            user.is_active = False
+            user.save()
+            return redirect('/profile')
+    return render(request, 'users/another_user_profile.html', {'user': user, 'moder_user': moder_user})
+
