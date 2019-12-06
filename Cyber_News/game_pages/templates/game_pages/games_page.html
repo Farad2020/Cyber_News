@@ -15,7 +15,7 @@
                     <div class="rgi-content">
                         <div class = "game">
                                 <h2><a href="{% url 'game_pages:game_det' game.id %}">{{game.game_name}}</a> </h2>
-                                <p>Rating: {{game.game_rating }}</p>
+                                <p>Developer: {{ game.game_developer }}</p>
                                 <p>Publisher: {{ game.game_publisher }}</p>
                         </div>
                     </div>

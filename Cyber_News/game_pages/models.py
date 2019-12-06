@@ -38,7 +38,6 @@ class Game(models.Model):
     game_genre = MultiSelectField(choices=genres, max_choices=5, default=None)
     game_rd = models.DateField('date published') # released date
     game_age_rating = MultiSelectField(choices=age_range, max_choices=1, default=None)
-    game_score = models.FloatField(default=0.0)
     game_img = models.ImageField(upload_to='game_img/', default=None, null=True)
     game_trailer = models.URLField(max_length=200, default=None, blank=True, null=True)
     followers = models.ManyToManyField(User, default=None, blank=True, null=True)
@@ -62,3 +61,9 @@ class Game(models.Model):
         game = self(game_name=game_name, game_developer=game_developer, game_text=game_text,
                     game_publisher=game_publisher, game_rd=game_rd, game_rating=game_rating)
         return game
+
+
+class RatingSystem(models.Model):
+    score = models.FloatField(default=0.0)
+    rater_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    game_id = models.ForeignKey(Game, on_delete=models.CASCADE)
