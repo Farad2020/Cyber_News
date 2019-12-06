@@ -20,14 +20,7 @@ def create_article_page(request):
     if form.is_valid():
         form.author_id = request.user
         form.save()
-<<<<<<< HEAD
         return redirect('article_pages:article_pages')
-=======
-        article = Article(author_id=request.user)
-        article.save()
-        form = EditArticleForm()
-        return redirect('/profile')
->>>>>>> f880872c755730e30fbfc4cf599d86e30a781906
     return render(request, "article_pages/article_creation_page.html", {'form': form})
 
 
