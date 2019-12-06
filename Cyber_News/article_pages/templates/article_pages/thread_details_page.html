@@ -1,0 +1,38 @@
+{% extends "Cyber_News_App/base_layout.html" %}
+
+{% block content %}
+    <div class="thread-detail"> <!-- Link to go to list -->
+        <h1>{{ thread.thread_name }}</h1>
+        <!-- <h1><a href="{% url 'article_pages:thread_edit' thread.id %}">edit</a> </h1>
+        <h2><a href="{% url 'game_pages:game_det' thread.game_id.id %}">Source</a> </h2> -->
+        <p>{{thread.thread_date }}</p>
+        <p>{{ thread.thread_text }}</p>
+    </div>
+
+<!--
+  <h3>Comments: </h3>
+  {% if comments %}
+  {% for comment in comments %}
+  <p><b>*{{comment.author.username}}* left this comment: </b></p>
+    <p> {{comment.comments_text}}</p>
+
+  {% endfor %}
+  {% else %}
+    <p>No comments on this article yet</p>
+  {% endif %}
+{%if user.is_authenticated%}
+  <form class="" action="" method="post">
+    {% csrf_token %}
+    <textarea name="comments_text" rows="8" cols="80" placeholder="Leave your thoughts"></textarea>
+    <br><input type="submit" name="" value="Submit">
+  </form>
+  {%endif%}
+{%if user.is_authenticated %}
+                {%if user not in comment.likes.all%}
+                    <input type="submit" name="follow" value="Follow">
+                {% else %}
+                    <input type="submit" name="unfollow" value="Unfollow">
+                {% endif %}
+            {% endif %}
+-->
+  {% endblock content%}

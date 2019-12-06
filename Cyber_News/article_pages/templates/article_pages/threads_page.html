@@ -1,0 +1,29 @@
+{% extends "Cyber_News_App/base_layout.html" %}
+
+{% block content %}
+    <div>
+            <div class = "threads">
+             <section class="page-section recent-blog-page spad">
+                 <div class="row">
+                {% for thread in threads %}
+                    <div class = "thread">
+                     <div class="col-sm-3">
+                        <div class="recent-game-item">
+                            <div class="rgi-thumb set-bg" data-setbg="{{ thread.game_id.game_img.url }}">
+                                <div class="cata new-violet">{{ thread.game_id.game_name }}</div>       <!-- Game genres -->
+                            </div>
+                         <div class="rgi-content">
+                            <div class = "blog">
+                                <h2><a href="{% url 'article_pages:thread_det' thread.id %}">{{thread.thread_name}}</a> </h2>
+                                <p>{{thread.snippet}}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                {% endfor %}
+                </div>
+             </section>
+            </div>
+    </div>
+{% endblock %}

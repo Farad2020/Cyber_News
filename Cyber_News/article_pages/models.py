@@ -59,11 +59,15 @@ class LikeSystem(models.Model):
 
 
 class Thread(models.Model): # later need to add comments to threads
+    thread_name = models.CharField(max_length=1000)
     thread_text = models.TextField()
     thread_date = models.DateTimeField(auto_now_add=True)
-    thread_author = models.ForeignKey(User, on_delete=models.CASCADE)
+    thread_author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     game_id = models.ForeignKey(Game, on_delete=models.CASCADE)
     #link to the game
+
+    def snippet(self):  # returns sneak-peek for article content
+        return self.thread_text[:50] + "..."
 
     def __str__(self):
         return self.thread_author + self.thread_text
@@ -81,3 +85,6 @@ class Blogs(models.Model):
 
     def __str__(self):
         return self.blog_name
+
+    def snippet(self):  # returns sneak-peek for article content
+        return self.blog_text[:50] + "..."

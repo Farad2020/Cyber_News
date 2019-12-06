@@ -29,3 +29,15 @@ class EditBlogForm(forms.ModelForm):
             #'numberOfClicks',
             'blog_img',
         ]
+
+
+class EditThreadForm(forms.ModelForm):
+    class Meta:
+        model = Thread
+        fields = [
+            'thread_name',
+            'thread_text',
+            #'thread_date',
+            #'thread_author',
+            'game_id',
+        ]
