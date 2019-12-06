@@ -19,7 +19,8 @@ def create_article_page(request):
     form = EditArticleForm(request.POST or None)
     if form.is_valid():
         form.save()
-        form.article = Article(author_id=request.user)
+        article = Article(author_id=request.user)
+        article.save()
         form = EditArticleForm()
         return redirect('/profile')
     return render(request, "article_pages/article_creation_page.html", {'form': form})
