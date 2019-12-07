@@ -18,8 +18,9 @@ def get_all_articles(request):
 def create_article_page(request):
     form = EditArticleForm(request.POST or None, request.FILES)
     if form.is_valid():
-        form.author_id = request.user
-        form.save()
+        article = form.save(False)
+        article.author_id = request.user
+        article.save()
         return redirect('article_pages:article_pages')
     return render(request, "article_pages/article_creation_page.html", {'form': form})
 
@@ -105,8 +106,9 @@ def blog_detail(request, blog_id):
 def create_blog(request):
     form = EditBlogForm(request.POST or None, request.FILES)
     if form.is_valid():
-        form.author_id = request.user
-        form.save()
+        blog = form.save(False)
+        blog.author_id = request.user
+        blog.save()
         return redirect('article_pages:blog_pages')
     return render(request, "article_pages/blog_creation_page.html", {'form': form})
 
@@ -152,8 +154,9 @@ def thread_detail(request, thread_id):
 def create_thread(request):
     form = EditThreadForm(request.POST or None, request.FILES)
     if form.is_valid():
-        form.author_id = request.user
-        form.save()
+        thread = form.save(False)
+        thread.author_id = request.user
+        thread.save()
         return redirect('article_pages:thread_pages')
     return render(request, "article_pages/thread_creation_page.html", {'form': form})
 

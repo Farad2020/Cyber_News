@@ -15,7 +15,7 @@ class Article(models.Model):
     article_name = models.CharField(max_length=1000)
     article_text = models.TextField(default="")
     article_date = models.DateTimeField(auto_now_add=True)  # earlier was written this: 'date published'
-    author_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    author_id = models.ForeignKey(User, on_delete=models.CASCADE)
     game_id = models.ForeignKey(Game, on_delete=models.CASCADE, null=True)
     article_score = models.FloatField(default=0.0)
     numberOfClicks = models.IntegerField(default=0)
@@ -62,7 +62,7 @@ class Thread(models.Model): # later need to add comments to threads
     thread_name = models.CharField(max_length=1000)
     thread_text = models.TextField()
     thread_date = models.DateTimeField(auto_now_add=True)
-    thread_author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    thread_author = models.ForeignKey(User, on_delete=models.CASCADE)
     game_id = models.ForeignKey(Game, on_delete=models.CASCADE)
     #link to the game
 
@@ -70,14 +70,14 @@ class Thread(models.Model): # later need to add comments to threads
         return self.thread_text[:50] + "..."
 
     def __str__(self):
-        return self.thread_author + self.thread_text
+        return self.thread_author.username
 
 
 class Blogs(models.Model):
     blog_name = models.CharField(max_length=1000)
     blog_text = models.TextField(default="")
     blog_date = models.DateTimeField(auto_now_add=True)  # earlier was written this: 'date published'
-    author_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    author_id = models.ForeignKey(User, on_delete=models.CASCADE)
     game_id = models.ForeignKey(Game, on_delete=models.CASCADE, null=True)
     blog_score = models.FloatField(default=0.0)
     numberOfClicks = models.IntegerField(default=0)
