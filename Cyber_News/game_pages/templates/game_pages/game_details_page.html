@@ -76,13 +76,7 @@
             </tr>
         </table>
         <p>Description: <br>{{ game.game_text }}</p>
-          {% for article in related_articles %}
-                    <div class = "article">
-                        <h2><a href="{% url 'article_pages:article_det' article.id %}">{{article.article_name}}</a> </h2> <!-- Link to go to specific article, from part15 -->
-                        <p>{{article.article_date }}</p>
-                        <p>{{article.snippet}}</p>
-                    </div>
-                {% endfor %}
+
         <iframe width="560" height="315" src="{{ game.game_trailer }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
@@ -92,7 +86,13 @@
             <legend class = "border-bottom mb-4">
                 Articles
             </legend>
-
+            {% for article in related_articles %}
+                    <div class = "related_article">
+                        <h2><a href="{% url 'article_pages:article_det' article.id %}">{{article.article_name}}</a> </h2>
+                        <p>{{article.article_date }}</p>
+                        <p>{{article.snippet}}</p>
+                    </div>
+            {% endfor %}
         </fieldset>
 
 
@@ -102,6 +102,13 @@
             <legend class = "border-bottom mb-4">
                 Blogs
             </legend>
+            {% for blog in related_blogs %}
+                    <div class = "related_blog">
+                        <h2><a href="{% url 'article_pages:blog_det' blog.id %}">{{blog.blog_name}}</a> </h2>
+                        <p>{{blog.blog_date }}</p>
+                        <p>{{blog.snippet}}</p>
+                    </div>
+            {% endfor %}
         </fieldset>
 
 
@@ -112,6 +119,13 @@
             <legend class = "border-bottom mb-4">
                 Threads
             </legend>
+            {% for thread in related_threads %}
+                    <div class = "related_thread">
+                        <h2><a href="{% url 'article_pages:thread_det' thread.id %}">{{thread.thread_name}}</a> </h2>
+                        <p>{{thread.thread_date }}</p>
+                        <p>{{thread.snippet}}</p>
+                    </div>
+            {% endfor %}
         </fieldset>
     </div>
 

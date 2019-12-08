@@ -41,3 +41,12 @@ class EditThreadForm(forms.ModelForm):
             #'thread_author',
             'game_id',
         ]
+
+
+class EditCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = [
+            'comments_text',
+        ]
+

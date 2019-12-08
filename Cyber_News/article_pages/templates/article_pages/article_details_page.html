@@ -32,31 +32,57 @@
     </div>
 
 
-  <h3>Comments: </h3>
-  {% if comments %}
-  {% for comment in comments %}
-  <p><b>*{{comment.author.username}}* left this comment: </b></p>
-    <p> {{comment.comments_text}}</p>
 
-  {% endfor %}
+    {%if user.is_authenticated%}
+        <form class="" action="" method="post">
+        {% csrf_token %}
+        <textarea name="comments_text" rows="8" cols="80" placeholder="Leave your thoughts"></textarea>         <!-- some stuff-->
+        <br><input type="submit" name="post_comment" value="Submit">
+        </form>
+    {%endif%}
+
+  <h3>Comments: </h3>
+  <button onclick="all_comments(1)">Hide</button>
+  <button onclick="all_comments(2)">Show</button>
+  {% if comments %}
+      <form id="all_comments" class="" action="" method="post">
+
+      {% csrf_token %}
+            {% for comment in comments %}
+                <p>
+                    <b>*{{comment.author.username}}* left this comment: </b>
+                {%if user == comment.author %}
+                    <a href="{% url 'article_pages:comment_edit' comment.id %}">Edit</a>
+                {% endif %}</p>
+                <p> {{comment.comments_text}}</p>
+                {% if comment.receiver %}
+                    Replied To: {{ comment.receiver.username }} <br><br>
+                {% endif %}
+
+                {%if user.is_authenticated %}
+                    {%if user not in comment.upvoters.all %}
+                        Upvote <input type="submit" name="upvote_comment" value="{{ comment.id }}" style="color: gray; background: gray; width: 45px"> {{ comment.upvoters.count }}
+                    {% else %}
+                        Remove Upvote<input type="submit" name="remove_upvote_comment" value="{{ comment.id }}" style="color: gray; background: gray; width: 45px"> {{ comment.upvoters.count }}
+                    {% endif %}
+                    <br>
+                    <textarea name="reply_text_{{ comment.id }}" rows="5" cols="40" placeholder="Leave your thoughts" >{{ comment.author.username }}, </textarea>
+                    <br>Reply:<input type="submit" name="reply_comment" value="{{ comment.id }}" style="color: gray; background: gray; width: 45px">
+                {% endif %}
+            {% endfor %}
+      </form>
   {% else %}
     <p>No comments on this article yet</p>
   {% endif %}
-{%if user.is_authenticated%}
-  <form class="" action="" method="post">
-    {% csrf_token %}
-    <textarea name="comments_text" rows="8" cols="80" placeholder="Leave your thoughts"></textarea>
-    <!-- <input type="hidden" name="username" value="{{author.username}}"> -->
-    <br><input type="submit" name="" value="Submit">
-  </form>
-  {%endif%}
-{%if user.is_authenticated %}
-                {%if user not in comment.likes.all%}
-                    <input type="submit" name="follow" value="Follow">
-                {% else %}
-                    <input type="submit" name="unfollow" value="Unfollow">
-                {% endif %}
-            {% endif %}
 
+
+    <script type="text/javascript">
+        function all_comments(a){
+            if(a==1)
+                document.getElementById("all_comments").style.display="none";
+            else
+                document.getElementById("all_comments").style.display="block";
+        }
+    </script>
   {% endblock content%}
 
