@@ -81,11 +81,13 @@ class Comment(models.Model):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, default=None, null=True)
     is_active = models.BooleanField(verbose_name="Is Active", default=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    upvotes = models.ManyToManyField(User, default=None, blank=True, null=True, related_name="comment_raters")
 
     def __str__(self):
         return self.comments_text
 
-
+"""
 class LikeSystem(models.Model):
     comment_id = models.ForeignKey(Comment, on_delete=models.CASCADE)
     likes = models.ManyToManyField(User, default=None, blank=True, null=True)
+"""
