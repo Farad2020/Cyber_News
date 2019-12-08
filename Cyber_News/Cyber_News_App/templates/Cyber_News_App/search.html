@@ -1,41 +1,38 @@
-{% extends "Cyber_News_App/base_layout.html" %}
+    {% extends "Cyber_News_App/base_layout.html" %}
 
 {% block content %}
-    <legend class="border-bottom mb-4"></legend>
-    <div class="">
-    <h1>Games:</h1>
-    </div>
-    {% if search_games %}
-    <br>
-        <ol>
-        {% for game in search_games %}
-            <li>
-                <h2><a href="{% url 'game_pages:game_det' game.id %}">
-                    {{game.game_name}}
-                </a></h2>
-                <h5>{{game.game_text|truncatewords:10}}</h5><br>
-            </li>
-        {% endfor %}
-         </ol>
-    {% else %}
-        {{empty_res}}
-    {% endif %}
-    <legend class="border-bottom mb-4"></legend>
-    <h1>Articles:</h1>
-    {% if search_arts %}
-    <br>
-        <ul>
-        {% for article in search_arts %}
+    <div class="content-section">
+        <legend class="border-bottom mb-4"><h2>Games:</h2></legend>
+        {% if search_games %}
+        <br>
+            <ol>
+            {% for game in search_games %}
                 <li>
-                        <h2><a href="{% url 'article_pages:article_det' article.id %}">
+                    <h2><a href="{% url 'game_pages:game_det' game.id %}">
+                        {{game.game_name}}
+                    </a></h2>
+                    <h5>{{game.game_text|truncatewords:10}}</h5><br>
+                </li>
+            {% endfor %}
+            </ol>
+        {% else %}
+            {{empty_res}}
+        {% endif %}
+        <legend class="border-bottom mb-4"><h2>Articles:</h2></legend>
+        {% if search_arts %}
+        <br>
+            <ul>
+            {% for article in search_arts %}
+                <li>
+                    <h2><a href="{% url 'article_pages:article_det' article.id %}">
                         {{article.article_name}}
-                        </a></h2>
+                    </a></h2>
                     <h5>{{article.article_text|truncatewords:10}}</h5><br>
                 </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        {{empty_res}}
-    {% endif %}
-    <legend class="border-bottom mb-4"></legend>
+            {% endfor %}
+            </ul>
+        {% else %}
+            {{empty_res}}
+        {% endif %}
+    </div>
 {% endblock %}

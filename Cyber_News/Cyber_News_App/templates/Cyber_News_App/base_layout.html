@@ -27,25 +27,16 @@
 			<!-- logo -->
 			<a class="site-logo" href="{% url 'cyber_news:index' %}">
 				<img src="/static/img/logo.png" alt="">
-			</a> <br>
-
-
+			</a>
+			{% if user.is_authenticated %}
 			<div class="user-panel">
-            {% if user.is_authenticated %}
-                <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
-            {% else %}
-                <a class="nav-item nav-link" href="{% url 'login' %}">Log In</a>
-            {% endif %}
+				<a href="{% url 'profile' %}">Profile</a>  /  <a href="{% url 'logout' %}">Log Out</a>
 			</div>
-            <div class="user-panel">
-            {% if user.is_authenticated %}
-                <a class="nav-item nav-link" href="{% url 'logout' %}">Log Out</a>
-            {% else %}
-                <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
-            {% endif %}
+			{% else %}
+			<div class="user-panel">
+				<a href="{% url 'profile' %}">Log In</a>  /  <a href="{% url 'logout' %}">Register</a>
 			</div>
-
-
+			{% endif %}
 			<!-- responsive -->
 			<div class="nav-switch">
 				<i class="fa fa-bars"></i>
@@ -61,15 +52,14 @@
 					<li><a href="{% url 'cyber_news:contacts' %}">Contact</a></li>
 				</ul>
 			</nav>
+			<div class="search_stuff">
+				<form name="search_stuff" action="{%url 'cyber_news:search'%}" method="post" >{% csrf_token %}
+            		<input class="search-txt-field" type="text" name="search_field"
+                   	maxlength="30" value="" method='POST' placeholder="  Search here" >
+            		<input class="search-btn" type="submit" name="Search" value="Search">
+        		</form>
+			</div>
 		</div>
-
-        <form  class="search_stuff" name="search_stuff" action="{%url 'cyber_news:search'%}" method="post" >
-            {% csrf_token %}
-            <input class="search-txt-field" type="text" name="search_field"
-                   maxlength="30" value="" method='POST' placeholder="  Search here" >
-            <input class="search-btn" type="submit" name="Search" value="Search">
-        </form>
-
 	</header>
 
 
@@ -87,8 +77,8 @@
          </div>
 	</div>
     <div class="wrapper">
-        {% block content %}
-        {% endblock %}
+		{% block content %}
+		{% endblock %}
     </div>
 </body>
 <footer>
@@ -103,8 +93,9 @@
 			<ul class="footer-menu">
 				<li><a href="{% url 'cyber_news:index' %}">Home</a></li>
 				<li><a href="{% url 'game_pages:games_page' %}">Games</a></li>
-				<li><a href="categories.html">Blog</a></li>
-				<li><a href="community.html">Thread</a></li>
+				<li><a href="{% url 'article_pages:article_pages' %}">Articles</a></li>
+				<li><a href="{% url 'article_pages:blog_pages' %}">Blogs</a></li>
+				<li><a href="{% url 'article_pages:thread_pages' %}">Threads</a></li>
 				<li><a href="{% url 'cyber_news:contacts' %}">Contact</a></li>
 			</ul>
 			<p class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

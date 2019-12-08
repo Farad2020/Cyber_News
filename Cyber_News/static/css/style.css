@@ -82,6 +82,37 @@ ol {
 }
 
 /*---------------------
+  Wrapper section
+-----------------------*/
+
+form label{
+    color: #131313;
+    font-family: 'Roboto', sans-serif;
+    position: center;
+    margin:0 auto;
+}
+
+form p{
+    vertical-align: top;
+}
+
+form ul.errorlist{
+    display: none;
+}
+
+.content-section {
+    background-image: url("/static/img/bayonetta.png");
+    background-repeat: no-repeat;
+	background-position: top center;
+}
+
+/*---------------------
+  Recent Games Section
+-----------------------*/
+
+.recent_games
+
+/*---------------------
   Helper CSS
 -----------------------*/
 
@@ -274,7 +305,7 @@ ol {
 .site-logo {
 	display: inline-block;
 	float: left;
-	padding-top: 6px;
+	padding-top: 3px;
 }
 
 .user-panel {
@@ -546,7 +577,6 @@ ol {
 	height: 204px;
 	width: 300px;
 	padding: 10px 0px;
-
 }
 
 .recent-game-item .rgi-content {
@@ -682,7 +712,9 @@ ol {
 .review-item .review-cover {
 	position: relative;
 	margin-bottom: 30px;
-	height: 345px;
+	height: 180px;
+	width: 300px;
+	object-fit: cover;
 }
 
 .review-item .review-cover .score {
@@ -1151,7 +1183,7 @@ ol {
 	padding-top: 62px;
 }
 
-.community-warp {
+.content-warp {
 	max-width: 1367px;
 	margin: 0 auto;
 	background: rgba(0, 0, 0, 0.28);
@@ -1282,10 +1314,9 @@ ol {
 		max-width: 1176px;
 	}
 }
-.search_stuff{
+.search_stuff {
 	background-color: #131313;
-	margin-top: 70px;
-	margin-left: 100px;
+	padding-left: 58px;
 }
 
 .search-txt-field{
@@ -1342,6 +1373,9 @@ ol {
 	}
 	.page-info-section .pi-content h2 {
 		font-size: 50px;
+	}
+	.review-item {
+	    margin-right: 20px;
 	}
 }
 
