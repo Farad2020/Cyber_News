@@ -127,9 +127,8 @@ form ul.errorlist{
 
 .set-bg {
 	background-repeat: no-repeat;
-	background-size: 415px, 294px;
+	background-size: cover;
 	background-position: top center;
-	object-fit: cover;
 }
 
 .spad {
@@ -571,20 +570,21 @@ form ul.errorlist{
   Recent Game Section
 ------------------------*/
 
+
 .recent-game-section {
+	background-color: #eef2f6;
 	border-top: 1px solid #d6dee7;
 	border-bottom: 1px solid #d6dee7;
-	padding-left: 50px;
-	padding-right: 50px;
-    background-image: url("/static/img/metal-gear-solid.png");
-	background-repeat: no-repeat;
-	background-position: top center;
 }
+
+.recent-game-section .section-title h2 {
+	color: white;
+}
+
 
 .recent-game-item .rgi-thumb {
 	height: 204px;
-	width: 300px;
-	padding: 10px 0px;
+	padding: 25px 28px;
 }
 
 .recent-game-item .rgi-content {
@@ -593,8 +593,6 @@ form ul.errorlist{
 	border: 1px solid #d6dee7;
 	border-top: none;
 	position: relative;
-	height: 100%;
-	width: 300px;
 }
 
 .recent-game-item .rgi-content h5 {
@@ -713,11 +711,21 @@ form ul.errorlist{
   Review Section
 ------------------------*/
 
-.review-section {
+.popular-games-section {
 	background-position: right top;
 }
 
-.review-item .review-cover {
+.pg-img {
+    height: 345px;
+    width: 264px;
+    object-fit: fill;
+}
+
+.popular-game-item{
+    height: 430px;
+}
+
+.popular-game-item .review-cover {
 	position: relative;
 	margin-bottom: 30px;
 	height: 180px;
@@ -725,7 +733,7 @@ form ul.errorlist{
 	object-fit: cover;
 }
 
-.review-item .review-cover .score {
+.popular-game-item .review-cover .score {
 	position: absolute;
 	width: 54px;
 	height: 54px;
@@ -740,39 +748,22 @@ form ul.errorlist{
 	z-index: 1;
 }
 
-.review-item .review-cover .score.yellow {
+.popular-game-item .review-cover .score.yellow {
 	background: #ffb320;
 }
 
-.review-item .review-cover .score.purple {
-	background: #694eae;
-}
-
-.review-item .review-cover .score.pink {
-	background: #ff20ae;
-}
-
-.review-item .review-cover .score.green {
-	background: #4eae60;
-}
-
-.review-item .review-text {
+.popular-game-item .pop-game-name{
 	text-align: center;
 }
 
-.review-item .review-text h5 {
+.popular-game-item h6 {
+	margin-bottom: 20px;
+}
+.popular-game-item .rating {
 	margin-bottom: 20px;
 }
 
-.review-item .review-text p {
-	margin-bottom: 0;
-}
-
-.review-item .rating {
-	margin-bottom: 20px;
-}
-
-.review-item .rating i {
+.popular-game-item .rating i {
 	font-size: 12px;
 }
 
@@ -1179,7 +1170,7 @@ form ul.errorlist{
 	color: #b5b5b5;
 }
 
-.review-section.review-dark {
+.popular-games-section.review-dark {
 	background-position: center top;
 }
 
@@ -1360,10 +1351,10 @@ form ul.errorlist{
 	.hero-slider .owl-dots {
 		max-width: 930px;
 	}
-	.review-section {
+	.popular-games-section {
 		background-position: right 10% top;
 	}
-	.review-item .review-cover {
+	.popular-game-item .review-cover {
 		height: 280px;
 	}
 	.latest-blog .lb-item .lb-thumb {
@@ -1382,7 +1373,7 @@ form ul.errorlist{
 	.page-info-section .pi-content h2 {
 		font-size: 50px;
 	}
-	.review-item {
+	.popular-game-item {
 	    margin-right: 20px;
 	}
 }
