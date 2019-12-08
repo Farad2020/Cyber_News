@@ -1,7 +1,8 @@
 from django.db import models
 from users.models import User
 from multiselectfield import MultiSelectField
-#from article_pages.models import Article
+
+# from article_pages.models import Article
 
 genres = (
     ("Action", "Action"), ("FPS", "FPS"), ("Strategy", "Strategy"), ("Shooter", "Shooter"),
@@ -9,7 +10,7 @@ genres = (
     ("Stealth", "Stealth"), ("Survival", "Survival"), ("Battle Royale", "Battle Royale"),
     ("Rhythm games", "Rhythm games"), ("Survival horror", "Survival horror"),
     ("Metroidvania", "Metroidvania"), ("Visual novels", "Visual novels"),
-    ("Interactive movie", "Interactive movie"), ("Action RPG", "Action RPG"),("RPG", "RPG"),
+    ("Interactive movie", "Interactive movie"), ("Action RPG", "Action RPG"), ("RPG", "RPG"),
     ("JRPG", "JRPG"), ("MMORPG", "MMORPG"), ("Quest", "Quest"), ("Roguelikes", "Roguelikes"),
     ("Simulator", "Simulator"), ("Strategy", "Strategy"), ("MOBA", "MOBA"), ("RTS", "RTS"),
     ("Tower defense", "Tower defense"), ("TBS", "TBS"), ("Sports", "Sports"),
@@ -36,15 +37,17 @@ class Game(models.Model):
     game_publisher = models.CharField(max_length=1000)
     game_platforms = MultiSelectField(choices=platforms, default=None)
     game_genre = MultiSelectField(choices=genres, max_choices=5, default=None)
-    game_rd = models.DateField('date published') # released date
+    game_rd = models.DateField('date published')  # released date
     game_age_rating = MultiSelectField(choices=age_range, max_choices=1, default=None)
     game_img = models.ImageField(upload_to='game_img/', default=None, null=True)
     game_trailer = models.URLField(max_length=200, default=None, blank=True, null=True)
     followers = models.ManyToManyField(User, default=None, blank=True, null=True)
     is_active = models.BooleanField(verbose_name="Is Active", default=True)
-    #related_articles = models.ManyToManyField(Article, default=None, blank=True, null=True)
-    #related_blogs = models.ManyToManyField(Blog, default=None, blank=True, null=True)
-    #related_threads = models.ManyToManyField(Thread, default=None, blank=True, null=True)
+    game_score = models.FloatField(default=0.0)
+
+    # related_articles = models.ManyToManyField(Article, default=None, blank=True, null=True)
+    # related_blogs = models.ManyToManyField(Blog, default=None, blank=True, null=True)
+    # related_threads = models.ManyToManyField(Thread, default=None, blank=True, null=True)
     # link to articles, blogs, threads
 
     def __str__(self):
@@ -57,6 +60,15 @@ class Game(models.Model):
         else:
             return (self.rating + new_rate) / 2
 
+    def calculate_score(self):
+        game_rates = RatingSystem.objects.filter(game_id=self)
+        game_rating = 0.0
+        for rate in game_rates:
+            game_rating += rate.score
+        if len(game_rates) > 0:
+            game_rating = game_rating / len(game_rates)
+        self.game_score = game_rating
+
     @classmethod
     def create(self, game_name, game_developer, game_text, game_publisher, game_rd, game_rating):
         game = self(game_name=game_name, game_developer=game_developer, game_text=game_text,
@@ -68,3 +80,6 @@ class RatingSystem(models.Model):
     score = models.FloatField(default=0.0)
     rater_id = models.ForeignKey(User, on_delete=models.CASCADE)
     game_id = models.ForeignKey(Game, on_delete=models.CASCADE)
+
+    def set_score(self, score):
+        self.score = score

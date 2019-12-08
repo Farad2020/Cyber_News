@@ -46,7 +46,7 @@ def game_details(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
     game.save()
     related_articles = Article.objects.filter(game_id=game)
-    game_rating = calculate_rating(request, game_id)
+    game_rating = game.game_score
     if request.method == 'POST':
         if 'remove' in request.POST:
             game.is_active = False
@@ -61,13 +61,15 @@ def game_details(request, game_id):
         elif 'rate' in request.POST:
             given_score = request.POST.get("rating")
             try:
-                new_rate = RatingSystem.objects.get(rater_id=request.user, game_id=game)
-                new_rate.score = given_score
-                new_rate.save()
+                new_rate = RatingSystem.objects.get_or_create(rater_id=request.user, game_id=game)
+                new_rate = list(new_rate)
+                new_rate[0].set_score(given_score)
+                new_rate[0].save()
             except:
-                new_rate = RatingSystem.objects.get_or_create(rater_id=request.user, game_id=game, score=given_score)
-                new_rate.save()
-            game_rating = calculate_rating(request, game_id)
+                print("Error occurred")
+            game.calculate_score()
+            game.save()
+            game_rating = game.game_score
     game.save()
     return render(request, "game_pages/game_details_page.html", {'game': game,
                                                                  'game_rating': game_rating,
