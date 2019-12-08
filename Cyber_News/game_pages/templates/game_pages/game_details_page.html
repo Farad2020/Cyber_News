@@ -1,8 +1,23 @@
 {% extends "Cyber_News_App/base_layout.html" %}
 
 {% block content %}
+    <div class="container">
+        <div class="det-head">
+            <table>
+                <tr>
+                    <td>
+                        <img class = "det-sign" src="/static/img/article-sign.png">
+                    </td>
+                    <td>
+                        {{ game.game_name }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
     <div class="game-details"> <!-- Link to go to list -->
         <div class="game-details-head">
+
             <div class="d-flex justify-content-start">
                 <div class="img_of_game">
                     <img src="{{ game.game_img.url }}" alt="{{ game.game_img }}">

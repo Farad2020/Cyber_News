@@ -18,24 +18,27 @@
                 </form>
                 </div>
 		        <div class="container">
-			    <div class="row">
-                    {% for game in games %}
-                    <div class="col-md-4">
-					    <div class="game-item">
-						    <div class="review-cover set-bg">
-                                <img src="{{ game.game_img.url }}" class="content-img" />
-							    <div class="score yellow">{{ game.game_score }}</div>
-						    </div>
-						    <div class="review-text">
-							    <h4><a href="{% url 'game_pages:game_det' game.id %}">{{game.game_name}}</a> </h4>
-                                <p>Genre: {{ game.game_genre }}</p>
-                                <p>Developer: {{ game.game_developer }}</p>
-						    </div>
-					    </div>
-				    </div>
-                    {% endfor %}
-			    </div>
-		    </div>
+                    <div class="section-title">
+						<h2>Games</h2>
+					</div>
+			        <div class="row">
+                        {% for game in games %}
+                        <div class="col-md-4">
+					        <div class="game-item">
+						        <div class="review-cover set-bg">
+                                    <img src="{{ game.game_img.url }}" class="content-img" />
+							        <div class="score yellow">{{ game.game_score }}</div>
+						        </div>
+						        <div class="review-text">
+							        <h4><a href="{% url 'game_pages:game_det' game.id %}">{{game.game_name}}</a> </h4>
+                                    <p>Genre: {{ game.game_genre }}</p>
+                                    <p>Developer: {{ game.game_developer }}</p>
+						        </div>
+					        </div>
+				        </div>
+                        {% endfor %}
+			        </div>
+		        </div>
             </div>
 	    </section>
     </div>
