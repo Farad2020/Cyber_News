@@ -9,9 +9,10 @@ from game_pages.models import Game
 
 # Here will be placed latest games/news/blogs/threads etc
 def index(request):
-    articles = Article.objects.all().order_by('article_date')
-    recent_games = Game.objects.all().order_by('game_rd')[:3]
-    return render(request, 'Cyber_News_App/homepage.html', {'articles': articles, 'recent_games': recent_games})
+    articles = Article.objects.all().exclude(is_active=False).order_by('article_date')[:4]
+    recent_games = Game.objects.all().exclude(is_active=False).order_by('-game_rd')[:3]
+    popular_games = Game.objects.all().exclude(is_active=False).order_by('-game_score')[:4]
+    return render(request, 'Cyber_News_App/homepage.html', {'articles': articles, 'recent_games': recent_games, 'popular_games': popular_games})
 
 
 def search(request):

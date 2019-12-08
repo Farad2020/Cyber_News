@@ -1,27 +1,79 @@
 {% extends "Cyber_News_App/base_layout.html" %}
 
+
+
 {% block content %}
 
-    <section class="review-section spad set-bg" data-setbg="img/review-bg.png">
+	<section class="popular-games-section spad set-bg" data-setbg="/static/img/v-devil-may-cry.png">
 		<div class="container">
 			<div class="section-title">
-				<div class="cata new">new</div>
-				<h2>Recent games</h2>
+				<h2>Popular games</h2>
 			</div>
 			<div class="row">
-                {% for game in recent_games %}
-                <div class="d-flex justify-content-start">
-					<div class="recent_games">
-						<div class="review-cover set-bg" data-setbg="{{ game.game_img.url }}">
-						</div>
-						<div class="review-text">
-							<h5>{{ game.game_name }}</h5>
-							<p>Developer: {{ game.game_developer }}</p>
-                            <p>Publisher: {{ game.game_publisher }}</p>
+				{% for game in popular_games %}
+				<div class="col-lg-3 col-md-6">
+					<div class="popular-game-item">
+						<div class="review-cover set-bg">
+							<div class="score yellow">{{ game.game_score }}</div>
+							<img src="{{ game.game_img.url }}" class="pg-img" />
+							<div class="pop-game-name">
+								<h5><a href="{% url 'game_pages:game_det' game.id %}">{{ game.game_name }}</a></h5>
+							</div>
 						</div>
 					</div>
 				</div>
-                {% endfor %}
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+
+	<section class="recent-game-section spad set-bg" data-setbg="/static/img/mgr-bg.jpg">
+		<div class="container">
+			<div class="section-title">
+				<h2>Recent Games</h2>
+			</div>
+			<div class="row">
+				{% for game in recent_games %}
+
+				<div class="col-lg-4 col-md-6">
+					<div class="recent-game-item">
+						<div class="rgi-thumb set-bg" data-setbg="{{ game.game_img.url }}">
+							<div class="cata new">{{ game.game_genre }}</div>
+						</div>
+						<div class="rgi-content">
+							<h5><a href="{% url 'game_pages:game_det' game.id %}">{{ game.game_name }}</a></h5>
+							<p>Developer: {{ game.game_developer }}</p>
+						</div>
+					</div>
+				</div>
+
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+
+	<section class="spad">
+		<div class="container">
+			<div class="section-title">
+				<h2>Recent Articles</h2>
+			</div>
+			<div class="row">
+				{% for article in articles %}
+				<div class="col-lg-3 col-md-6 p-0">
+					<div class="recent-articles set-bg">
+						<div class="image-container">
+                    		<img src="{{article.article_img.url}}" class="ra-img" />
+                		</div>
+						<div class="text-on-ra">
+							<span class="cata new">{{article.game_id.game_name}}</span>
+							<div class="fi-content text-white">
+								<h5><a href="{% url 'article_pages:article_det' article.id %}">{{ article.article_name }}</a></h5>
+								<p>{{article.snippet}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</section>

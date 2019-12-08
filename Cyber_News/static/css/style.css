@@ -110,7 +110,6 @@ form ul.errorlist{
   Recent Games Section
 -----------------------*/
 
-.recent_games
 
 /*---------------------
   Helper CSS
@@ -128,13 +127,14 @@ form ul.errorlist{
 
 .set-bg {
 	background-repeat: no-repeat;
-	background-size: 400px, 100px;
+	background-size: cover;
 	background-position: top center;
 }
 
 .spad {
 	padding-top: 97px;
 	padding-bottom: 97px;
+    height: auto;
 }
 
 .text-white h1,
@@ -517,15 +517,21 @@ form ul.errorlist{
 }
 
 /*------------------
-  Feature Section
+  Recent Articles Section
 ---------------------*/
 
-.feature-item {
+.recent-articles {
 	height: 415px;
 	position: relative;
 }
 
-.feature-item:after {
+.ra-img {
+	height: 415px;
+	width: 294px;
+	object-fit: cover;
+}
+
+.text-on-ra {
 	position: absolute;
 	content: "";
 	width: 100%;
@@ -536,14 +542,14 @@ form ul.errorlist{
 	opacity: .65;
 }
 
-.feature-item .cata {
+.text-on-ra .cata {
 	position: relative;
 	margin-top: 28px;
 	margin-left: 29px;
 	z-index: 3;
 }
 
-.feature-item .fi-content {
+.text-on-ra .fi-content {
 	position: absolute;
 	width: 100%;
 	left: 0;
@@ -552,11 +558,11 @@ form ul.errorlist{
 	z-index: 2;
 }
 
-.feature-item .fi-content h5 {
+.text-on-ra .fi-content h5 {
 	margin-bottom: 18px;
 }
 
-.feature-item .fi-content .fi-comment {
+.text-on-ra .fi-content .fi-comment {
 	font-size: 12px;
 	opacity: .54;
 }
@@ -565,18 +571,21 @@ form ul.errorlist{
   Recent Game Section
 ------------------------*/
 
+
 .recent-game-section {
 	background-color: #eef2f6;
 	border-top: 1px solid #d6dee7;
 	border-bottom: 1px solid #d6dee7;
-	padding-left: 50px;
-	padding-right: 50px;
 }
+
+.recent-game-section .section-title h2 {
+	color: white;
+}
+
 
 .recent-game-item .rgi-thumb {
 	height: 204px;
-	width: 300px;
-	padding: 10px 0px;
+	padding: 25px 28px;
 }
 
 .recent-game-item .rgi-content {
@@ -585,8 +594,6 @@ form ul.errorlist{
 	border: 1px solid #d6dee7;
 	border-top: none;
 	position: relative;
-	height: 100%;
-	width: 300px;
 }
 
 .recent-game-item .rgi-content h5 {
@@ -705,11 +712,21 @@ form ul.errorlist{
   Review Section
 ------------------------*/
 
-.review-section {
+.popular-games-section {
 	background-position: right top;
 }
 
-.review-item .review-cover {
+.pg-img {
+    height: 345px;
+    width: 264px;
+    object-fit: cover;
+}
+
+.popular-game-item{
+    height: 430px;
+}
+
+.popular-game-item .review-cover {
 	position: relative;
 	margin-bottom: 30px;
 	height: 180px;
@@ -717,7 +734,7 @@ form ul.errorlist{
 	object-fit: cover;
 }
 
-.review-item .review-cover .score {
+.popular-game-item .review-cover .score {
 	position: absolute;
 	width: 54px;
 	height: 54px;
@@ -732,39 +749,30 @@ form ul.errorlist{
 	z-index: 1;
 }
 
-.review-item .review-cover .score.yellow {
+.popular-game-item .review-cover .score.yellow {
 	background: #ffb320;
 }
 
-.review-item .review-cover .score.purple {
-	background: #694eae;
-}
-
-.review-item .review-cover .score.pink {
-	background: #ff20ae;
-}
-
-.review-item .review-cover .score.green {
-	background: #4eae60;
-}
-
-.review-item .review-text {
+.popular-game-item .pop-game-name{
 	text-align: center;
 }
 
-.review-item .review-text h5 {
+.pop-game-name a{
+    color: #131313;
+}
+
+.pop-game-name a:visited{
+    color: #131313;
+}
+
+.popular-game-item h6 {
+	margin-bottom: 20px;
+}
+.popular-game-item .rating {
 	margin-bottom: 20px;
 }
 
-.review-item .review-text p {
-	margin-bottom: 0;
-}
-
-.review-item .rating {
-	margin-bottom: 20px;
-}
-
-.review-item .rating i {
+.popular-game-item .rating i {
 	font-size: 12px;
 }
 
@@ -990,11 +998,11 @@ form ul.errorlist{
 	padding-right: 20px;
 }
 
-.widget-item .review-item {
+.widget-item .game-item {
 	background: #eff2f5;
 }
 
-.widget-item .review-item .review-text {
+.widget-item .game-item .review-text {
 	padding: 0 35px 20px;
 }
 
@@ -1159,20 +1167,86 @@ form ul.errorlist{
   Review page
 --------------------*/
 
-.review-page .review-item {
+.page-section {
+    overflow: auto;
+}
+
+.game-checkboxes{
+    float:left;
+	padding: 20px;
+}
+
+.game-checkboxes a{
+    color: #131313;
+}
+
+.game-checkboxes a:visited{
+    color: #131313;
+}
+
+.info-page .game-item {
 	margin-bottom: 63px;
 }
 
-.review-page .review-item .review-text h4 {
+.info-page .game-item .review-text h4 {
+    text-align: center;
+    margin-top: 10px;
 	margin-bottom: 10px;
+	position: center;
 }
 
-.review-dark .review-item .review-text p {
+.info-page .game-item .review-text a {
+    color: #131313;
+}
+
+.info-page .game-item .review-text a:visited {
+    color: #131313;
+}
+
+.review-dark .game-item .review-text p {
 	color: #b5b5b5;
 }
 
-.review-section.review-dark {
+.game-item .review-cover .score {
+	position: absolute;
+	width: 54px;
+	height: 54px;
+	top: -27px;
+	left: 26px;
+	padding-top: 15px;
+	font-size: 18px;
+	font-weight: 500;
+	color: #fff;
+	text-align: center;
+	border-radius: 50%;
+	z-index: 1;
+}
+
+.game-item .review-cover .cata {
+	display: inline-block;
+	text-transform: uppercase;
+	font-size: 12px;
+	font-weight: 500;
+	color: #fff;
+	padding: 6px 25px;
+}
+
+.game-item .review-cover .cata.new-yellow {
+	background: #ffc107;
+}
+
+.game-item .review-cover .score.yellow {
+	background: #ffb320;
+}
+
+.popular-games-section.review-dark {
 	background-position: center top;
+}
+
+.content-img {
+    height: 345px;
+    width: 558px;
+    object-fit: cover;
 }
 
 /*-----------------
@@ -1352,10 +1426,10 @@ form ul.errorlist{
 	.hero-slider .owl-dots {
 		max-width: 930px;
 	}
-	.review-section {
+	.popular-games-section {
 		background-position: right 10% top;
 	}
-	.review-item .review-cover {
+	.popular-game-item .review-cover {
 		height: 280px;
 	}
 	.latest-blog .lb-item .lb-thumb {
@@ -1374,227 +1448,8 @@ form ul.errorlist{
 	.page-info-section .pi-content h2 {
 		font-size: 50px;
 	}
-	.review-item {
+	.popular-game-item {
 	    margin-right: 20px;
-	}
-}
-
-/* Tablet :768px. */
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-	.site-logo {
-		max-width: 130px;
-	}
-	.main-menu {
-		margin-right: 25px;
-	}
-	.main-menu ul li a {
-		margin-left: 15px;
-	}
-	.user-panel {
-		padding: 8px 15px;
-	}
-	.hero-slider .hs-text h2 {
-		font-size: 50px;
-	}
-	.hero-slider .owl-dots {
-		max-width: 690px;
-	}
-	.recent-game-item {
-		margin-bottom: 42px;
-	}
-	.tournament-item .ti-thumb {
-		width: 100%;
-		height: 230px;
-		float: none;
-	}
-	.tournament-item .ti-text {
-		padding-left: 0;
-		padding-top: 20px;
-	}
-	.review-section {
-		background-position: left top;
-	}
-	.review-item {
-		margin-bottom: 63px;
-	}
-	.footer-logo {
-		margin-bottom: 50px;
-	}
-	.latest-blog .lb-item .lb-thumb {
-		width: 80px;
-		height: 80px;
-	}
-	.latest-blog .lb-item .lb-content {
-		padding-left: 95px;
-	}
-	.footer-top-bg {
-		display: none;
-	}
-}
-
-/* Large Mobile :480px. */
-
-@media only screen and (max-width: 767px) {
-	.header-section {
-		overflow: visible;
-		padding: 23px 0;
-	}
-	.header-section .container {
-		position: relative;
-	}
-	.site-logo {
-		float: none;
-		padding-top: 0;
-	}
-	.main-menu {
-		display: none;
-		position: absolute;
-		top: calc(100% + 24px);
-		left: 0;
-		width: 100%;
-		background: #ffffff;
-		z-index: 999;
-	}
-	.main-menu ul li {
-		display: block;
-		border-bottom: 1px solid #ececec;
-	}
-	.main-menu ul li a {
-		margin-left: 0;
-		color: #131313;
-		padding: 13px 26px;
-	}
-
-	.nav-switch {
-		color: #fff;
-		display: block;
-		float: right;
-		cursor: pointer;
-		font-size: 25px;
-	}
-	.user-panel {
-		display: none;
-	}
-	.hero-slider .hs-item {
-		height: 700px;
-	}
-	.hero-slider .hs-text h2 {
-		font-size: 36px;
-	}
-	.hero-slider .owl-dots {
-		max-width: 510px;
-	}
-	.ln-title {
-		padding-right: 30px;
-	}
-	.feature-item {
-		margin-bottom: 30px;
-	}
-	.recent-game-item {
-		margin-bottom: 42px;
-	}
-	.review-section {
-		background-position: left top;
-	}
-	.review-item {
-		margin-bottom: 63px;
-	}
-	.footer-logo {
-		margin-bottom: 50px;
-	}
-	.footer-top-bg {
-		display: none;
-	}
-	.footer-section {
-		padding: 30px 0 20px;
-		text-align: center;
-	}
-	.footer-menu li:first-child a {
-		margin-left: 0;
-	}
-	.footer-menu,
-	.copyright {
-		float: none;
-	}
-	.copyright {
-		padding-top: 15px;
-	}
-	.community-post-list li {
-		padding: 30px 25px 30px;
-	}
-	.page-info-section .pi-content h2 {
-		font-size: 50px;
-	}
-}
-
-/* Medium Mobile :480px. */
-
-@media only screen and (max-width: 576px) {
-	.hero-slider .owl-dots {
-		padding: 0 15px;
-	}
-	.feature-section {
-		padding-left: 15px;
-		padding-right: 15px;
-	}
-	.community-post-list .community-post .author-avator {
-		float: none;
-	}
-	.community-post-list .community-post .post-content {
-		padding-left: 0;
-		padding-top: 30px;
-	}
-}
-
-/* Small Mobile :320px. */
-
-@media only screen and (max-width: 479px) {
-	.hero-slider .hs-item {
-		height: auto;
-		padding: 150px 0;
-	}
-	.ln-title {
-		display: none;
-	}
-	.news-ticker {
-		width: 100%;
-	}
-	.tournament-item .ti-thumb {
-		width: 100%;
-		height: 230px;
-		float: none;
-	}
-	.tournament-item .ti-text {
-		padding-left: 0;
-		padding-top: 20px;
-	}
-	.latest-blog .lb-item .lb-thumb {
-		width: 55px;
-		height: 55px;
-	}
-	.latest-blog .lb-item .lb-content {
-		padding-left: 67px;
-	}
-	.top-comment .tc-item .tc-content {
-		padding-left: 85px;
-	}
-	.site-btn {
-		padding: 11px 30px;
-		min-width: 145px;
-	}
-	.comment-list .comment .comment-avator {
-		float: none;
-	}
-	.comment-list .comment .comment-content {
-		padding-left: 0;
-		padding-top: 20px;
-	}
-	.footer-widget {
-		padding: 40px 15px 7px;
-	}
-	.page-info-section .pi-content h2 {
-		font-size: 40px;
 	}
 }
 
@@ -1641,20 +1496,9 @@ form ul.errorlist{
 	color: grey;
 }
 
-.games-page{
-  display: inline-block;
-    width: 100%;
-}
-
 .games-list{
     width: 88%;
     float: left;
-}
-
-.game-checkboxes{
-    width: 12%;
-    float: right;
-	padding: 20px;
 }
 
 .game-details{
