@@ -1,27 +1,91 @@
 {% extends "Cyber_News_App/base_layout.html" %}
 
+
+
 {% block content %}
 
-    <section class="review-section spad set-bg" data-setbg="img/review-bg.png">
+	<section class="recent-game-section spad set-bg">
 		<div class="container">
 			<div class="section-title">
 				<div class="cata new">new</div>
-				<h2>Recent games</h2>
+				<h2>Recent Games</h2>
 			</div>
 			<div class="row">
-                {% for game in recent_games %}
-                <div class="d-flex justify-content-start">
-					<div class="recent_games">
-						<div class="review-cover set-bg" data-setbg="{{ game.game_img.url }}">
+				<div class="col-lg-4 col-md-6">
+					<div class="recent-game-item">
+						<div class="rgi-thumb set-bg" data-setbg="img/recent-game/1.jpg">
+							<div class="cata new">new</div>
 						</div>
-						<div class="review-text">
-							<h5>{{ game.game_name }}</h5>
-							<p>Developer: {{ game.game_developer }}</p>
-                            <p>Publisher: {{ game.game_publisher }}</p>
+						<div class="rgi-content">
+							<h5>Suspendisse ut justo tem por, rutrum</h5>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit amet, consectetur elit. </p>
+							<a href="#" class="comment">3 Comments</a>
+							<div class="rgi-extra">
+								<div class="rgi-star"><img src="img/icons/star.png" alt=""></div>
+								<div class="rgi-heart"><img src="img/icons/heart.png" alt=""></div>
+							</div>
 						</div>
 					</div>
 				</div>
-                {% endfor %}
+				<div class="col-lg-4 col-md-6">
+					<div class="recent-game-item">
+						<div class="rgi-thumb set-bg" data-setbg="img/recent-game/2.jpg">
+							<div class="cata racing">racing</div>
+						</div>
+						<div class="rgi-content">
+							<h5>Susce pulvinar metus nulla, vel  facilisis sem </h5>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit amet, consectetur elit. </p>
+							<a href="#" class="comment">3 Comments</a>
+							<div class="rgi-extra">
+								<div class="rgi-star"><img src="img/icons/star.png" alt=""></div>
+								<div class="rgi-heart"><img src="img/icons/heart.png" alt=""></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="recent-game-item">
+						<div class="rgi-thumb set-bg" data-setbg="img/recent-game/3.jpg">
+							<div class="cata adventure">Adventure</div>
+						</div>
+						<div class="rgi-content">
+							<h5>Suspendisse ut justo tem por, rutrum</h5>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit amet, consectetur elit. </p>
+							<a href="#" class="comment">3 Comments</a>
+							<div class="rgi-extra">
+								<div class="rgi-star"><img src="img/icons/star.png" alt=""></div>
+								<div class="rgi-heart"><img src="img/icons/heart.png" alt=""></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="spad">
+		<div class="container">
+			<div class="section-title">
+				<div class="cata new">new</div>
+				<h2>Recent Articles</h2>
+			</div>
+			<div class="row">
+				{% for article in articles %}
+				<div class="col-lg-3 col-md-6 p-0">
+					<div class="recent-articles set-bg">
+						<div class="image-container">
+                    		<img src="{{article.article_img.url}}" class="ra-img" />
+                		</div>
+						<div class="text-on-ra">
+							<span class="cata new">{{article.game_id.game_name}}</span>
+							<div class="fi-content text-white">
+								<h5><a href="{% url 'article_pages:article_det' article.id %}">{{ article.article_name }}</a></h5>
+								<p>{{article.snippet}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</section>

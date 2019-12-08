@@ -15,14 +15,14 @@ urlpatterns = [
 
     path('blogs/', views.get_all_blogs, name="blog_pages"),
     path('create_blog/', views.create_blog, name="create_blog"),
-    #path('delete_blog/', views.blog_delete, name="delete_blog"),
+    # path('delete_blog/', views.blog_delete, name="delete_blog"),
     path('blogs/<int:blog_id>/', views.blog_detail, name="blog_det"),
     path('blogs/<int:blog_id>/edit/', views.edit_blog, name="blog_edit"),
 
 
     path('threads/', views.get_all_threads, name="thread_pages"),
     path('create_thread/', views.create_thread, name="create_thread"),
-    #path('delete_thread/', views.blog_delete, name="delete_blog"),   # or just delete with
+    # path('delete_thread/', views.blog_delete, name="delete_blog"),   # or just delete with
     path('threads/<int:thread_id>/', views.thread_detail, name="thread_det"),
     path('threads/<int:thread_id>/edit/', views.edit_thread, name="thread_edit"),     # maybe none editable?
 ]
