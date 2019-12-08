@@ -12,7 +12,7 @@ from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
 def get_all_games(request):
-    games = Game.objects.all().order_by('game_name')
+    games = Game.objects.filter(is_active=True).order_by('game_name')
     box_genres = ["Action", "Action RPG", "Adventure", "Battle Royale",
                 "Beat 'em up", "Fighting", "FPS", "Interactive movie",
                 "JRPG", "Metroidvania", "MMO", "MMORPG", "MOBA", "Platformer",
@@ -47,9 +47,10 @@ def game_details(request, game_id):
     related_articles = Article.objects.filter(game_id=game)
     game_rating = calculate_rating(request, game_id)
     if request.method == 'POST':
-        if 'delete' in request.POST:
-            game.delete()
-            return redirect('game_pages:games_page')
+        if 'remove' in request.POST:
+            game.is_active = False
+        elif 'return' in request.POST:
+            game.is_active = True
         elif 'edit' in request.POST:
             return redirect('game_pages:game_edit',game_id)
         elif 'follow' in request.POST:
@@ -66,6 +67,7 @@ def game_details(request, game_id):
                 new_rate = RatingSystem.objects.get_or_create(rater_id=request.user, game_id=game,score=given_score)
                 new_rate.save()
             game_rating = calculate_rating(request, game_id)
+    game.save()
     return render(request, "game_pages/game_details_page.html", {'game': game,
                                                                  'game_rating':game_rating,
                                                                  'related_articles': related_articles,
