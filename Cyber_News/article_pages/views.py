@@ -79,10 +79,10 @@ def article_details(request, article_id):
 
 def edit_article(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
-    form = EditArticleForm(request.POST or None, instance=article)
-    if form.is_valid():
+    form = EditArticleForm(request.POST or None, request.FILES or None, instance=article)
+    if form.is_valid() and request.method == 'POST':
         form.save()
-        return redirect('../')
+        return redirect('article_pages:article_det',article_id)
     return render(request, "article_pages/edit_article.html", {'form': form})
 
 
@@ -153,8 +153,8 @@ def create_blog(request):
 
 def edit_blog(request, blog_id):
     blog = get_object_or_404(Blogs, pk=blog_id)
-    form = EditBlogForm(request.POST or None, instance=blog)
-    if form.is_valid():
+    form = EditBlogForm(request.POST or None, request.FILES or None, instance=blog)
+    if form.is_valid() and request.method == 'POST':
         form.save()
         return redirect('../')
     return render(request, "article_pages/edit_blog.html", {'form': form})
@@ -211,8 +211,8 @@ def create_thread(request):
 
 def edit_thread(request, thread_id):
     thread = get_object_or_404(Thread, pk=thread_id)
-    form = EditBlogForm(request.POST or None, instance=thread)
-    if form.is_valid():
+    form = EditThreadForm(request.POST or None, request.FILES or None, instance=thread)
+    if form.is_valid() and request.method == 'POST':
         form.save()
         return redirect('../')
     return render(request, "article_pages/edit_thread.html", {'form': form})
