@@ -11,7 +11,7 @@ from .forms import *
 
 
 def get_all_articles(request):
-    articles = Article.objects.all()        #.order_by('-date')
+    articles = Article.objects.filter(is_active=True)        #.order_by('-date')
     return render(request, "article_pages/articles_page.html", {'articles': articles})
 
 
@@ -32,36 +32,32 @@ def article_details(request, article_id):
     comments = showComments(request, article_id)
 
     if request.method == 'POST':
-        try:
-            txt = request.POST.get("comments_text")
-            # print(request.POST)
-            comment = Comment(comments_text=txt,
+        if 'upvote' in request.POST:
+            if request.user in article.article_score.all():
+                article.article_score.remove(request.user)
+            else:
+                article.article_score.add(request.user)
+        if 'deactivate' in request.POST:
+                print("False")
+                article.is_active = False
+        if 'activate' in request.POST:
+                print("True")
+                article.is_active = True
+        else:
+            try:
+                txt = request.POST.get("comments_text")
+                # print(request.POST)
+                comment = Comment(comments_text=txt,
                               article=Article.objects.get(pk=article_id),
                               author=request.user)
-            comment.save()
-        except:
-            print('the comments cannot be added')
+                comment.save()
+            except:
+                print('the comments cannot be added')
 
+    article.save()
     # author = User.objects.get(pk=article.author_id_id)  # why id_id works!&? 'author': author 'comment' : comments,
     return render(request, 'article_pages/article_details_page.html', {'article': article,
                                                                        'comments': comments, })
-
-
-def articles_delete(request, id=None):
-    article = get_object_or_404(Article, id=id)
-
-    creator = article.user.username
-
-    if request.method == "POST" and request.user.is_authenticated and request.user.username == creator:
-        article.delete()
-        messages.success(request, "Post successfully deleted!")
-        return HttpResponseRedirect("/article_pages/article_details_page.html/")
-
-    context = {'article': article,
-               'creator': creator,
-               }
-
-    return render(request, 'article_pages/articles_delete.html', context)
 
 
 def edit_article(request, article_id):
@@ -77,7 +73,7 @@ def edit_article(request, article_id):
 
 
 def get_all_blogs(request):
-    blogs = Blogs.objects.all()     #.order_by('-date')
+    blogs = Blogs.objects.filter(is_active=True)     #.order_by('-date')
     return render(request, "article_pages/blogs_page.html", {'blogs': blogs})
 
 
@@ -85,6 +81,20 @@ def blog_detail(request, blog_id):
     blog = get_object_or_404(Blogs, pk=blog_id)
     blog.numberOfClicks += 1
     blog.save()
+    if request.method == 'POST':
+        if 'upvote' in request.POST:
+            if request.user in blog.blog_score.all():
+                blog.blog_score.remove(request.user)
+            else:
+                blog.blog_score.add(request.user)
+        if 'deactivate' in request.POST:
+            print("False")
+            blog.is_active = False
+        if 'activate' in request.POST:
+            print("True")
+            blog.is_active = True
+    blog.save()
+
     '''
     comments = showComments(request, blog_id)
     if request.method == 'POST':
@@ -132,6 +142,14 @@ def get_all_threads(request):
 
 def thread_detail(request, thread_id):
     thread = get_object_or_404(Thread, pk=thread_id)
+    if request.method == 'POST':
+        if 'deactivate' in request.POST:
+            print("False")
+            thread.is_active = False
+        if 'activate' in request.POST:
+            print("True")
+            thread.is_active = True
+
     thread.save()
     '''
     comments = showComments(request, blog_id)

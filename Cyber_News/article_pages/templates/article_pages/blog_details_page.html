@@ -3,9 +3,27 @@
 {% block content %}
     <div class="blog-detail"> <!-- Link to go to list -->
         <h1>{{ blog.blog_name }}</h1>
-        <!-- <h1><a href="{% url 'article_pages:blog_edit' blog.id %}">edit</a> </h1>
-        <h2><a href="{% url 'game_pages:game_det' blog.game_id.id %}">Source</a> </h2> -->
         <img src="{{blog.blog_img.url}}" alt="{{blog.blog_img}}" class="img-responsive" />
+        <form method="post" >
+            {% csrf_token %}
+            {%if user.is_authenticated %}
+                        {%if user not in blog.blog_score.all%}
+                            <input type="submit" name="upvote" value="{{ blog.blog_score.count }} Upvote">
+                        {% else %}
+                            <input type="submit" name="upvote" value="{{ blog.blog_score.count }} Remove Upvote">
+                        {% endif %}
+            {% endif %}
+
+            {%if user.is_moderator or user == blog.author_id %}
+                <h3><a href="{% url 'article_pages:blog_edit' blog.id %}">edit</a> </h3>
+                {%if blog.is_active == True %}
+                    <input type="submit" name="deactivate" value="Remove Blog">
+                {%elif blog.is_active == False %}
+                    <input type="submit" name="activate" value="Return Blog">
+                {% endif %}
+            {% endif %}
+        </form>
+        <h2><a href="{% url 'game_pages:game_det' blog.game_id.id %}">Source</a> </h2>
         <p>{{blog.blog_date }}</p>
         <p>{{ blog.blog_text }}</p>
         <p>Release date: {{ blog.blog_date }}</p>

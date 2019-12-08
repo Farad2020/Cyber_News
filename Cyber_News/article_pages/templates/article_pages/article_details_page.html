@@ -3,9 +3,28 @@
 {% block content %}
     <div class="article-detail"> <!-- Link to go to list -->
         <h1>{{ article.article_name }}</h1>
-        <h1><a href="{% url 'article_pages:article_edit' article.id %}">edit</a> </h1>
-        <h2><a href="{% url 'game_pages:game_det' article.game_id.id %}">Source</a> </h2>
+
         <img src="{{article.article_img.url}}" alt="{{article.article_img}}" class="img-responsive" />
+        <form method="post" >
+            {% csrf_token %}
+            {%if user.is_authenticated %}
+                        {%if user not in article.article_score.all%}
+                            <input type="submit" name="upvote" value="{{ article.article_score.count }} Upvote">
+                        {% else %}
+                            <input type="submit" name="upvote" value="{{ article.article_score.count }} Remove Upvote">
+                        {% endif %}
+            {% endif %}
+
+            {%if user.is_moderator or user == article.author_id %}
+                <h3><a href="{% url 'article_pages:article_edit' article.id %}">edit</a> </h3>
+                {%if article.is_active == True %}
+                    <input type="submit" name="deactivate" value="Remove Article">
+                {%elif article.is_active == False %}
+                    <input type="submit" name="activate" value="Return Article">
+                {% endif %}
+            {% endif %}
+        </form>
+        <h2><a href="{% url 'game_pages:game_det' article.game_id.id %}">Source</a> </h2>
         <p>{{ article.article_text }}</p>
         <p>Release date: {{ article.article_date }}</p>
         <p>Rating: {{ article.rating }}</p>

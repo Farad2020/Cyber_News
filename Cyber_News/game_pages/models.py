@@ -41,6 +41,7 @@ class Game(models.Model):
     game_img = models.ImageField(upload_to='game_img/', default=None, null=True)
     game_trailer = models.URLField(max_length=200, default=None, blank=True, null=True)
     followers = models.ManyToManyField(User, default=None, blank=True, null=True)
+    is_active = models.BooleanField(verbose_name="Is Active", default=True)
     #related_articles = models.ManyToManyField(Article, default=None, blank=True, null=True)
     #related_blogs = models.ManyToManyField(Blog, default=None, blank=True, null=True)
     #related_threads = models.ManyToManyField(Thread, default=None, blank=True, null=True)
