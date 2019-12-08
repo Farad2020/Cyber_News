@@ -20,13 +20,16 @@
                         </form>
                     </h5>
                     <form method="post">{% csrf_token %}
+
                     {%if user.is_moderator %}
-                        <p>Do you want to delete this game?</p>
-                        <input type="submit" name="delete" value="Delete">
-                        <!-- can button redirect me? <h1><a href="{% url 'game_pages:game_edit' game.id %}">edit</a> </h1> -->
-                        <!-- <a href="{% url 'game_pages:game_edit' game.id %}"><input type="submit" name="edit" value="Edit"></a>-->
+                        {% if game.is_active == True %}
+                            <input type="submit" name="remove" value="Remove">
+                    {% elif game.is_active == False %}
+                            <input type="submit" name="return" value="Return">
+                    {% endif %}
                         <input type="submit" name="edit" value="Edit">
                     {% endif %}
+
                     {%if user.is_authenticated %}
                         {%if user not in game.followers.all%}
                             <input type="submit" name="follow" value="Follow">

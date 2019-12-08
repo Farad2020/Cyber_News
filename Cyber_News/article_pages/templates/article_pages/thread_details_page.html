@@ -3,7 +3,18 @@
 {% block content %}
     <div class="thread-detail"> <!-- Link to go to list -->
         <h1>{{ thread.thread_name }}</h1>
-        <!-- <h1><a href="{% url 'article_pages:thread_edit' thread.id %}">edit</a> </h1>
+        <form method="post" >
+            {% csrf_token %}
+            {%if user.is_moderator or user == thread.author_id %}
+                <h3><a href="{% url 'article_pages:thread_edit' thread.id %}">edit</a></h3>
+                {%if thread.is_active == True %}
+                    <input type="submit" name="deactivate" value="Remove Thread">
+                {%elif thread.is_active == False %}
+                    <input type="submit" name="activate" value="Return Thread">
+                {% endif %}
+            {% endif %}
+        </form>
+        <!--  </h1>
         <h2><a href="{% url 'game_pages:game_det' thread.game_id.id %}">Source</a> </h2> -->
         <p>{{thread.thread_date }}</p>
         <p>{{ thread.thread_text }}</p>
