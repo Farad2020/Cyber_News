@@ -34,5 +34,37 @@
         {% else %}
             {{empty_res}}
         {% endif %}
+    <legend class="border-bottom mb-4"><h2>Blogs:</h2></legend>
+        {% if search_blogs %}
+        <br>
+            <ul>
+            {% for blog in search_blogs %}
+                <li>
+                    <h2><a href="{% url 'article_pages:blog_det' blog.id %}">
+                        {{blog.blog_name}}
+                    </a></h2>
+                    <h5>{{blog.blog_text|truncatewords:10}}</h5><br>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            {{empty_res}}
+        {% endif %}
+    <legend class="border-bottom mb-4"><h2>Threads:</h2></legend>
+        {% if search_threads %}
+        <br>
+            <ul>
+            {% for thread in search_threads %}
+                <li>
+                    <h2><a href="{% url 'article_pages:thread_det' thread.id %}">
+                        {{thread.thread_name}}
+                    </a></h2>
+                    <h5>{{thread.thread_text|truncatewords:10}}</h5><br>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            {{empty_res}}
+        {% endif %}
     </div>
 {% endblock %}

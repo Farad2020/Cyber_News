@@ -81,7 +81,9 @@ class Comment(models.Model):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, default=None, null=True)
     is_active = models.BooleanField(verbose_name="Is Active", default=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    upvotes = models.ManyToManyField(User, default=None, blank=True, null=True, related_name="comment_raters")
+    upvoters = models.ManyToManyField(User, default=None, blank=True, null=True, related_name="comment_raters")
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True, related_name="receiver")
+    comment_date = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.comments_text

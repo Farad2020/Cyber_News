@@ -46,6 +46,8 @@ def game_details(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
     game.save()
     related_articles = Article.objects.filter(game_id=game)
+    related_blogs = Blogs.objects.filter(game_id=game)
+    related_threads = Thread.objects.filter(game_id=game)
     game_rating = game.game_score
     if request.method == 'POST':
         if 'remove' in request.POST:
@@ -74,6 +76,8 @@ def game_details(request, game_id):
     return render(request, "game_pages/game_details_page.html", {'game': game,
                                                                  'game_rating': game_rating,
                                                                  'related_articles': related_articles,
+                                                                 'related_blogs': related_blogs,
+                                                                 'related_threads': related_threads,
                                                                  })
 
 
