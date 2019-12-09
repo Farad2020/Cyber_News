@@ -134,6 +134,7 @@ form ul.errorlist{
 .spad {
 	padding-top: 97px;
 	padding-bottom: 97px;
+    height: auto;
 }
 
 .text-white h1,
@@ -718,7 +719,7 @@ form ul.errorlist{
 .pg-img {
     height: 345px;
     width: 264px;
-    object-fit: fill;
+    object-fit: cover;
 }
 
 .popular-game-item{
@@ -754,6 +755,14 @@ form ul.errorlist{
 
 .popular-game-item .pop-game-name{
 	text-align: center;
+}
+
+.pop-game-name a{
+    color: #131313;
+}
+
+.pop-game-name a:visited{
+    color: #131313;
 }
 
 .popular-game-item h6 {
@@ -989,11 +998,11 @@ form ul.errorlist{
 	padding-right: 20px;
 }
 
-.widget-item .review-item {
+.widget-item .game-item {
 	background: #eff2f5;
 }
 
-.widget-item .review-item .review-text {
+.widget-item .game-item .review-text {
 	padding: 0 35px 20px;
 }
 
@@ -1158,20 +1167,86 @@ form ul.errorlist{
   Review page
 --------------------*/
 
-.review-page .review-item {
+.page-section {
+    overflow: auto;
+}
+
+.game-checkboxes{
+    float:left;
+	padding: 20px;
+}
+
+.game-checkboxes a{
+    color: #131313;
+}
+
+.game-checkboxes a:visited{
+    color: #131313;
+}
+
+.info-page .game-item {
 	margin-bottom: 63px;
 }
 
-.review-page .review-item .review-text h4 {
+.info-page .game-item .review-text h4 {
+    text-align: center;
+    margin-top: 10px;
 	margin-bottom: 10px;
+	position: center;
 }
 
-.review-dark .review-item .review-text p {
+.info-page .game-item .review-text a {
+    color: #131313;
+}
+
+.info-page .game-item .review-text a:visited {
+    color: #131313;
+}
+
+.review-dark .game-item .review-text p {
 	color: #b5b5b5;
+}
+
+.game-item .review-cover .score {
+	position: absolute;
+	width: 54px;
+	height: 54px;
+	top: -27px;
+	left: 26px;
+	padding-top: 15px;
+	font-size: 18px;
+	font-weight: 500;
+	color: #fff;
+	text-align: center;
+	border-radius: 50%;
+	z-index: 1;
+}
+
+.game-item .review-cover .cata {
+	display: inline-block;
+	text-transform: uppercase;
+	font-size: 12px;
+	font-weight: 500;
+	color: #fff;
+	padding: 6px 25px;
+}
+
+.game-item .review-cover .cata.new-yellow {
+	background: #ffc107;
+}
+
+.game-item .review-cover .score.yellow {
+	background: #ffb320;
 }
 
 .popular-games-section.review-dark {
 	background-position: center top;
+}
+
+.content-img {
+    height: 345px;
+    width: 558px;
+    object-fit: cover;
 }
 
 /*-----------------
@@ -1421,20 +1496,9 @@ form ul.errorlist{
 	color: grey;
 }
 
-.games-page{
-  display: inline-block;
-    width: 100%;
-}
-
 .games-list{
     width: 88%;
     float: left;
-}
-
-.game-checkboxes{
-    width: 12%;
-    float: right;
-	padding: 20px;
 }
 
 .game-details{

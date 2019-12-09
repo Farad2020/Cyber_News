@@ -1,6 +1,37 @@
 {% extends "Cyber_News_App/base_layout.html" %}
 
 {% block content %}
+
+    <div>
+        <section class="page-section spad">
+            <div class="info-page">
+		        <div class="container">
+			        <div class="row">
+                        {% for article in articles %}
+                        <div class="col-md-4">
+					        <div class="game-item">
+						        <div class="review-cover set-bg">
+                                    <img src="{{article.article_img.url}}" class="content-img" />
+							        <div class="cata new-yellow">{{ article.author_id.username }}</div>
+						        </div>
+						        <div class="review-text">
+							        <h4><a href="{% url 'article_pages:article_det' article.id %}">{{article.article_name}}</a> </h4>
+                                    <p>{{article.article_date }}</p>
+                                    <p>{{article.snippet}}</p>
+						        </div>
+					        </div>
+				        </div>
+                        {% endfor %}
+			        </div>
+		        </div>
+            </div>
+	    </section>
+    </div>
+{% endblock %}
+
+
+<!--
+
     <div>
             <div class = "articles">
              <section class="page-section recent-game-page spad">
@@ -10,7 +41,7 @@
                      <div class="col-sm-3">
                         <div class="recent-game-item">
                             <div class="rgi-thumb set-bg" data-setbg="{{ article.game_id.game_img.url }}">
-                                <div class="cata new-yellow">{{ article.author_id.username }}</div>       <!-- Game genres -->
+                                <div class="cata new-yellow">{{ article.author_id.username }}</div>       Game genres
                             </div>
                          <div class="rgi-content">
                             <div class = "article">
@@ -28,4 +59,5 @@
              </section>
             </div>
     </div>
-{% endblock %}
+
+-->
