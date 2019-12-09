@@ -709,7 +709,7 @@ form ul.errorlist{
 }
 
 /*----------------------
-  Review Section
+  Popular games Section
 ------------------------*/
 
 .popular-games-section {
@@ -774,6 +774,20 @@ form ul.errorlist{
 
 .popular-game-item .rating i {
 	font-size: 12px;
+}
+
+/*----------------------
+  Footer top Section
+------------------------*/
+
+.det-head {
+    width: 100%;
+}
+
+.det-sign {
+    height:100px;
+    width: 150px;
+    object-fit: cover;
 }
 
 /*----------------------

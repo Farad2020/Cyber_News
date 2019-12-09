@@ -2,28 +2,30 @@
 
 {% block content %}
     <div>
-            <div class = "blogs">
-             <section class="page-section recent-blog-page spad">
-                 <div class="row">
-                {% for blog in blogs %}
-                    <div class = "blog">
-                     <div class="col-sm-3">
-                        <div class="recent-game-item">
-                            <div class="rgi-thumb set-bg" data-setbg="{{ blog.game_id.game_img.url }}">
-                                <div class="cata new-blue">{{ blog.author_id.username }}</div>       <!-- Game genres -->
-                            </div>
-                         <div class="rgi-content">
-                            <div class = "blog">
-                                <h2><a href="{% url 'article_pages:blog_det' blog.id %}">{{blog.blog_name}}</a> </h2>
-                                <p>{{blog.snippet}}</p>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                {% endfor %}
-                </div>
-             </section>
+        <section class="page-section spad">
+            <div class="info-page">
+		        <div class="container">
+                    <div class="section-title">
+						<h2>Blogs</h2>
+					</div>
+			        <div class="row">
+                        {% for blog in blogs %}
+                        <div class="col-md-4">
+					        <div class="game-item">
+						        <div class="review-cover set-bg">
+                                    <img src="{{ blog.game_id.game_img.url }}" class="content-img" />
+							        <div class="cata new-yellow">{{ blog.author_id.username }}</div>
+						        </div>
+						        <div class="review-text">
+							        <h4><a href="{% url 'article_pages:blog_det' blog.id %}">{{blog.blog_name}}</a></h4>
+                                    <p>{{blog.snippet}}</p>
+						        </div>
+					        </div>
+				        </div>
+                        {% endfor %}
+			        </div>
+		        </div>
             </div>
+	    </section>
     </div>
 {% endblock %}
