@@ -6,142 +6,141 @@
             <table>
                 <tr>
                     <td>
-                        <img class = "det-sign" src="/static/img/article-sign.png">
+                        <img class = "det-sign" src="/static/img/game-sign.png">
                     </td>
                     <td>
-                        {{ game.game_name }}
+                        <h1>{{ game.game_name }}</h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="img_of_game">
+                            <img src="{{ game.game_img.url }}" alt="{{ game.game_img }}">
+                        </div>
+                        <h5 style="color: #131313">Rate the Game:
+                                        <form method="post">{% csrf_token %}
+                                            <input type="radio" id="rating" name="rating" value="1"> 1
+                                            <input type="radio" id="rating" name="rating" value="2"> 2
+                                            <input type="radio" id="rating" name="rating" value="3"> 3
+                                            <input type="radio" id="rating" name="rating" value="4"> 4
+                                            <input type="radio" id="rating" name="rating" value="5"> 5
+                                            <input type="submit" name="rate" value="Rate">
+                                        </form>
+                        </h5>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td colspan="2">
+                                    <form method="post">{% csrf_token %}
+                                        {%if user.is_moderator %}
+                                            {% if game.is_active == True %}
+                                                <input type="submit" name="remove" value="Remove">
+                                            {% elif game.is_active == False %}
+                                                <input type="submit" name="return" value="Return">
+                                            {% endif %}
+                                            <input type="submit" name="edit" value="Edit">
+                                        {% endif %}
+
+                                        {%if user.is_authenticated %}
+                                            {%if user not in game.followers.all%}
+                                                <input type="submit" name="follow" value="Follow">
+                                            {% else %}
+                                                <input type="submit" name="unfollow" value="Unfollow">
+                                            {% endif %}
+                                        {% endif %}
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Publisher</th>
+                                <td>{{ game.game_publisher }}</td>
+                            </tr>
+                            <tr>
+                                <th>Developer</th>
+                                <td>{{ game.game_developer }}</td>
+                            </tr>
+                            <tr>
+                                <th>Rating</th>
+                                <td>{{ game_rating }}</td>
+                            </tr>
+                            <tr>
+                                <th>Platforms</th>
+                                <td>{{ game.game_platforms }}</td>
+                            </tr>
+                            <tr>
+                                <th>Release date</th>
+                                <td>{{ game.game_rd }}</td>
+                            </tr>
+                            <tr>
+                                <th>Age Rating</th>
+                                <td>{{ game.game_age_rating }}</td>
+                            </tr>
+                            <tr>
+                                <th>Genres</th>
+                                <td>{{ game.game_genre }}</td>
+                            </tr>
+                            <tr>
+                                <th>User Score</th>
+                                <td>{{ game.game_score }}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <h4>{{ game.game_text }}</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <iframe width="560" height="315" src="{{ game.game_trailer }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </td>
                 </tr>
             </table>
         </div>
-    </div>
-    <div class="game-details"> <!-- Link to go to list -->
-        <div class="game-details-head">
-
-            <div class="d-flex justify-content-start">
-                <div class="img_of_game">
-                    <img src="{{ game.game_img.url }}" alt="{{ game.game_img }}">
-                </div>
-                <div class="game_info">
-                    <h1>{{ game.game_name }}</h1>
-                    <h5 style="color: #131313">Rate the Game:
-                        <form method="post">{% csrf_token %}
-                            <input type="radio" id="rating" name="rating" value="1"> 1
-                            <input type="radio" id="rating" name="rating" value="2"> 2
-                            <input type="radio" id="rating" name="rating" value="3"> 3
-                            <input type="radio" id="rating" name="rating" value="4"> 4
-                            <input type="radio" id="rating" name="rating" value="5"> 5
-                            <input type="submit" name="rate" value="Rate">
-                        </form>
-                    </h5>
-                    <form method="post">{% csrf_token %}
-
-                    {%if user.is_moderator %}
-                        {% if game.is_active == True %}
-                            <input type="submit" name="remove" value="Remove">
-                    {% elif game.is_active == False %}
-                            <input type="submit" name="return" value="Return">
-                    {% endif %}
-                        <input type="submit" name="edit" value="Edit">
-                    {% endif %}
-
-                    {%if user.is_authenticated %}
-                        {%if user not in game.followers.all%}
-                            <input type="submit" name="follow" value="Follow">
-                        {% else %}
-                            <input type="submit" name="unfollow" value="Unfollow">
-                        {% endif %}
-                    {% endif %}
-                    </form>
-                </div>
-            </div>
-        </div>
-        <table>
-            <tr>
-                <th>Publisher</th>
-                <td>{{ game.game_publisher }}</td>
-            </tr>
-            <tr>
-                <th>Developer</th>
-                <td>{{ game.game_developer }}</td>
-            </tr>
-            <tr>
-                <th>Rating</th>
-                <td>{{ game_rating }}</td>
-            </tr>
-            <tr>
-                <th>Platforms</th>
-                <td>{{ game.game_platforms }}</td>
-            </tr>
-            <tr>
-                <th>Release date</th>
-                <td>{{ game.game_rd }}</td>
-            </tr>
-            <tr>
-                <th>Age Rating</th>
-                <td>{{ game.game_age_rating }}</td>
-            </tr>
-            <tr>
-                <th>Genres</th>
-                <td>{{ game.game_genre }}</td>
-            </tr>
-            <tr>
-                <th>User Score</th>
-                <td>{{ game.game_score }}</td>
-            </tr>
-        </table>
-        <p>Description: <br>{{ game.game_text }}</p>
-
-        <iframe width="560" height="315" src="{{ game.game_trailer }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-
-
-        <!-- LINES TO ADD RELATED CONTENT -->
-        <fieldset class="form-group">
-            <legend class = "border-bottom mb-4">
-                Articles
-            </legend>
-            {% for article in related_articles %}
+        <div class="det-body">
+            <fieldset class="form-group">
+                <legend class = "border-bottom mb-4">
+                    Articles
+                </legend>
+                {% for article in related_articles %}
                     <div class = "related_article">
                         <h2><a href="{% url 'article_pages:article_det' article.id %}">{{article.article_name}}</a> </h2>
                         <p>{{article.article_date }}</p>
                         <p>{{article.snippet}}</p>
                     </div>
-            {% endfor %}
-        </fieldset>
+                {% endfor %}
+            </fieldset>
 
 
-
-
-        <fieldset class="form-group">
-            <legend class = "border-bottom mb-4">
-                Blogs
-            </legend>
-            {% for blog in related_blogs %}
+            <fieldset class="form-group">
+                <legend class = "border-bottom mb-4">
+                    Blogs
+                </legend>
+                {% for blog in related_blogs %}
                     <div class = "related_blog">
                         <h2><a href="{% url 'article_pages:blog_det' blog.id %}">{{blog.blog_name}}</a> </h2>
                         <p>{{blog.blog_date }}</p>
                         <p>{{blog.snippet}}</p>
                     </div>
-            {% endfor %}
-        </fieldset>
+                {% endfor %}
+            </fieldset>
 
 
-
-
-
-        <fieldset class="form-group">
-            <legend class = "border-bottom mb-4">
-                Threads
-            </legend>
-            {% for thread in related_threads %}
+            <fieldset class="form-group">
+                <legend class = "border-bottom mb-4">
+                    Threads
+                </legend>
+                {% for thread in related_threads %}
                     <div class = "related_thread">
                         <h2><a href="{% url 'article_pages:thread_det' thread.id %}">{{thread.thread_name}}</a> </h2>
                         <p>{{thread.thread_date }}</p>
                         <p>{{thread.snippet}}</p>
                     </div>
-            {% endfor %}
-        </fieldset>
+                {% endfor %}
+            </fieldset>
+        </div>
     </div>
 
 {% endblock %}

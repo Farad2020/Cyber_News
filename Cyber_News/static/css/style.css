@@ -784,6 +784,11 @@ form ul.errorlist{
     width: 100%;
 }
 
+.det-head td{
+    padding: 10px;
+    overflow: auto;
+}
+
 .det-sign {
     height:100px;
     width: 150px;
@@ -1522,12 +1527,6 @@ form ul.errorlist{
 .game-details-head{
     padding-top:20px;
     margin-bottom: 10px;
-}
-
-.img_of_game {
-    height: 320px;
-	width: 500px;
-	object-fit: cover;
 }
 
 .game_info{
