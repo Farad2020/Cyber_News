@@ -1,10 +1,11 @@
 {% extends "Cyber_News_App/base_layout.html" %}
 
 {% block content %}
+    <div class="container">
     <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
         {{ form.as_p }}
     <input type="submit" value="Submit" />
     </form>
-
+    </div>
 {% endblock %}

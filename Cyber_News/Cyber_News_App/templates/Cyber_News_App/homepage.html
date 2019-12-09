@@ -52,7 +52,30 @@
 		</div>
 	</section>
 
-	<section class="spad">
+    <section class="tournaments-section spad">
+		<div class="container">
+			<div class="tournament-title">Threads</div>
+			<div class="row">
+                {% for thread in recent_threads %}
+                    <div class="col-md-6">
+					    <div class="tournament-item mb-4 mb-lg-0">
+                            <div class="ti-notic">{{ thread.thread_author.username }}</div>
+                            <div class="ti-content">
+                                <div class="ti-thumb set-bg" data-setbg="{{ thread.thread_author.userImg.url }}"></div>
+                                <div class="ti-text">
+                                    <h4>{{ thread.game_id.game_name }}</h4>
+                                    <p>{{ thread.thread_name }}</p>
+                                    <p>{{ thread.snippet }}</p>
+                                </div>
+                            </div>
+                        </div>
+				    </div>
+                {% endfor %}
+			</div>
+		</div>
+	</section>
+
+	<section class="spad set-bg" data-setbg="/static/img/Death-Stranding-bg.jpg">
 		<div class="container">
 			<div class="section-title">
 				<h2>Recent Articles</h2>
@@ -77,5 +100,7 @@
 			</div>
 		</div>
 	</section>
+
+
 
 {% endblock %}

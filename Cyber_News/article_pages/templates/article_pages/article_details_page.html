@@ -1,59 +1,109 @@
 {% extends "Cyber_News_App/base_layout.html" %}
 
 {% block content %}
-    <div class="article-detail"> <!-- Link to go to list -->
-        <h1>{{ article.article_name }}</h1>
-
-        <img src="{{article.article_img.url}}" alt="{{article.article_img}}" class="img-responsive" />
-        <form method="post" >
-            {% csrf_token %}
-            {%if user.is_authenticated %}
+    <div class="container">
+        <div class="det-head">
+            <table>
+                <tr>
+                    <td>
+                        <img class = "det-sign" src="/static/img/article-sign.png">
+                    </td>
+                    <td>
+                        <h1>{{ article.article_name }}</h1>
+                        <h5>{{ article.article_date }}</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="img_of_game">
+                            <img src="{{article.game_id.game_img.url}}" />
+                        </div>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <th>
+                                    Game:
+                                </th>
+                                <td>
+                                    <a href="{% url 'game_pages:game_det' article.game_id.id %}">{{ article.game_id.game_name }}</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Publisher</th>
+                                <td>{{ article.game_id.game_publisher }}</td>
+                            </tr>
+                            <tr>
+                                <th>Developer</th>
+                                <td>{{ article.game_id.game_developer }}</td>
+                            </tr>
+                            <tr>
+                                <th>Score</th>
+                                <td>{{ article.game_id.game_score }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <form method="post">{% csrf_token %}
+                                        {%if user.is_moderator or user == article.author_id %}
+                                            <a href="{% url 'article_pages:article_edit' article.id %}">edit</a>
+                                            {%if article.is_active == True %}
+                                                <input type="submit" name="deactivate" value="Remove Article">
+                                            {%elif article.is_active == False %}
+                                                <input type="submit" name="activate" value="Return Article">
+                                            {% endif %}
+                                        {% endif %}
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <img src="{{article.article_img.url}}" alt="{{article.article_img}}" class="img-responsive" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <h5>{{ article.article_text }}</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <form method="post" >{% csrf_token %}
+                        {%if user.is_authenticated %}
                         {%if user not in article.article_score.all%}
                             <input type="submit" name="upvote" value="{{ article.article_score.count }} Upvote">
                         {% else %}
                             <input type="submit" name="upvote" value="{{ article.article_score.count }} Remove Upvote">
                         {% endif %}
-            {% endif %}
+                        {% endif %}
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-            {%if user.is_moderator or user == article.author_id %}
-                <h3><a href="{% url 'article_pages:article_edit' article.id %}">edit</a> </h3>
-                {%if article.is_active == True %}
-                    <input type="submit" name="deactivate" value="Remove Article">
-                {%elif article.is_active == False %}
-                    <input type="submit" name="activate" value="Return Article">
-                {% endif %}
-            {% endif %}
-        </form>
-        <h2><a href="{% url 'game_pages:game_det' article.game_id.id %}">Source</a> </h2>
-        <p>{{ article.article_text }}</p>
-        <p>Release date: {{ article.article_date }}</p>
-        <p>Rating: {{ article.rating }}</p>
-        <p>NUMBER OF CLICKS:{{ article.numberOfClicks}}</p>
-    </div>
+        <div class="det-footer">
+            {%if user.is_authenticated%}
+                <form class="" action="" method="post">{% csrf_token %}
+                    <textarea name="comments_text" rows="8" cols="80" placeholder="Leave your thoughts"></textarea>         <!-- some stuff-->
+                    <br><input type="submit" name="post_comment" value="Submit">
+                </form>
+            {%endif%}
 
-
-
-    {%if user.is_authenticated%}
-        <form class="" action="" method="post">
-        {% csrf_token %}
-        <textarea name="comments_text" rows="8" cols="80" placeholder="Leave your thoughts"></textarea>         <!-- some stuff-->
-        <br><input type="submit" name="post_comment" value="Submit">
-        </form>
-    {%endif%}
-
-  <h3>Comments: </h3>
-  <button onclick="all_comments(1)">Hide</button>
-  <button onclick="all_comments(2)">Show</button>
-  {% if comments %}
-      <form id="all_comments" class="" action="" method="post">
-
-      {% csrf_token %}
-            {% for comment in comments %}
+            <h3>Comments: </h3>
+            <button onclick="all_comments(1)">Hide</button>
+            <button onclick="all_comments(2)">Show</button>
+            {% if comments %}
+                <form id="all_comments" class="" action="" method="post">{% csrf_token %}
+                {% for comment in comments %}
                 <p>
                     <b>*{{comment.author.username}}* left this comment: </b>
-                {%if user == comment.author %}
-                    <a href="{% url 'article_pages:comment_edit' comment.id %}">Edit</a>
-                {% endif %}</p>
+                    {%if user == comment.author %}
+                        <a href="{% url 'article_pages:comment_edit' comment.id %}">Edit</a>
+                    {% endif %}
+                </p>
                 <p> {{comment.comments_text}}</p>
                 {% if comment.receiver %}
                     Replied To: {{ comment.receiver.username }} <br><br>
@@ -69,20 +119,22 @@
                     <textarea name="reply_text_{{ comment.id }}" rows="5" cols="40" placeholder="Leave your thoughts" >{{ comment.author.username }}, </textarea>
                     <br>Reply:<input type="submit" name="reply_comment" value="{{ comment.id }}" style="color: gray; background: gray; width: 45px">
                 {% endif %}
-            {% endfor %}
-      </form>
-  {% else %}
-    <p>No comments on this article yet</p>
-  {% endif %}
+                {% endfor %}
+                </form>
+            {% else %}
+                <p>No comments on this article yet</p>
+            {% endif %}
 
 
-    <script type="text/javascript">
-        function all_comments(a){
-            if(a==1)
-                document.getElementById("all_comments").style.display="none";
-            else
-                document.getElementById("all_comments").style.display="block";
-        }
-    </script>
+            <script type="text/javascript">
+                function all_comments(a){
+                    if(a==1)
+                        document.getElementById("all_comments").style.display="none";
+                    else
+                        document.getElementById("all_comments").style.display="block";
+                }
+            </script>
+        </div>
+    </div>
   {% endblock content%}
 

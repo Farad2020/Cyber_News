@@ -795,6 +795,11 @@ form ul.errorlist{
     object-fit: cover;
 }
 
+.img_of_game {
+	height: 80%;
+	width: 80%;
+}
+
 /*----------------------
   Footer top Section
 ------------------------*/
@@ -1500,15 +1505,13 @@ form ul.errorlist{
 }
 
 .cont_creation a {
-    color:red;
+	font-weight: bold;
+    color:#ffb320;
 }
 
-.followed_game {
-    padding-right:10px;
-}
 
-.followed_game a {
-    padding-left: 20%;
+.followed_game h5 {
+	text-align: center;
 }
 
 .create-game-page{

@@ -161,7 +161,7 @@ def edit_blog(request, blog_id):
 
 
 def get_all_threads(request):
-    threads = Thread.objects.all()  # .order_by('-date')
+    threads = Thread.objects.all().order_by('-thread_date')
     return render(request, "article_pages/threads_page.html", {'threads': threads})
 
 
@@ -203,7 +203,7 @@ def create_thread(request):
     form = EditThreadForm(request.POST or None, request.FILES)
     if form.is_valid():
         thread = form.save(False)
-        thread.author_id = request.user
+        thread.thread_author = request.user
         thread.save()
         return redirect('article_pages:thread_pages')
     return render(request, "article_pages/thread_creation_page.html", {'form': form})

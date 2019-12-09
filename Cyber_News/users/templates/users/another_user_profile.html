@@ -1,22 +1,44 @@
 {% extends "Cyber_News_App/base_layout.html" %}
 {% block content %}
     <div class="container">
-            <div class="card-title mb-4" style="padding-top: 50px; padding-bottom: 50px;">
-                <div class="d-flex justify-content-start">
-                    <div class="image-container">
-                        <img src="{{user.userImg.url}}" class="img-thumbnail" />
-                    </div>
-                    <div class="userData ml-3">
-                        <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold; font-family: sans-serif;">{{ user.username }}</h2>
-                        <h6 class="d-block">300 Blog Posts</h6>
-                        <form method="post">{% csrf_token %}
-                            {% if moder_user.is_moderator %}
+        <div class="card-title mb-4" style="padding-top: 50px; padding-bottom: 50px;">
+            <div class="d-flex justify-content-start">
+                <div class="image-container">
+                    <img src="{{user.userImg.url}}" class="img-thumbnail" />
+                </div>
+                <div class="userData ml-3">
+                    <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold; font-family: sans-serif;">{{ user.username }}</h2>
+                    <h6 class="d-block">300 Blog Posts</h6>
+                    <form method="post">{% csrf_token %}
+                        {% if moder_user.is_moderator %}
+                            {% if user.is_active == True %}
                                 <input type="submit" name="ban" value="Ban">
+                            {% elif user.is_active == False%}
+                                <input type="submit" name="unban" value="Unban">
                             {% endif %}
-                        </form>
-                    </div>
+                        {% endif %}
+                    </form>
                 </div>
             </div>
+        </div>
 
+        <fieldset class="form-group">
+            <legend class = "border-bottom mb-4">
+                Followed games
+            </legend>
+            <div class="d-flex justify-content-start">
+                {% for game in games %}
+                <div class = "followed_game">
+                    {% if user in game.followers.all %}
+                    <div class="image-container">
+                        <img src="{{game.game_img.url}}" class="img-thumbnail" />
+                    </div>
+                    <h5><a href="{% url 'game_pages:game_det' game.id %}">{{game.game_name}}</a></h5>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </fieldset>
     </div>
+
 {% endblock content %}

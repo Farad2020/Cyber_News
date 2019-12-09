@@ -45,7 +45,7 @@ class Thread(models.Model): # later need to add comments to threads
     thread_name = models.CharField(max_length=1000)
     thread_text = models.TextField()
     thread_date = models.DateTimeField(auto_now_add=True)
-    thread_author = models.ForeignKey(User, on_delete=models.CASCADE)
+    thread_author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     game_id = models.ForeignKey(Game, on_delete=models.CASCADE)
     is_active = models.BooleanField(verbose_name="Is Active", default=True)
 
@@ -60,7 +60,7 @@ class Blogs(models.Model):
     blog_name = models.CharField(max_length=1000)
     blog_text = models.TextField(default="")
     blog_date = models.DateTimeField(auto_now_add=True)  # earlier was written this: 'date published'
-    author_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    author_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     game_id = models.ForeignKey(Game, on_delete=models.CASCADE, null=True)
     blog_score = models.ManyToManyField(User, default=None, blank=True, null=True, related_name="blog_raters")
     numberOfClicks = models.IntegerField(default=0)

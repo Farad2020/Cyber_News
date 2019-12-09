@@ -23,18 +23,18 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="container">
         {% if user.is_moderator %}
         <fieldset class="form-group">
             <legend class = "border-bottom mb-4">
                 Active users
             </legend>
             {% for user in active_users %}
-                <div class = "user">
-                    <h5><a href="{% url 'other_user_profile' user.id %}" >{{user.username}} </a></h5>
-                </div>
+                {% if user.is_moderator == False %}
+                    <div class = "user">
+                        <h5><a href="{% url 'other_user_profile' user.id %}" >{{user.username}} </a></h5>
+                    </div>
+                {% endif %}
             {% endfor %}
         </fieldset>
 
@@ -60,9 +60,7 @@
             {% endfor %}
         </fieldset>
         {% endif %}
-    </div>
 
-    <div class="container">
         <fieldset class="form-group">
             <legend class = "border-bottom mb-4">
                 Followed games
@@ -80,5 +78,71 @@
                 {% endfor %}
             </div>
         </fieldset>
+
+        {% if user.is_moderator %}
+        <fieldset class="form-group">
+            <legend class = "border-bottom mb-4">
+                Your articles
+            </legend>
+            <div class="d-flex justify-content-start">
+                {% for article in articles %}
+                <div class = "followed_game">
+                    {% if user == article.author_id %}
+                    <div class="image-container">
+                        <img src="{{article.article_img.url}}" class="img-thumbnail" />
+                    </div>
+                    <h5><a href="{% url 'article_pages:article_det' article.id %}">{{article.article_name}}</a></h5>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </fieldset>
+        {% endif %}
+
+        <fieldset class="form-group">
+            <legend class = "border-bottom mb-4">
+                Your blogs
+            </legend>
+            <div class="d-flex justify-content-start">
+                {% for blog in blogs %}
+                <div class = "followed_game">
+                    {% if user == blog.author_id %}
+                    <div class="image-container">
+                        <img src="{{blog.game_id.game_img.url}}" class="img-thumbnail" />
+                    </div>
+                    <h5><a href="{% url 'article_pages:blog_det' blog.id %}">{{blog.blog_name}}</a></h5>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </fieldset>
+
+
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">
+                Your questions in thread
+            </legend>
+            <div class="community-warp spad" style="padding-top: 10px;">
+                <ul class="community-post-list">
+                    {% for thread in threads %}
+                        {% if user == thread.thread_author %}
+                            <li>
+                                <div class="community-post">
+                                    <div class="author-avator set-bg" data-setbg="{{ thread.thread_author.userImg.url }}"></div>
+                                    <div class="post-content">
+                                        <a href="{% url 'article_pages:thread_det' thread.id %}" style="color: white;">
+                                        <h5>{{ thread.thread_author.username }}<span>posted an update</span></h5>
+                                        <div class="post-date">{{ thread.thread_date }}</div>
+                                        <p style="font-weight: bold;">{{ thread.thread_name }}</p>
+                                        <p>{{ thread.snippet }}</p></a>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endif %}
+                    {% endfor%}
+                </ul>
+            </div>
+        </fieldset>
+
     </div>
 {% endblock content %}

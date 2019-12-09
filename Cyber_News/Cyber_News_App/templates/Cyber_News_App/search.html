@@ -1,11 +1,11 @@
     {% extends "Cyber_News_App/base_layout.html" %}
 
 {% block content %}
-    <div class="content-section">
+    <div class="container">
         <legend class="border-bottom mb-4"><h2>Games:</h2></legend>
         {% if search_games %}
         <br>
-            <ol>
+            <ul>
             {% for game in search_games %}
                 <li>
                     <h2><a href="{% url 'game_pages:game_det' game.id %}">
@@ -14,7 +14,7 @@
                     <h5>{{game.game_text|truncatewords:10}}</h5><br>
                 </li>
             {% endfor %}
-            </ol>
+            </ul>
         {% else %}
             {{empty_res}}
         {% endif %}

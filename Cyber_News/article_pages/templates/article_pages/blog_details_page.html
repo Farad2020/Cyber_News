@@ -1,57 +1,110 @@
 {% extends "Cyber_News_App/base_layout.html" %}
 
 {% block content %}
-    <div class="blog-detail"> <!-- Link to go to list -->
-        <h1>{{ blog.blog_name }}</h1>
-        <img src="{{blog.blog_img.url}}" alt="{{blog.blog_img}}" class="img-responsive" />
-        <form method="post" >
-            {% csrf_token %}
-            {%if user.is_authenticated %}
+    <div class="container">
+        <div class="det-head">
+            <table>
+                <tr>
+                    <td>
+                        <img class = "det-sign" src="/static/img/blog-sign.png">
+                    </td>
+                    <td>
+                        <h2>{{ blog.blog_name }}</h2>
+                        <h5>{{ blog.author_id.username }}</h5>
+                        <h5>{{ blog.blog_date }}</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="img_of_game">
+                            <img src="{{blog.game_id.game_img.url}}" />
+                        </div>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <th>
+                                    Game:
+                                </th>
+                                <td>
+                                    <a href="{% url 'game_pages:game_det' blog.game_id.id %}">{{ blog.game_id.game_name }}</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Publisher</th>
+                                <td>{{ blog.game_id.game_publisher }}</td>
+                            </tr>
+                            <tr>
+                                <th>Developer</th>
+                                <td>{{ blog.game_id.game_developer }}</td>
+                            </tr>
+                            <tr>
+                                <th>Score</th>
+                                <td>{{ blog.game_id.game_score }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <form method="post">{% csrf_token %}
+                                        {%if user.is_moderator or user == blog.author_id %}
+                                            <a href="{% url 'article_pages:blog_edit' blog.id %}">edit</a>
+                                            {%if blog.is_active == True %}
+                                                <input type="submit" name="deactivate" value="Remove Blog">
+                                            {%elif blog.is_active == False %}
+                                                <input type="submit" name="activate" value="Return Blog">
+                                            {% endif %}
+                                        {% endif %}
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <img src="{{blog.blog_img.url}}" alt="{{blog.blog_img}}" class="img-responsive" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <h5>{{ blog.blog_text }}</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <form method="post" >{% csrf_token %}
+                        {%if user.is_authenticated %}
                         {%if user not in blog.blog_score.all%}
                             <input type="submit" name="upvote" value="{{ blog.blog_score.count }} Upvote">
                         {% else %}
                             <input type="submit" name="upvote" value="{{ blog.blog_score.count }} Remove Upvote">
                         {% endif %}
-            {% endif %}
+                        {% endif %}
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-            {%if user.is_moderator or user == blog.author_id %}
-                <h3><a href="{% url 'article_pages:blog_edit' blog.id %}">edit</a> </h3>
-                {%if blog.is_active == True %}
-                    <input type="submit" name="deactivate" value="Remove Blog">
-                {%elif blog.is_active == False %}
-                    <input type="submit" name="activate" value="Return Blog">
-                {% endif %}
-            {% endif %}
-        </form>
-        <h2><a href="{% url 'game_pages:game_det' blog.game_id.id %}">Source</a> </h2>
-        <p>{{blog.blog_date }}</p>
-        <p>{{ blog.blog_text }}</p>
-        <p>Release date: {{ blog.blog_date }}</p>
-        <p>Rating: {{ blog.blog_score }}</p>
-        <p>NUMBER OF CLICKS:{{ blog.numberOfClicks}}</p>
-    </div>
+        <div class="det-footer">
+            {%if user.is_authenticated%}
+                <form class="" action="" method="post">{% csrf_token %}
+                    <textarea name="comments_text" rows="8" cols="80" placeholder="Leave your thoughts"></textarea>         <!-- some stuff-->
+                    <br><input type="submit" name="post_comment" value="Submit">
+                </form>
+            {%endif%}
 
-    {%if user.is_authenticated%}
-        <form class="" action="" method="post">
-        {% csrf_token %}
-        <textarea name="comments_text" rows="8" cols="80" placeholder="Leave your thoughts"></textarea>         <!-- some stuff-->
-        <br><input type="submit" name="post_comment" value="Submit">
-        </form>
-    {%endif%}
-
-  <h3>Comments: </h3>
-  <button onclick="all_comments(1)">Hide</button>
-  <button onclick="all_comments(2)">Show</button>
-  {% if comments %}
-      <form id="all_comments" class="" action="" method="post">
-
-      {% csrf_token %}
-            {% for comment in comments %}
+            <h3>Comments: </h3>
+            <button onclick="all_comments(1)">Hide</button>
+            <button onclick="all_comments(2)">Show</button>
+            {% if comments %}
+                <form id="all_comments" class="" action="" method="post">{% csrf_token %}
+                {% for comment in comments %}
                 <p>
                     <b>*{{comment.author.username}}* left this comment: </b>
-                {%if user == comment.author %}
-                    <a href="{% url 'article_pages:comment_edit' comment.id %}">Edit</a>
-                {% endif %}</p>
+                    {%if user == comment.author %}
+                        <a href="{% url 'article_pages:comment_edit' comment.id %}">Edit</a>
+                    {% endif %}
+                </p>
                 <p> {{comment.comments_text}}</p>
                 {% if comment.receiver %}
                     Replied To: {{ comment.receiver.username }} <br><br>
@@ -67,18 +120,21 @@
                     <textarea name="reply_text_{{ comment.id }}" rows="5" cols="40" placeholder="Leave your thoughts" >{{ comment.author.username }}, </textarea>
                     <br>Reply:<input type="submit" name="reply_comment" value="{{ comment.id }}" style="color: gray; background: gray; width: 45px">
                 {% endif %}
-            {% endfor %}
-      </form>
-  {% else %}
-    <p>No comments on this article yet</p>
-  {% endif %}
+                {% endfor %}
+                </form>
+            {% else %}
+                <p>No comments on this blog yet</p>
+            {% endif %}
 
-    <script type="text/javascript">
-        function all_comments(a){
-            if(a==1)
-                document.getElementById("all_comments").style.display="none";
-            else
-                document.getElementById("all_comments").style.display="block";
-        }
-    </script>
+
+            <script type="text/javascript">
+                function all_comments(a){
+                    if(a==1)
+                        document.getElementById("all_comments").style.display="none";
+                    else
+                        document.getElementById("all_comments").style.display="block";
+                }
+            </script>
+        </div>
+    </div>
   {% endblock content%}

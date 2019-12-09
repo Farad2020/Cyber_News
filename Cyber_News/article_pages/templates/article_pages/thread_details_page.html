@@ -1,26 +1,41 @@
 {% extends "Cyber_News_App/base_layout.html" %}
 
 {% block content %}
-    <div class="thread-detail"> <!-- Link to go to list -->
-        <h1>{{ thread.thread_name }}</h1>
-        <form method="post" >
-            {% csrf_token %}
-            {%if user.is_moderator or user == thread.author_id %}
-                <h3><a href="{% url 'article_pages:thread_edit' thread.id %}">edit</a></h3>
-                {%if thread.is_active == True %}
-                    <input type="submit" name="deactivate" value="Remove Thread">
-                {%elif thread.is_active == False %}
-                    <input type="submit" name="activate" value="Return Thread">
-                {% endif %}
-            {% endif %}
-        </form>
-        <!--  </h1>
-        <h2><a href="{% url 'game_pages:game_det' thread.game_id.id %}">Source</a> </h2> -->
-        <p>{{thread.thread_date }}</p>
-        <p>{{ thread.thread_text }}</p>
-    </div>
+    <div class="container">
 
-    {%if user.is_authenticated%}
+    <section class="page-section community-page set-bg" data-setbg="img/community-bg.jpg">
+        <div class="community-warp spad">\
+            <div class="container">
+                <ul class="community-post-list">
+                    <li>
+                        <div class="community-post">
+							<div class="author-avator set-bg" data-setbg="{{ thread.thread_author.userImg.url }}"></div>
+							<div class="post-content">
+                                <a href="{% url 'article_pages:thread_det' thread.id %}" style="color: white;">
+								<h5>{{ thread.thread_author.username }}<span>posted an update</span></h5>
+								<div class="post-date">{{ thread.thread_date }}</div>
+                                <p style="font-weight: bold;">{{ thread.thread_name }}</p>
+								<p>{{ thread.thread_text }}</p></a>
+							</div>
+                            <form method="post" >{% csrf_token %}
+                                {%if user.is_moderator or user == thread.author_id %}
+                                    <h3><a href="{% url 'article_pages:thread_edit' thread.id %}">edit</a></h3>
+                                    {%if thread.is_active == True %}
+                                        <input type="submit" name="deactivate" value="Remove Thread">
+                                    {%elif thread.is_active == False %}
+                                        <input type="submit" name="activate" value="Return Thread">
+                                    {% endif %}
+                                {% endif %}
+                            </form>
+						</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="det-footer">
+        {%if user.is_authenticated%}
         <form class="" action="" method="post">
         {% csrf_token %}
         <textarea name="comments_text" rows="8" cols="80" placeholder="Leave your thoughts"></textarea>         <!-- some stuff-->
@@ -67,4 +82,9 @@
                 document.getElementById("all_comments").style.display="block";
         }
     </script>
+    </div>
+
+
+    </div>
+
   {% endblock content%}

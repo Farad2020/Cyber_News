@@ -5,6 +5,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 # Create your views here.
 from .forms import *
 from game_pages.models import Game
+from article_pages.models import Article, Blogs, Thread, Comment
 
 from django.contrib.auth import get_user_model
 
@@ -31,10 +32,13 @@ def logout_view(request):
 @login_required
 def profile(request):
     games = Game.objects.all()
+    articles = Article.objects.all()
+    blogs = Blogs.objects.all()
+    threads = Thread.objects.all()
     users = User.objects.all()
     active_users = User.objects.filter(is_active = True)
     deactive_users = User.objects.exclude(is_active = True)
-    return render(request, 'users/profile.html', {'games': games, 'users': users, 'active_users': active_users, 'deactive_users': deactive_users})
+    return render(request, 'users/profile.html', {'games': games, 'blogs': blogs, 'threads': threads, 'users': users, 'articles': articles,'active_users': active_users, 'deactive_users': deactive_users})
 
 
 def edit_profile(request):
@@ -63,10 +67,15 @@ def change_password(request):
 def other_user_profile(request, id):
     user = get_object_or_404(User, pk=id)
     moder_user = request.user
+    games = Game.objects.all()
     if request.method == 'POST':
         if 'ban' in request.POST:
             user.is_active = False
             user.save()
             return redirect('/profile')
-    return render(request, 'users/another_user_profile.html', {'user': user, 'moder_user': moder_user})
+        elif 'unban' in request.POST:
+            user.is_active = True
+            user.save()
+            return redirect('/profile')
+    return render(request, 'users/another_user_profile.html', {'user': user, 'moder_user': moder_user, 'games': games})
 
