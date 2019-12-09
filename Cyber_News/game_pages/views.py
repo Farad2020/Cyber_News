@@ -98,8 +98,7 @@ def edit_game_info(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
     # request.POST, request.FILES or None
     form = EditGameForm(request.POST or None, request.FILES or None, instance=game)
-    if request.method == 'POST':
-        if 'edit' in request.POST:
-            form.save()
-            return redirect('game_pages:games_page')
+    if form.is_valid and request.method == 'POST':
+        form.save()
+        return redirect('game_pages:games_page')
     return render(request, "game_pages/edit_game_info.html", {'form': form})
