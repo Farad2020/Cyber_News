@@ -6,6 +6,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 app_name = "cyber_news"
+# Использовать эту ссылку чтобы получить доступ к главной странице
+#http://127.0.0.1:8000/main/index/
 
 urlpatterns = [
     #path('article/<article_id>/', v1.article_details, name='article'),
